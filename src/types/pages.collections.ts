@@ -23,29 +23,12 @@ export const about = defineCollection({
       description: z.string(),
       image: z.string(),
     }),
-    goal: z.object({
-      name: z.string(),
-      description: z.string(),
-      avatar: z.string(),
-      designation: z.string(),
-    }),
     lists: z.array(
       z.object({
         title: z.string(),
         description: z.string(),
       }),
     ),
-    funfacts: z.object({
-      title: z.string(),
-      lists: z.array(
-        z.object({
-          icon: z.string(),
-          value: z.number(),
-          unit: z.string(),
-          content: z.string(),
-        }),
-      ),
-    }),
     services: z.array(
       z.object({
         title: z.string(),
@@ -53,25 +36,6 @@ export const about = defineCollection({
         icon: z.string(),
       }),
     ),
-    office_culture: z.object({
-      enable: z.boolean(),
-      title: z.string(),
-      content: z.string(),
-      images: z.array(
-        z.object({
-          image: z.string(),
-        }),
-      ),
-      join_our_team: z.object({
-        title: z.string(),
-        content: z.string(),
-        button: z.object({
-          enable: z.boolean(),
-          label: z.string(),
-          link: z.string(),
-        }),
-      }),
-    }),
   }),
 });
 
@@ -187,69 +151,106 @@ export const homepage = defineCollection({
     base: "src/content/homepage",
   }),
   schema: z.object({
-    banner: z.object({
+    hero: z.object({
+      tagline: z.string(),
       title: z.string(),
-      content: z.string(),
-      image: z.string(),
-      conclusion: z.string(),
-      button: z.object({
+      subtitle: z.string(),
+      primary_button: z.object({
+        enable: z.boolean(),
+        label: z.string(),
+        link: z.string(),
+      }),
+      secondary_button: z.object({
         enable: z.boolean(),
         label: z.string(),
         link: z.string(),
       }),
     }),
-    brands_images: z.object({
-      title: z.string(),
-      lists: z.array(
+    trust_strip: z.object({
+      enable: z.boolean(),
+      items: z.array(
         z.object({
-          image: z.string(),
-          alt: z.string(),
-        }),
-      ),
-    }),
-    feature: z.object({
-      title: z.string(),
-      description: z.string(),
-      button: z.object({
-        label: z.string(),
-        link: z.string(),
-        enable: z.boolean(),
-      }),
-      features: z.array(
-        z.object({
-          name: z.string(),
           icon: z.string(),
-          content: z.string(),
+          label: z.string(),
         }),
       ),
     }),
-    workflow: z.object({
+    how_it_works: z.object({
+      enable: z.boolean(),
+      title: z.string(),
+      steps: z.array(
+        z.object({
+          icon: z.string(),
+          text: z.string(),
+        }),
+      ),
+    }),
+    plans_section: z.object({
       title: z.string(),
       description: z.string(),
-      image: z.string(),
-      video_id: z.string(),
     }),
-    services: z.array(
-      z.object({
-        title: z.string(),
-        description: z.string(),
-        slider_images: z.array(z.string()),
-      }),
-    ),
-    integrate: z.object({
+    included_services: z.object({
+      enable: z.boolean(),
       title: z.string(),
-      content: z.string(),
-      image: z.string(),
-      tools: z.array(z.string()),
+      items: z.array(
+        z.object({
+          icon: z.string(),
+          text: z.string(),
+        }),
+      ),
     }),
-    annoucement: z.object({
+    ownership_comparison: z.object({
+      enable: z.boolean(),
+      title: z.string(),
+      rows: z.array(
+        z.object({
+          traditional: z.string(),
+          printone: z.string(),
+        }),
+      ),
+    }),
+    use_cases: z.object({
+      enable: z.boolean(),
+      title: z.string(),
+      items: z.array(
+        z.object({
+          icon: z.string(),
+          title: z.string(),
+          description: z.string(),
+        }),
+      ),
+    }),
+    sustainability: z.object({
+      enable: z.boolean(),
+      title: z.string(),
+      description: z.string(),
+      points: z.array(z.string()),
       image: z.string(),
+    }),
+    case_study_teaser: z.object({
+      enable: z.boolean(),
+      title: z.string(),
+      description: z.string(),
+    }),
+    faq_teaser: z.object({
+      enable: z.boolean(),
+      title: z.string(),
+      link: z.string(),
+      questions: z.array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        }),
+      ),
+    }),
+    final_cta: z.object({
+      enable: z.boolean(),
       title: z.string(),
       description: z.string(),
       button: z.object({
+        enable: z.boolean(),
         label: z.string(),
         link: z.string(),
-        enable: z.boolean(),
       }),
     }),
   }),
@@ -275,17 +276,17 @@ export const howItWorks = defineCollection({
     }),
     intro_video: z.object({
       enable: z.boolean(),
-      title: z.string(),
-      content: z.string(),
-      video_id: z.string(),
-      video_thumbnail: z.string(),
+      title: z.string().optional(),
+      content: z.string().optional(),
+      video_id: z.string().optional(),
+      video_thumbnail: z.string().optional(),
     }),
     how_it_works: z.object({
       enable: z.boolean(),
       blocks: z.array(
         z.object({
           title: z.string(),
-          image: z.string(),
+          icon: z.string(),
           content: z.string(),
         }),
       ),
@@ -311,22 +312,6 @@ export const pricing = defineCollection({
   schema: z.object({
     ...commonFields,
     subtitle: z.string(),
-    pricing_list: z.array(
-      z.object({
-        name: z.string(),
-        currency: z.string(),
-        price: z.string(),
-        price_per: z.string(),
-        info: z.string(),
-        recommended: z.boolean(),
-        services: z.array(z.string()),
-        button: z.object({
-          enable: z.boolean(),
-          label: z.string(),
-          link: z.string(),
-        }),
-      }),
-    ),
     faq: z.object({
       enable: z.boolean(),
       title: z.string(),

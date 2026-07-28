@@ -1,114 +1,135 @@
 ---
-banner:
-  title: Let us solve your critical website development challenges
-  content: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nihil enim maxime corporis cumque <br/> totam aliquid nam sint inventore optio modi neque laborum officiis necessitatibus
-  image: /images/banner.png
-  conclusion: The best customer experiences are built with Bigspring
-  button:
+hero:
+  tagline: "One Printer. One Plan. One Bill."
+  title: "Print More. Pay Less. Never Buy Ink Again."
+  subtitle: "Epson PrintOne brings together the printer, monthly pages, ink support, installation and servicing in one simple monthly plan."
+  primary_button:
     enable: true
-    label: "Contact Us"
+    label: "View Plans"
+    link: "/pricing"
+  secondary_button:
+    enable: true
+    label: "Subscribe Now"
     link: "/contact"
 
-#Brands Slider
-brands_images:
-  title: Let us solve your critical website development challenges
-  lists:
-    - image: /images/brands/microsoft.webp
-      alt: Microsoft
-    - image: /images/brands/hubspot.webp
-      alt: Hubspot
-    - image: /images/brands/toshiba.webp
-      alt: TOSHIBA
-    - image: /images/brands/aribnb.webp
-      alt: aribnb
-    - image: /images/brands/facebook.webp
-      alt: facebook
-    - image: /images/brands/tinder.webp
-      alt: tinder
-    - image: /images/brands/microsoft.webp
-      alt: Microsoft
-    - image: /images/brands/hubspot.webp
-      alt: Hubspot
-    - image: /images/brands/toshiba.webp
-      alt: TOSHIBA
-    - image: /images/brands/aribnb.webp
-      alt: aribnb
-    - image: /images/brands/facebook.webp
-      alt: facebook
-    - image: /images/brands/tinder.webp
-      alt: tinder
+trust_strip:
+  enable: true
+  items:
+    - icon: "FaPrint"
+      label: "Printer included"
+    - icon: "FaTruckFast"
+      label: "Delivery and installation"
+    - icon: "FaDroplet"
+      label: "Genuine Epson ink"
+    - icon: "FaFileLines"
+      label: "Monthly pages included"
+    - icon: "FaScrewdriverWrench"
+      label: "Onsite servicing"
+    - icon: "FaLocationDot"
+      label: "Local Singapore support"
 
-# feature
-feature:
-  title: The ultimate platform for creating, sharing, and executing.
-  description: We are helping thousands of organizations run their business strategies and achieve their ambitious results! We make big plans happen.
+how_it_works:
+  enable: true
+  title: "How PrintOne works"
+  steps:
+    - icon: "FaClipboardList"
+      text: "Choose your printer plan"
+    - icon: "FaTruckFast"
+      text: "Print-IQ delivers and installs the Epson printer"
+    - icon: "FaPrint"
+      text: "Print within the plan's monthly page allowance"
+    - icon: "FaScrewdriverWrench"
+      text: "Ink support and servicing are managed under the programme"
+
+plans_section:
+  title: "Six plans, one simple bill"
+  description: "From home users to offices that need A3 printing, there's a PrintOne plan sized to how much you print."
+
+included_services:
+  enable: true
+  title: "Everything included with every subscription"
+  items:
+    - icon: "FaPrint"
+      text: "Printer included"
+    - icon: "FaTruckFast"
+      text: "Free delivery"
+    - icon: "FaScrewdriverWrench"
+      text: "Free installation and setup"
+    - icon: "FaDroplet"
+      text: "Genuine Epson ink supplied under the programme"
+    - icon: "FaFileLines"
+      text: "Free monthly pages according to the selected plan"
+    - icon: "FaWrench"
+      text: "Onsite servicing"
+    - icon: "FaArrowsRotate"
+      text: "Onsite repair or one-to-one exchange, subject to final approved terms"
+    - icon: "FaShieldHalved"
+      text: "Official Epson warranty wording, subject to final approval"
+    - icon: "FaLocationDot"
+      text: "Singapore local support"
+    - icon: "FaEnvelope"
+      text: "Scan-to-email configuration where supported and applicable"
+
+ownership_comparison:
+  enable: true
+  title: "Traditional printer ownership versus PrintOne"
+  rows:
+    - traditional: "Upfront printer purchase"
+      printone: "Monthly plan"
+    - traditional: "Separate ink purchasing"
+      printone: "Programme ink support"
+    - traditional: "Ad hoc servicing"
+      printone: "Included servicing framework"
+    - traditional: "Unpredictable operating cost"
+      printone: "Predictable monthly fee"
+
+use_cases:
+  enable: true
+  title: "Built for the way you print"
+  items:
+    - icon: "FaHouse"
+      title: "Home and family"
+      description: "A reliable printer with ink and pages included, for households and home users who print occasionally."
+    - icon: "FaGraduationCap"
+      title: "Students and home businesses"
+      description: "Higher page allowances for coursework, projects and day-to-day business printing without buying ink."
+    - icon: "FaBuilding"
+      title: "SMEs and small offices"
+      description: "Plans sized for offices, including A3 printing, with servicing and support included."
+
+sustainability:
+  enable: true
+  title: "Sustainability and Epson Heat-Free Technology"
+  description: "Epson Heat-Free Technology is designed to use less energy than conventional heat-based laser printing."
+  points:
+    - "Epson Heat-Free Technology"
+    - "Designed to reduce energy use compared with conventional heat-based laser printing"
+    - "Lower consumables and packaging burden where supported"
+  image: "/images/printers/epson-l6390.jpg"
+
+case_study_teaser:
+  enable: false
+  title: "Customer stories"
+  description: "Case studies are being prepared and will appear here once approved."
+
+faq_teaser:
+  enable: true
+  title: "Frequently asked questions"
+  link: "/faq"
+  questions:
+    - question: "What's included in every PrintOne plan?"
+      answer: "Every PrintOne plan includes the printer, free delivery and installation, genuine Epson ink, your monthly page allowance, and onsite servicing."
+    - question: "Which Epson printer do I get?"
+      answer: "Each plan is matched to a specific Epson EcoTank model, from the L1250 on PrintOne Lite up to the L15180 on PrintOne Max Plus. See the plan comparison for details."
+    - question: "How is PrintOne different from buying a printer outright?"
+      answer: "Instead of an upfront printer purchase and separate ink buying, PrintOne combines the printer, ink support and servicing into one predictable monthly fee."
+
+final_cta:
+  enable: true
+  title: "One Printer. One Plan. One Bill."
+  description: "Compare the six PrintOne plans and find the one sized for how much you print."
   button:
-    label: Try for Free
-    link: "/contact"
     enable: true
-  features:
-    - name: "Cloud Support"
-      icon: "FaMixcloud"
-      content: Fugiat similique nobis porro cumque stinctio iusto quaerat corrupti.
-    - name: "Object Oriented"
-      icon: "FaCircleDot"
-      content: Fugiat similique nobis porro cumque stinctio iusto quaerat corrupti.
-    - name: "24h Service"
-      icon: "FaHeadphones"
-      content: Fugiat similique nobis porro cumque stinctio iusto quaerat corrupti.
-    - name: "Faster Response"
-      icon: "FaThumbsUp"
-      content: Fugiat similique nobis porro cumque stinctio iusto quaerat corrupti.
-
-# workflow
-workflow:
-  title: Built exclusively for you
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas Werat viverra id et aliquet. vulputate egestas sollicitudin.
-  image: /images/video-popup.webp
-  video_id: "WJCRM6ylhgI"
-
-#Services
-services:
-  - title: It is the most advanced digital marketing company.
-    description: Adipiscing elit Consequat tristique eget amet, tempus eu at consecttur. Leo facilisi nunc viverra tellus. Ac laoreet sit vel consquat. consectetur adipiscing elit. Consequat tristique eget amet, tempus eu at consecttur. Leo facilisi nunc viverra tellus. Ac laoreet sit vel consquat.
-    slider_images:
-      - /images/services/service-1.png
-      - /images/services/service-2.png
-      - /images/services/service-3.png
-  - title: It is a privately owned Information and cyber security company
-    description: Adipiscing elit Consequat tristique eget amet, tempus eu at consecttur. Leo facilisi nunc viverra tellus. Ac laoreet sit vel consquat. consectetur adipiscing elit. Consequat tristique eget amet, tempus eu at consecttur. Leo facilisi nunc viverra tellus. Ac laoreet sit vel consquat.
-    slider_images:
-      - /images/services/service-2.png
-  - title: It’s a team of experienced and skilled people with distributions
-    description: Adipiscing elit Consequat tristique eget amet, tempus eu at consecttur. Leo facilisi nunc viverra tellus. Ac laoreet sit vel consquat. consectetur adipiscing elit. Consequat tristique eget amet, tempus eu at consecttur. Leo facilisi nunc viverra tellus. Ac laoreet sit vel consquat.
-    slider_images:
-      - /images/services/service-3.png
-  - title: A company standing different from others
-    description: Adipiscing elit Consequat tristique eget amet, tempus eu at consecttur. Leo facilisi nunc viverra tellus. Ac laoreet sit vel consquat. consectetur adipiscing elit. Consequat tristique eget amet, tempus eu at consecttur. Leo facilisi nunc viverra tellus. Ac laoreet sit vel consquat.
-    slider_images:
-      - /images/services/service-3.png
-
-# Integrate
-integrate:
-  title: Integrate with all the tools your teams love using
-  content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas Werat viverra id et aliquet. vulputate egestas sollicitudin.
-  image: "/images/cta.png"
-  tools:
-    - /images/tools/1.webp
-    - /images/tools/2.webp
-    - /images/tools/3.webp
-    - /images/tools/4.webp
-    - /images/tools/5.webp
-    - /images/tools/6.webp
-    - /images/tools/8.webp
-
-# Annoucement
-annoucement:
-  image: /images/announcement.png
-  title: Ready to get started?
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat eget amtempus eu at consecttur.
-  button:
-    label: "Contact Us"
+    label: "Subscribe Now"
     link: "/contact"
-    enable: true
 ---

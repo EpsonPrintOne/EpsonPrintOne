@@ -1,0 +1,55 @@
+---
+import { formatMonthlyPages, type Plan } from "@/data/plans";
+import { Image } from "astro:assets";
+
+interface Props {
+  plan: Plan;
+}
+
+const { plan } = Astro.props;
+---
+
+<div
+  class={`h-full rounded-sm border py-8 px-6 text-center bg-body dark:bg-darkmode-secondary ${
+    plan.featured
+      ? "recommended border-primary dark:border-darkmode-primary"
+      : "border-border dark:border-none"
+  }`}
+>
+  {
+    plan.featured && (
+      <span class="mb-4 inline-block rounded-full bg-primary dark:bg-darkmode-primary px-4 py-1 text-sm font-medium text-white">
+        Highly Recommended
+      </span>
+    )
+  }
+  <Image
+    src={plan.image}
+    alt={plan.model}
+    width={280}
+    height={280}
+    class="mx-auto mb-4 h-40 w-auto object-contain"
+  />
+  <h4 class="mb-1">{plan.name}</h4>
+  <p class="mb-4 text-sm text-text-light dark:text-darkmode-text-light">
+    {plan.model}
+  </p>
+  <div class="mb-3">
+    <span class="h5">$</span>
+    <span
+      class="h2 font-bold text-text-dark dark:text-darkmode-text-dark"
+      >{plan.monthlyFee.toFixed(2)}</span
+    >
+    <span> /month</span>
+  </div>
+  <p class="mb-5 text-text-dark dark:text-darkmode-text-dark">
+    {formatMonthlyPages(plan.monthlyPages)}
+  </p>
+  <p class="mb-6 text-sm">{plan.audience}</p>
+  <a
+    href="/pricing"
+    class={plan.featured ? "btn-primary" : "btn btn-outline-primary"}
+  >
+    View Plan
+  </a>
+</div>

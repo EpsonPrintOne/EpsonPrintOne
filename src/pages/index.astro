@@ -1,185 +1,176 @@
 ---
-import BrandSlider from "@/components/BrandSlider.astro";
-import ServicesSlider from "@/components/ServicesSlider.astro";
+import Accordion from "@/helpers/Accordion";
 import DynamicIcon from "@/helpers/DynamicIcon";
-import VideoThumnail from "@/helpers/VideoThumnail";
 import Base from "@/layouts/Base.astro";
+import PlanCard from "@/components/PlanCard.astro";
 import { getListPage } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
-import Testimonial from "@/partials/Testimonial.astro";
+import { featuredPlan, formatMonthlyPages, plans } from "@/data/plans";
 import { Image } from "astro:assets";
 
 const homepage = await getListPage("homepage", "-index");
 
 const {
-  banner,
-  brands_images,
-  feature,
-  workflow,
-  services,
-  integrate,
-  annoucement,
+  hero,
+  trust_strip,
+  how_it_works,
+  plans_section,
+  included_services,
+  ownership_comparison,
+  use_cases,
+  sustainability,
+  case_study_teaser,
+  faq_teaser,
+  final_cta,
 } = homepage.data;
 ---
 
 <Base>
-  {/* Banner */}
+  {/* Hero */}
   <section class="pt-20">
     <div class="container">
-      <div class="row text-center">
-        <div class="mx-auto lg:col-8">
-          <h1
-            class="font-primary font-bold"
-            set:html={markdownify(banner.title)}
+      <div class="row items-center gy-10">
+        <div class="lg:col-6">
+          <p
+            class="mb-4 font-semibold text-primary dark:text-darkmode-primary"
+            set:html={markdownify(hero.tagline)}
           />
-          <p class="mt-4 mb-8" set:html={markdownify(banner.content)} />
-          {
-            banner.button && banner.button.enable && (
-              <a
-                href={banner.button.link}
-                class="btn btn-outline-primary mb-12"
-                set:html={markdownify(banner.button.label)}
-              />
-            )
-          }
-          <Image
-            class="mx-auto"
-            width={750}
-            height={395}
-            src={banner.image}
-            alt="banner-image"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section">
-    <div class="container">
-      <div class="row items-center justify-between">
-        <div class="col-12 text-center mb-5">
-          <h2 class="h5" set:html={markdownify(brands_images.title)} />
-          <BrandSlider data={brands_images.lists} />
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <section class="section bg-light dark:bg-darkmode-light">
-    <div class="container">
-      <div class="row gy-5">
-        <div class="xl:col-4">
-          <h2 class="mb-5" set:html={markdownify(feature.title)} />
-          <p class="mb-6" set:html={markdownify(feature.description)} />
-
-          {
-            feature.button.enable && (
-              <a
-                href={feature.button.link}
-                title="Try for Free"
-                class="btn btn-outline-primary"
-              >
-                {feature.button.label}
-              </a>
-            )
-          }
-        </div>
-        <div class="xl:col-8 overflow-hidden">
-          <div class="row g-5">
+          <h1 class="font-primary font-bold" set:html={markdownify(hero.title)} />
+          <p class="mt-4 mb-8" set:html={markdownify(hero.subtitle)} />
+          <div class="flex flex-wrap gap-4">
             {
-              feature.features.map((feature) => (
-                <div class="md:col-6">
-                  <div class="px-6 py-8 items-start sm:flex sm:space-x-6 rounded-sm bg-body dark:bg-darkmode-secondary hover:-translate-y-1 transition-transform duration-300 hover:shadow-lg">
-                    <DynamicIcon
-                      icon={feature.icon}
-                      className="mb-5 flex-none inline-block -mt-1 w-10 h-10 text-5xl text-primary dark:text-darkmode-primary"
-                    />
-                    <div class="inline-block">
-                      <h4 class="mb-3" set:html={markdownify(feature.name)} />
-                      <p class="mb-0" set:html={markdownify(feature.content)} />
-                    </div>
-                  </div>
-                </div>
-              ))
+              hero.primary_button.enable && (
+                <a href={hero.primary_button.link} class="btn-primary">
+                  {hero.primary_button.label}
+                </a>
+              )
+            }
+            {
+              hero.secondary_button.enable && (
+                <a
+                  href={hero.secondary_button.link}
+                  class="btn btn-outline-primary"
+                >
+                  {hero.secondary_button.label}
+                </a>
+              )
             }
           </div>
         </div>
+        <div class="lg:col-6">
+          <Image
+            src={featuredPlan.image}
+            alt={featuredPlan.model}
+            width={700}
+            height={560}
+            class="mx-auto h-auto w-full max-w-md object-contain"
+          />
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="lg:col-5 mx-auto text-center">
-        <h2 class="mb-5" set:html={markdownify(workflow.title)} />
-        <p set:html={markdownify(workflow.description)} />
-      </div>
-
-      <div class="text-center mt-8 xl:col-9 mx-auto">
-        <VideoThumnail
-          src={workflow.image}
-          videoId={workflow.video_id}
-          client:load
-        />
-      </div>
-    </div>
-  </section>
-
+  {/* Trust strip */}
   {
-    services.map((service, index) => {
-      const isEven = (index + 1) % 2 === 0;
-      return (
-        <section
-          class={`section ${!isEven ? "bg-light dark:bg-darkmode-light" : ""}`}
-        >
-          <div class="container">
-            <div
-              class={`row gy-5 lg:gy-0 items-center ${
-                !isEven ? "flex-col-reverse lg:flex-row" : "lg:flex-row-reverse"
-              }`}
-            >
-              <div class={`lg:col-6 ${isEven ? "lg:order-1 order-2" : ""}`}>
-                <h2 class="mb-5" set:html={markdownify(service.title)} />
-                <p set:html={markdownify(service.description)} />
+    trust_strip.enable && (
+      <section class="section bg-dark dark:bg-darkmode-dark">
+        <div class="container">
+          <div class="row gy-6 text-center">
+            {trust_strip.items.map((item) => (
+              <div class="sm:col-4 lg:col-2">
+                <DynamicIcon
+                  icon={item.icon}
+                  className="mx-auto mb-3 h-7 w-7 text-white"
+                />
+                <p class="text-white/90">{item.label}</p>
               </div>
-              <div class={`lg:col-6 ${isEven ? "lg:order-2 order-1" : ""}`}>
-                {service.slider_images.length > 1 ? (
-                  <ServicesSlider data={service.slider_images} />
-                ) : (
-                  <Image
-                    src={service.slider_images[0]}
-                    width={808}
-                    height={535}
-                    alt="services-image"
-                  />
-                )}
-              </div>
-            </div>
+            ))}
           </div>
-        </section>
-      );
-    })
+        </div>
+      </section>
+    )
   }
-  <Testimonial />
 
+  {/* How it works */}
+  {
+    how_it_works.enable && (
+      <section class="section">
+        <div class="container">
+          <h2 class="mb-10 text-center" set:html={markdownify(how_it_works.title)} />
+          <div class="row gy-8">
+            {how_it_works.steps.map((step, index) => (
+              <div class="sm:col-6 lg:col-3 text-center">
+                <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-light dark:bg-darkmode-light">
+                  <DynamicIcon
+                    icon={step.icon}
+                    className="h-6 w-6 text-primary dark:text-darkmode-primary"
+                  />
+                </div>
+                <p class="mb-1 text-sm font-semibold text-primary dark:text-darkmode-primary">
+                  Step {index + 1}
+                </p>
+                <p class="text-text-dark dark:text-darkmode-text-dark">
+                  {step.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {/* Featured plan */}
+  <section class="section bg-light dark:bg-darkmode-light">
+    <div class="container">
+      <div class="row items-center gy-8 rounded-sm bg-body dark:bg-darkmode-secondary p-8 lg:p-12">
+        <div class="lg:col-5 text-center">
+          <Image
+            src={featuredPlan.image}
+            alt={featuredPlan.model}
+            width={360}
+            height={360}
+            class="mx-auto h-56 w-auto object-contain"
+          />
+        </div>
+        <div class="lg:col-7">
+          <span class="mb-4 inline-block rounded-full bg-primary dark:bg-darkmode-primary px-4 py-1 text-sm font-medium text-white">
+            Highly Recommended
+          </span>
+          <h2 class="mb-2">{featuredPlan.name}</h2>
+          <p class="mb-4 text-text-light dark:text-darkmode-text-light">
+            {featuredPlan.model}
+          </p>
+          <div class="mb-4">
+            <span class="h5">$</span>
+            <span class="h2 font-bold text-text-dark dark:text-darkmode-text-dark">
+              {featuredPlan.monthlyFee.toFixed(2)}
+            </span>
+            <span> /month</span>
+            <span class="ml-3 text-text-dark dark:text-darkmode-text-dark">
+              {formatMonthlyPages(featuredPlan.monthlyPages)}
+            </span>
+          </div>
+          <a href="/pricing" class="btn-primary">
+            View Plan
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Six-plan grid */}
   <section class="section">
     <div class="container">
-      <div class="lg:col-6 mx-auto text-center">
-        <h2 class="mb-4" set:html={markdownify(integrate.title)} />
-        <p set:html={markdownify(integrate.content)} />
+      <div class="lg:col-7 mx-auto mb-10 text-center">
+        <h2 class="mb-4" set:html={markdownify(plans_section.title)} />
+        <p set:html={markdownify(plans_section.description)} />
       </div>
-
-      <div class="col-12 text-center mt-16">
+      <div class="row gy-8">
         {
-          integrate.tools.map((src) => (
-            <div class="inline-block rounded bg-body m-4 py-6 px-6 shadow hover:-translate-y-1 duration-300 transition-transform">
-              <Image
-                width={186}
-                class="w-auto h-auto"
-                height={45}
-                src={src}
-                alt="tools image"
-              />
+          plans.map((plan) => (
+            <div class="sm:col-6 lg:col-4">
+              <PlanCard plan={plan} />
             </div>
           ))
         }
@@ -187,26 +178,161 @@ const {
     </div>
   </section>
 
-  <section class="section">
-    <Image
-      class="w-full"
-      src={annoucement.image}
-      width={1908}
-      height={415}
-      alt="anoucement-image"
-    />
-    <div class="container">
-      <div class="lg:col-7 mx-auto text-center section pb-0">
-        <h1 class="mb-8">{annoucement.title}</h1>
-        <p class="mb-5">{annoucement.description}</p>
-        {
-          annoucement.button.enable && (
-            <a href={annoucement.button.link} class="btn btn-primary">
-              {annoucement.button.label}
+  {/* Included services */}
+  {
+    included_services.enable && (
+      <section class="section bg-light dark:bg-darkmode-light">
+        <div class="container">
+          <h2 class="mb-10 text-center" set:html={markdownify(included_services.title)} />
+          <div class="row gy-8">
+            {included_services.items.map((item) => (
+              <div class="sm:col-6 lg:col-3 flex items-start space-x-4">
+                <DynamicIcon
+                  icon={item.icon}
+                  className="mt-1 h-6 w-6 flex-none text-primary dark:text-darkmode-primary"
+                />
+                <p>{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {/* Ownership comparison */}
+  {
+    ownership_comparison.enable && (
+      <section class="section">
+        <div class="container">
+          <h2 class="mb-10 text-center" set:html={markdownify(ownership_comparison.title)} />
+          <div class="lg:col-8 mx-auto overflow-hidden rounded-sm border border-border dark:border-darkmode-border">
+            <div class="row g-0 bg-light dark:bg-darkmode-light py-4 text-center font-semibold text-text-dark dark:text-darkmode-text-dark">
+              <div class="col-6">Traditional ownership</div>
+              <div class="col-6 text-primary dark:text-darkmode-primary">
+                PrintOne
+              </div>
+            </div>
+            {ownership_comparison.rows.map((row) => (
+              <div class="row g-0 border-t border-border dark:border-darkmode-border py-4 text-center">
+                <div class="col-6">{row.traditional}</div>
+                <div class="col-6 font-medium text-text-dark dark:text-darkmode-text-dark">
+                  {row.printone}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {/* Use cases */}
+  {
+    use_cases.enable && (
+      <section class="section bg-light dark:bg-darkmode-light">
+        <div class="container">
+          <h2 class="mb-10 text-center" set:html={markdownify(use_cases.title)} />
+          <div class="row gy-8">
+            {use_cases.items.map((item) => (
+              <div class="lg:col-4">
+                <div class="h-full rounded-sm bg-body dark:bg-darkmode-secondary p-8 text-center">
+                  <DynamicIcon
+                    icon={item.icon}
+                    className="mx-auto mb-4 h-8 w-8 text-primary dark:text-darkmode-primary"
+                  />
+                  <h4 class="mb-3">{item.title}</h4>
+                  <p>{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {/* Sustainability */}
+  {
+    sustainability.enable && (
+      <section class="section">
+        <div class="container">
+          <div class="row items-center gy-8">
+            <div class="lg:col-6">
+              <Image
+                src={sustainability.image}
+                alt="Epson EcoTank printer"
+                width={600}
+                height={480}
+                class="mx-auto h-72 w-auto object-contain"
+              />
+            </div>
+            <div class="lg:col-6">
+              <h2 class="mb-4" set:html={markdownify(sustainability.title)} />
+              <p class="mb-6" set:html={markdownify(sustainability.description)} />
+              <ul class="space-y-3">
+                {sustainability.points.map((point) => (
+                  <li class="flex items-start space-x-3">
+                    <DynamicIcon
+                      icon="FaLeaf"
+                      className="mt-1 h-4 w-4 flex-none text-primary dark:text-darkmode-primary"
+                    />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {/* Case studies (pending approved content) */}
+  {
+    case_study_teaser.enable && (
+      <section class="section bg-light dark:bg-darkmode-light">
+        <div class="container text-center">
+          <h2 class="mb-4" set:html={markdownify(case_study_teaser.title)} />
+          <p set:html={markdownify(case_study_teaser.description)} />
+        </div>
+      </section>
+    )
+  }
+
+  {/* FAQ teaser */}
+  {
+    faq_teaser.enable && (
+      <section class="section">
+        <div class="container">
+          <h2 class="mb-10 text-center" set:html={markdownify(faq_teaser.title)} />
+          <div class="row justify-center">
+            <Accordion questions={faq_teaser.questions} client:load />
+          </div>
+          <div class="mt-10 text-center">
+            <a href={faq_teaser.link} class="btn btn-outline-primary">
+              View all FAQs
             </a>
-          )
-        }
-      </div>
-    </div>
-  </section>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {/* Final CTA */}
+  {
+    final_cta.enable && (
+      <section class="section bg-dark dark:bg-darkmode-dark">
+        <div class="container text-center">
+          <h2 class="mb-4 text-white" set:html={markdownify(final_cta.title)} />
+          <p class="mb-8 text-white/80" set:html={markdownify(final_cta.description)} />
+          {final_cta.button.enable && (
+            <a href={final_cta.button.link} class="btn-primary">
+              {final_cta.button.label}
+            </a>
+          )}
+        </div>
+      </section>
+    )
+  }
 </Base>
