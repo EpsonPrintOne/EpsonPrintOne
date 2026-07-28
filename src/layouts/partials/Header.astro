@@ -4,6 +4,7 @@ import ThemeSwitcher from "@/components/ThemeSwitcher.astro";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
 import DynamicIcon from "@/helpers/DynamicIcon";
+import { Image } from "astro:assets";
 
 export interface IChildNavigationLink {
   name: string;
@@ -27,8 +28,16 @@ const { pathname } = Astro.url;
 <header class={`header z-30 ${settings.sticky_header && "sticky top-0"}`}>
   <nav class="navbar container">
     <!-- logo -->
-    <div class="order-0">
+    <div class="order-0 flex items-center gap-3">
       <Logo />
+      <span class="hidden h-8 w-px bg-border dark:bg-darkmode-border sm:block" />
+      <Image
+        src="/images/branding/epson-logo.jpg"
+        alt="Powered by Epson"
+        width={180}
+        height={63}
+        class="hidden h-5 w-auto object-contain sm:inline-block"
+      />
     </div>
     {/* navbar toggler */}
     <input id="nav-toggle" type="checkbox" class="hidden" />

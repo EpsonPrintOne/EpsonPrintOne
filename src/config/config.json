@@ -1,21 +1,21 @@
 {
   "site": {
-    "title": "Bigspring Astro and Tailwindcss",
-    "base_url": "https://example.com",
+    "title": "Epson PrintOne",
+    "base_url": "https://epsonprintone.com",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
-    "logo": "/images/logo.png",
-    "logo_darkmode": "/images/logo-darkmode.png",
-    "logo_width": "180",
-    "logo_height": "39",
-    "logo_text": "Bigspring"
+    "logo": "/images/branding/printone-logo.png",
+    "logo_darkmode": "/images/branding/printone-logo.png",
+    "logo_width": "124",
+    "logo_height": "42",
+    "logo_text": "PrintOne"
   },
 
   "settings": {
     "sticky_header": true,
-    "theme_switcher": true,
-    "default_theme": "system",
+    "theme_switcher": false,
+    "default_theme": "light",
     "pagination": 6,
     "summary_length": 96,
     "blog_folder": "blog"
@@ -23,13 +23,13 @@
 
   "params": {
     "contact_form_action": "#",
-    "footer_content": "Lorem ipsum dolor sit amet, consectetur elit. Consjat tristique eget amet, tempus eu at cttur.",
-    "copyright": "All rights reserved | Theme by [Themefisher](https://themefisher.com/)"
+    "footer_content": "Operated by Print-IQ Singapore Pte Ltd. Powered by Epson.",
+    "copyright": "© 2026 Print-IQ Singapore Pte Ltd. All rights reserved."
   },
 
   "navigation_button": {
     "enable": true,
-    "label": "Get Demo",
+    "label": "Subscribe Now",
     "link": "/contact"
   },
 
@@ -39,8 +39,8 @@
   },
 
   "metadata": {
-    "meta_author": "Themefisher",
+    "meta_author": "Print-IQ Singapore Pte Ltd",
     "meta_image": "/images/og-image.png",
-    "meta_description": "Bigspring with Nextjs and Tailwindcss"
+    "meta_description": "Epson PrintOne: One Printer. One Plan. One Bill. Subscribe to an Epson EcoTank printer with ink, servicing and monthly pages included, powered by Print-IQ Singapore."
   }
 }

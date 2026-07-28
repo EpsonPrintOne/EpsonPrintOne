@@ -5,109 +5,28 @@
       "url": "/"
     },
     {
-      "name": "Company",
-      "hasChildren": true,
-      "children": [
-        {
-          "name": "About",
-          "url": "/about"
-        },
-        {
-          "name": "Team",
-          "url": "/team"
-        },
-        {
-          "name": "How It Works",
-          "url": "/how-it-works"
-        },
-        {
-          "name": "career",
-          "url": "/careers"
-        }
-      ]
+      "name": "Plans",
+      "url": "/pricing"
     },
     {
-      "name": "Products",
-      "hasChildren": true,
-      "children": [
-        {
-          "name": "CRM",
-          "description": "For great customer relationships",
-          "url": "/products/product-1",
-          "icon": "FaUsers"
-        },
-        {
-          "name": "Help Desk",
-          "description": "Software to deliver great customer support",
-          "url": "/products/product-2",
-          "icon": "FaDiceD6"
-        },
-        {
-          "name": "Workplace",
-          "description": "Application built to improve productivity",
-          "url": "/products/product-3",
-          "icon": "FaHouseLaptop"
-        },
-        {
-          "name": "Analytics",
-          "description": "Create custom reports from any data set.",
-          "url": "/products/product-4",
-          "icon": "FaChartBar"
-        },
-        {
-          "name": "View All Product",
-          "url": "/products",
-          "icon": "FaArrowRight"
-        }
-      ]
+      "name": "How It Works",
+      "url": "/how-it-works"
     },
     {
-      "name": "Blog",
-      "hasChildren": true,
-      "children": [
-        {
-          "name": "Blog",
-          "url": "/blog"
-        },
-        {
-          "name": "Authors",
-          "url": "/authors"
-        }
-      ]
+      "name": "Why PrintOne",
+      "url": "/why-printone"
     },
     {
-      "name": "Pages",
-      "hasChildren": true,
-      "children": [
-        {
-          "name": "Pricing",
-          "url": "/pricing"
-        },
-        {
-          "name": "Case Studies",
-          "url": "/case-study"
-        },
-        {
-          "name": "FAQ",
-          "url": "/faq"
-        },
-        {
-          "name": "Privacy Policy",
-          "url": "/privacy-policy"
-        },
-        {
-          "name": "Terms & Condition",
-          "url": "/terms-condition"
-        },
-        {
-          "name": "Elements",
-          "url": "/elements"
-        },
-        {
-          "name": "404",
-          "url": "/404"
-        }
-      ]
+      "name": "Sustainability",
+      "url": "/sustainability"
+    },
+    {
+      "name": "Case Studies",
+      "url": "/case-study"
+    },
+    {
+      "name": "FAQ",
+      "url": "/faq"
     },
     {
       "name": "Contact",
@@ -123,37 +42,24 @@
           "url": "/about"
         },
         {
-          "name": "Team",
-          "url": "/team"
+          "name": "Plans",
+          "url": "/pricing"
         },
         {
           "name": "How It Works",
           "url": "/how-it-works"
         },
         {
-          "name": "career",
-          "url": "/careers"
-        }
-      ]
-    },
-    {
-      "name": "Product",
-      "menu": [
-        {
-          "name": "CRM",
-          "url": "/products/product-1"
+          "name": "Why PrintOne",
+          "url": "/why-printone"
         },
         {
-          "name": "Help Desk",
-          "url": "/products/product-2"
+          "name": "Sustainability",
+          "url": "/sustainability"
         },
         {
-          "name": "Workplace",
-          "url": "/products/product-3"
-        },
-        {
-          "name": "Analytics",
-          "url": "/products/product-4"
+          "name": "Case Studies",
+          "url": "/case-study"
         }
       ]
     },
