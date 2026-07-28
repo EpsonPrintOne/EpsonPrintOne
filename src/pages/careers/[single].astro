@@ -1,0 +1,182 @@
+---
+import DynamicIcon from "@/helpers/DynamicIcon";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { markdownify, slugify } from "@/lib/utils/textConverter";
+import { render, type CollectionEntry } from "astro:content";
+
+type Props = CollectionEntry<"career">;
+
+const careers = await getSinglePage("career");
+
+export async function getStaticPaths() {
+  const careers = await getSinglePage("career");
+
+  const paths = careers.map((career) => ({
+    params: {
+      single: career.id,
+    },
+    props: { ...career },
+  }));
+
+  return paths;
+}
+
+const { data, id } = Astro.props;
+const { Content } = await render(Astro.props);
+
+const otherJobs = careers
+  .filter((career) => slugify(career.id) !== id)
+  .slice(0, 4);
+---
+
+<Base {...data}>
+  <div class="section">
+    <div class="container">
+      <h1 class="text-center mb-24" set:html={data.title} />
+      <div class="row gy-5 lg:gy-0">
+        <div class="lg:col-8">
+          <div class="content">
+            <Content />
+          </div>
+        </div>
+        <div class="lg:col-4">
+          <div
+            class="shadow dark:shadow-dark bg-body dark:bg-dark rounded px-7 py-10 mb-10"
+          >
+            <form class="space-y-4">
+              <label class="block" for="first-name">
+                <div
+                  class="mb-3 text-text-dark dark:text-darkmode-text-dark font-medium"
+                >
+                  First Name <span class="text-red-500">*</span>
+                </div>
+                <input
+                  class="block w-full border border-border dark:border-darkmode-border rounded-sm p-3 focus:border-primary foucs:outline-none focus:ring-0 focus:shadow-none transition dark:bg-dark/20"
+                  type="text"
+                  name="first-name"
+                  id="first-name"
+                  placeholder="First Name"
+                  required
+                />
+              </label>
+
+              <label class="block" for="last-name">
+                <div
+                  class="mb-3 text-text-dark dark:text-darkmode-text-dark font-medium"
+                >
+                  Last Name <span class="text-red-500">*</span>
+                </div>
+                <input
+                  class="block w-full border border-border dark:border-darkmode-border rounded-sm p-3 focus:border-primary foucs:outline-none focus:ring-0 focus:shadow-none transition dark:bg-dark/20"
+                  type="text"
+                  name="last-name"
+                  id="last-name"
+                  placeholder="Last Name"
+                  required
+                />
+              </label>
+
+              <label class="block" for="email">
+                <div
+                  class="mb-3 text-text-dark dark:text-darkmode-text-dark font-medium"
+                >
+                  Email Address<span class="text-red-500">*</span>
+                </div>
+                <input
+                  class="block w-full border border-border dark:border-darkmode-border rounded-sm p-3 focus:border-primary foucs:outline-none focus:ring-0 focus:shadow-none transition dark:bg-dark/20"
+                  type="text"
+                  name="email"
+                  id="email"
+                  placeholder="Email Address"
+                  required
+                />
+              </label>
+
+              <label class="block" for="file-upload">
+                <div
+                  class="mb-3 text-text-dark dark:text-darkmode-text-dark font-medium"
+                >
+                  Upload CV<span class="text-red-500">*</span>
+                </div>
+                <input
+                  class="block w-full focus:ring-0 focus:border-none focus:shadow-none focus:outline-0"
+                  type="file"
+                  name="file-upload"
+                  id="file-upload"
+                  placeholder="file-upload"
+                  required
+                />
+
+                <span class="text-sm mt-1 inline-block">
+                  only doc, pdf file allowed & file size will be less than 2MB
+                </span>
+              </label>
+
+              <button
+                class="btn btn-outline-primary bg-primary/80 dark:bg-darkmode-primary/80 py-[14px] border-0 text-body dark:text-white hover:bg-primary dark:hover:bg-darkmode-primary block w-full"
+                type="submit"
+              >
+                Apply Now
+              </button>
+            </form>
+
+            <div
+              class="rounded-sm flex items-center bg-light dark:text-darkmode-text-dark mt-4 p-3 space-x-5 text-text-dark dark:bg-dark"
+            >
+              <p class="">Share this job:</p>
+              <ul class="space-x-3">
+                <li class="inline-block">
+                  <DynamicIcon className="w-5 h-5" icon="FaFacebook" />
+                </li>
+                <li class="inline-block">
+                  <DynamicIcon className="w-5 h-5" icon="FaTwitter" />
+                </li>
+                <li class="inline-block">
+                  <DynamicIcon className="w-5 h-5" icon="FaEnvelope" />
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="shadow dark:shadow-dark bg-body dark:bg-dark rounded px-7 py-10"
+          >
+            <h4 class="font-bold">Other Jobs</h4>
+
+            <ul>
+              {
+                otherJobs.map((career) => {
+                  const { title, job_nature } = career.data;
+                  return (
+                    <li class="mt-5">
+                      <a
+                        href={`/careers/${slugify(career.id)}`}
+                        class="border block border-border dark:border-darkmode-border py-8 px-5 rounded transition hover:shadow hover:dark:shadow-dark hover:border-transparent hover:-translate-y-1 duration-[400ms]"
+                      >
+                        <p
+                          class="font-bold text-text-dark dark:text-darkmode-text-dark mb-2"
+                          set:html={markdownify(title)}
+                        />
+
+                        <p>
+                          <span set:html={markdownify(job_nature!)} /> | Service
+                        </p>
+                      </a>
+                    </li>
+                  );
+                })
+              }
+
+              <li class="text-center">
+                <button class="btn btn-outline-primary mt-5" type="button"
+                  >View All Positions</button
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>

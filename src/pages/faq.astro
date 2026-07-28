@@ -1,0 +1,22 @@
+---
+import Search from "@/helpers/Search";
+import Base from "@/layouts/Base.astro";
+import { getListPage } from "@/lib/contentParser.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+
+const faqIndex = await getListPage("faq", "-index");
+const buildDrafts = process.argv.includes("--buildDrafts");
+if (!buildDrafts && faqIndex.data.draft) return Astro.redirect("/404");
+const { title, subtitle, faq_list } = faqIndex.data;
+---
+
+<Base {...faqIndex.data}>
+  <PageHeader title={title} subtitle={subtitle} />
+  <section class="section">
+    <div class="container">
+      <div class="row justify-center">
+        <Search faq_list={faq_list} client:load />
+      </div>
+    </div>
+  </section>
+</Base>

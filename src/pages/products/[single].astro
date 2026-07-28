@@ -1,0 +1,215 @@
+---
+import ServicesSlider from "@/components/ServicesSlider.astro";
+import DynamicIcon from "@/helpers/DynamicIcon";
+import VideoThumnail from "@/helpers/VideoThumnail";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import { Image } from "astro:assets";
+import { type CollectionEntry } from "astro:content";
+import { marked } from "marked";
+
+type Props = CollectionEntry<"products">;
+
+export async function getStaticPaths() {
+  const products = await getSinglePage("products");
+  const paths = products.map((product) => ({
+    params: {
+      single: product.id,
+    },
+    props: { ...product },
+  }));
+
+  return paths;
+}
+const { data } = Astro.props;
+const {
+  banner,
+  about_this_product,
+  call_to_action,
+  intro_video,
+  product_info,
+  services,
+} = data;
+
+const lightColor = "bg-light dark:bg-darkmode-light";
+---
+
+<Base {...data}>
+  {
+    banner && (
+      <section class={`section ${banner?.has_color ? lightColor : ""}`}>
+        <div class="container">
+          <div class="row gy-4 lg:gy-0 items-center justify-center">
+            <div class="lg:col-5 lg:order-1 order-2">
+              <div class="lg:max-w-sm">
+                <h1 set:html={markdownify(banner.title)} />
+              </div>
+              <p class="mt-4 mb-12" set:html={markdownify(banner.content)} />
+              {banner.button.enable && (
+                <a class="btn btn-outline-primary" href={banner.button.link}>
+                  {banner.button.label}
+                </a>
+              )}
+            </div>
+            <div class="lg:col-7 lg:order-2 order-1">
+              <Image
+                class="rounded shadow"
+                src={banner.image}
+                width={1440}
+                height={900}
+                alt={"banner"}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    about_this_product && (
+      <section class="section">
+        <div class="container">
+          <div class="row gy-4 xl:gy-0">
+            <div class="xl:col-7 mx-auto text-center mb-8 lg:mb-12">
+              <h2 set:html={markdownify(about_this_product.title)} />
+              <p
+                class="mt-5"
+                set:html={markdownify(about_this_product.content)}
+              />
+            </div>
+
+            {about_this_product.features.map((item) => {
+              return (
+                <div class="lg:col-6">
+                  <DynamicIcon
+                    className="w-16 h-16 text-primary dark:text-darkmode-primary mb-4"
+                    icon={item.icon}
+                  />
+                  <h3 class="mb-5" set:html={markdownify(item.title)} />
+                  <div
+                    class="content"
+                    set:html={markdownify(marked.parse(item.content) as string)}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    )
+  }
+  {
+    product_info?.enable && (
+      <section class="section bg-light dark:bg-darkmode-light">
+        <div class="container">
+          <div class="lg:col-6 mb-12">
+            <h2 class="mb-5" set:html={markdownify(product_info.title)} />
+            <p set:html={markdownify(product_info.content)} />
+          </div>
+
+          {product_info.features?.map((item) => {
+            return (
+              <div class="row mb-12">
+                <div class="lg:col-6">
+                  <div class="content" set:html={marked.parse(item.content)} />
+                </div>
+                <div class="lg:col-6">
+                  <Image
+                    class="rounded shadow"
+                    src={item.image}
+                    width={808}
+                    height={535}
+                    alt="services-image"
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    )
+  }
+  {
+    intro_video?.enable && (
+      <section class="section bg-body dark:bg-darkmode-body">
+        <div class="container">
+          <div class="lg:col-6 mx-auto text-center">
+            <h2 set:html={markdownify(intro_video.title)} />
+            <p set:html={markdownify(intro_video.content)} />
+          </div>
+          <div class="lg:col-9 mx-auto text-center mt-8">
+            <VideoThumnail
+              src={intro_video.video_thumbnail}
+              videoId={intro_video.video_id}
+              client:load
+            />
+          </div>
+        </div>
+      </section>
+    )
+  }
+  {
+    services?.enable &&
+      services.block.map((service, index) => {
+        const isEven = (index + 1) % 2 === 0;
+        return (
+          <section
+            class={`section ${
+              !isEven ? "bg-light dark:bg-darkmode-light" : ""
+            }`}
+          >
+            <div class="container">
+              <div
+                class={`row gy-5 lg:gy-0 items-center ${
+                  !isEven
+                    ? "flex-col-reverse lg:flex-row"
+                    : "lg:flex-row-reverse"
+                }`}
+              >
+                <div class={`lg:col-6 ${isEven ? "lg:order-1 order-2" : ""}`}>
+                  <h2 class="mb-5" set:html={markdownify(service.title)} />
+                  <p set:html={markdownify(service.description)} />
+                </div>
+                <div class={`lg:col-6 ${isEven ? "lg:order-2 order-1" : ""}`}>
+                  {service.slider_images.length > 1 ? (
+                    <ServicesSlider data={service.slider_images} />
+                  ) : (
+                    <Image
+                      src={service.slider_images[0]}
+                      width={808}
+                      height={535}
+                      alt="services-image"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      })
+  }
+  {
+    call_to_action?.enable && (
+      <section class="section">
+        <div class="container">
+          <div class="row justify-center items-center">
+            <div class="lg:col-7 text-center">
+              <h2 class="mb-4" set:html={markdownify(call_to_action.title)} />
+              <p
+                class="mb-6"
+                set:html={markdownify(call_to_action.description)}
+              />
+              {call_to_action.button.enable && (
+                <a class="btn btn-primary" href={call_to_action.button.link}>
+                  {call_to_action.button.label}
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+</Base>

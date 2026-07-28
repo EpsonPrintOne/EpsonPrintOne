@@ -1,0 +1,212 @@
+---
+import BrandSlider from "@/components/BrandSlider.astro";
+import ServicesSlider from "@/components/ServicesSlider.astro";
+import DynamicIcon from "@/helpers/DynamicIcon";
+import VideoThumnail from "@/helpers/VideoThumnail";
+import Base from "@/layouts/Base.astro";
+import { getListPage } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import Testimonial from "@/partials/Testimonial.astro";
+import { Image } from "astro:assets";
+
+const homepage = await getListPage("homepage", "-index");
+
+const {
+  banner,
+  brands_images,
+  feature,
+  workflow,
+  services,
+  integrate,
+  annoucement,
+} = homepage.data;
+---
+
+<Base>
+  {/* Banner */}
+  <section class="pt-20">
+    <div class="container">
+      <div class="row text-center">
+        <div class="mx-auto lg:col-8">
+          <h1
+            class="font-primary font-bold"
+            set:html={markdownify(banner.title)}
+          />
+          <p class="mt-4 mb-8" set:html={markdownify(banner.content)} />
+          {
+            banner.button && banner.button.enable && (
+              <a
+                href={banner.button.link}
+                class="btn btn-outline-primary mb-12"
+                set:html={markdownify(banner.button.label)}
+              />
+            )
+          }
+          <Image
+            class="mx-auto"
+            width={750}
+            height={395}
+            src={banner.image}
+            alt="banner-image"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section">
+    <div class="container">
+      <div class="row items-center justify-between">
+        <div class="col-12 text-center mb-5">
+          <h2 class="h5" set:html={markdownify(brands_images.title)} />
+          <BrandSlider data={brands_images.lists} />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section bg-light dark:bg-darkmode-light">
+    <div class="container">
+      <div class="row gy-5">
+        <div class="xl:col-4">
+          <h2 class="mb-5" set:html={markdownify(feature.title)} />
+          <p class="mb-6" set:html={markdownify(feature.description)} />
+
+          {
+            feature.button.enable && (
+              <a
+                href={feature.button.link}
+                title="Try for Free"
+                class="btn btn-outline-primary"
+              >
+                {feature.button.label}
+              </a>
+            )
+          }
+        </div>
+        <div class="xl:col-8 overflow-hidden">
+          <div class="row g-5">
+            {
+              feature.features.map((feature) => (
+                <div class="md:col-6">
+                  <div class="px-6 py-8 items-start sm:flex sm:space-x-6 rounded-sm bg-body dark:bg-darkmode-secondary hover:-translate-y-1 transition-transform duration-300 hover:shadow-lg">
+                    <DynamicIcon
+                      icon={feature.icon}
+                      className="mb-5 flex-none inline-block -mt-1 w-10 h-10 text-5xl text-primary dark:text-darkmode-primary"
+                    />
+                    <div class="inline-block">
+                      <h4 class="mb-3" set:html={markdownify(feature.name)} />
+                      <p class="mb-0" set:html={markdownify(feature.content)} />
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="lg:col-5 mx-auto text-center">
+        <h2 class="mb-5" set:html={markdownify(workflow.title)} />
+        <p set:html={markdownify(workflow.description)} />
+      </div>
+
+      <div class="text-center mt-8 xl:col-9 mx-auto">
+        <VideoThumnail
+          src={workflow.image}
+          videoId={workflow.video_id}
+          client:load
+        />
+      </div>
+    </div>
+  </section>
+
+  {
+    services.map((service, index) => {
+      const isEven = (index + 1) % 2 === 0;
+      return (
+        <section
+          class={`section ${!isEven ? "bg-light dark:bg-darkmode-light" : ""}`}
+        >
+          <div class="container">
+            <div
+              class={`row gy-5 lg:gy-0 items-center ${
+                !isEven ? "flex-col-reverse lg:flex-row" : "lg:flex-row-reverse"
+              }`}
+            >
+              <div class={`lg:col-6 ${isEven ? "lg:order-1 order-2" : ""}`}>
+                <h2 class="mb-5" set:html={markdownify(service.title)} />
+                <p set:html={markdownify(service.description)} />
+              </div>
+              <div class={`lg:col-6 ${isEven ? "lg:order-2 order-1" : ""}`}>
+                {service.slider_images.length > 1 ? (
+                  <ServicesSlider data={service.slider_images} />
+                ) : (
+                  <Image
+                    src={service.slider_images[0]}
+                    width={808}
+                    height={535}
+                    alt="services-image"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    })
+  }
+  <Testimonial />
+
+  <section class="section">
+    <div class="container">
+      <div class="lg:col-6 mx-auto text-center">
+        <h2 class="mb-4" set:html={markdownify(integrate.title)} />
+        <p set:html={markdownify(integrate.content)} />
+      </div>
+
+      <div class="col-12 text-center mt-16">
+        {
+          integrate.tools.map((src) => (
+            <div class="inline-block rounded bg-body m-4 py-6 px-6 shadow hover:-translate-y-1 duration-300 transition-transform">
+              <Image
+                width={186}
+                class="w-auto h-auto"
+                height={45}
+                src={src}
+                alt="tools image"
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <Image
+      class="w-full"
+      src={annoucement.image}
+      width={1908}
+      height={415}
+      alt="anoucement-image"
+    />
+    <div class="container">
+      <div class="lg:col-7 mx-auto text-center section pb-0">
+        <h1 class="mb-8">{annoucement.title}</h1>
+        <p class="mb-5">{annoucement.description}</p>
+        {
+          annoucement.button.enable && (
+            <a href={annoucement.button.link} class="btn btn-primary">
+              {annoucement.button.label}
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </section>
+</Base>

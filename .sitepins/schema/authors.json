@@ -1,0 +1,52 @@
+{
+  "file": "src/content/authors/awab-husameldin.md",
+  "name": "authors",
+  "fileType": "md",
+  "fmType": "yaml",
+  "template": [
+    {
+      "name": "title",
+      "label": "Title",
+      "type": "string",
+      "value": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "image",
+      "label": "Image",
+      "type": "media",
+      "value": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "social",
+      "label": "Social",
+      "type": "Array",
+      "value": [],
+      "defaultValue": "",
+      "fields": [
+        {
+          "name": "icon",
+          "label": "Icon",
+          "type": "string",
+          "value": "",
+          "defaultValue": ""
+        },
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "string",
+          "value": "",
+          "defaultValue": ""
+        },
+        {
+          "name": "link",
+          "label": "Link",
+          "type": "string",
+          "value": "",
+          "defaultValue": ""
+        }
+      ]
+    }
+  ]
+}

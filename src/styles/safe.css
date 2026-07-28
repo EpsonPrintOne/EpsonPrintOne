@@ -1,0 +1,53 @@
+/* navbar toggler */
+input#nav-toggle:checked ~ label#show-button {
+  @apply hidden;
+}
+
+input#nav-toggle:checked ~ label#hide-button {
+  @apply flex lg:hidden;
+}
+
+input#nav-toggle:checked ~ .navbar-nav {
+  @apply max-lg:max-h-screen visible;
+}
+
+/* form style */
+.form-input {
+  @apply w-full rounded border-transparent bg-light px-6 py-4 text-text-dark placeholder:text-text-light focus:border-primary focus:ring-transparent dark:border-darkmode-border dark:bg-darkmode-light dark:text-darkmode-text-light;
+}
+
+.form-label {
+  @apply mb-4 block font-secondary text-xl font-normal text-text-dark dark:text-darkmode-text-light;
+}
+
+/* swiper pagination */
+.swiper-pagination {
+  @apply mt-9 flex items-center justify-center space-x-2 text-center;
+}
+.swiper-pagination-bullet {
+  @apply h-2.5 w-2.5 rounded-full bg-light opacity-100 dark:bg-darkmode-light;
+}
+
+.swiper-pagination-bullet.active {
+  @apply h-4 w-4 bg-primary dark:bg-darkmode-light;
+}
+
+/* pagination */
+.pagination {
+  @apply space-x-3 text-center;
+
+  span {
+    @apply inline-block w-4 h-4 border border-primary/20  dark:border-light/30;
+
+    &.active {
+      @apply bg-primary dark:bg-darkmode-primary;
+    }
+  }
+}
+
+/* swiper pagination */
+.brand-slider .swiper-wrapper {
+  -webkit-transition-timing-function: linear !important;
+  -o-transition-timing-function: linear !important;
+  transition-timing-function: linear !important;
+}

@@ -1,0 +1,108 @@
+---
+import VideoThumnail from "@/helpers/VideoThumnail";
+import Base from "@/layouts/Base.astro";
+import { getListPage } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import { Image } from "astro:assets";
+
+const howItWorksIndex = await getListPage("howItWorks", "-index");
+const buildDrafts = process.argv.includes("--buildDrafts");
+if (!buildDrafts && howItWorksIndex.data.draft) return Astro.redirect("/404");
+const { banner, how_it_works, intro_video } = howItWorksIndex.data;
+---
+
+<Base {...howItWorksIndex.data}>
+  <section class="section bg-light dark:bg-darkmode-light">
+    <div class="container">
+      <div class="row gy-4 lg:gy-0">
+        <div class="lg:col-6">
+          <div class="space-y-8">
+            <h1 set:html={markdownify(banner.title)} />
+            <p set:html={markdownify(banner.content)} />
+
+            {
+              banner.button.enable && (
+                <a href={banner.button.link} class="btn btn-outline-primary">
+                  {banner.button.label}
+                </a>
+              )
+            }
+          </div>
+        </div>
+        <div class="lg:col-6">
+          <Image
+            src={banner.image}
+            alt="how-it-works-image"
+            class="mx-auto"
+            width={550}
+            height={348}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section bg-body dark:bg-darkmode-body">
+    <div class="container">
+      <div class="lg:col-6 mx-auto text-center">
+        <h2 set:html={markdownify(intro_video.title)} />
+        <p set:html={markdownify(intro_video.content)} />
+      </div>
+
+      <div class="lg:col-9 mx-auto text-center mt-8">
+        <VideoThumnail
+          src={intro_video.video_thumbnail}
+          videoId={intro_video.video_id}
+          client:load
+        />
+      </div>
+    </div>
+  </section>
+
+  {
+    how_it_works.enable && (
+      <div class="relative after:absolute after:h-3/4 after:top-[46%] xl:after:top-[45%] after:-translate-y-1/2 after:w-0.5 after:left-1/2 after:bg-primary/20 dark:after:bg-darkmode-primary/20 lg:after:block after:hidden">
+        {how_it_works.blocks.map((block, index) => {
+          const isEven = (index + 1) % 2 === 0;
+          return (
+            <section
+              class={`section ${
+                !isEven ? "bg-light dark:bg-darkmode-light" : ""
+              } relative before:absolute before:left-1/2 before:w-6 before:h-6 before:-translate-x-1/2 before:rounded-full before:border-4 before:border-primary/30 dark:before:border-darkmode-primary/30 before:bg-primary dark:before:bg-darkmode-primary before:top-[calc(4.5rem_+_6.5rem)] before:hidden lg:before:block`}
+            >
+              <div class="container">
+                <div
+                  class={`row gy-5 lg:gy-0 ${
+                    isEven ? "lg:flex-row-reverse" : ""
+                  }`}
+                >
+                  <div class="lg:col-6 lg:order-1 order-2">
+                    <div class="lg:px-4">
+                      <div class={`${!isEven ? "lg:text-right" : "text-left"}`}>
+                        <h2
+                          class="mb-3 lg:mt-16"
+                          set:html={markdownify(block.title)}
+                        />
+                        <p set:html={markdownify(block.content)} />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="lg:col-6 lg:order-2 order-1">
+                    <div class="px-4">
+                      <Image
+                        src={block.image}
+                        class="rounded"
+                        width={1070}
+                        height={698}
+                        alt="product-image"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          );
+        })}
+      </div>
+    )
+  }
+</Base>

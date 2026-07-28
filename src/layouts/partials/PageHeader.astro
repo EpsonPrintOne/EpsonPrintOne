@@ -1,0 +1,17 @@
+---
+import { humanize } from "@/lib/utils/textConverter";
+interface Props {
+  title: string;
+  subtitle?: string;
+}
+const { title, subtitle } = Astro.props;
+---
+
+<section class="section !pb-0">
+  <div class="container text-center">
+    <div class="lg:col-6 mx-auto text-center">
+      <h1 class="mb-3">{humanize(title)}</h1>
+      {subtitle && <p>{humanize(subtitle)}</p>}
+    </div>
+  </div>
+</section>

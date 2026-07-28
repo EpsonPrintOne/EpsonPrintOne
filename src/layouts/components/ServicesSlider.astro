@@ -1,0 +1,40 @@
+---
+interface Props {
+  data: Array<string>;
+}
+
+import { Image } from "astro:assets";
+const { data } = Astro.props;
+---
+
+<div class="swiper services-slider">
+  <div class="swiper-wrapper">
+    {
+      data.map((src) => (
+        <div class="swiper-slide text-center">
+          <Image src={src} width={808} height={535} alt="services-image" />
+        </div>
+      ))
+    }
+  </div>
+  <div class="pagination mt-8 lg:mt-16"></div>
+</div>
+
+<script>
+  import { Swiper } from "swiper";
+  import "swiper/css";
+  import { Autoplay, Pagination } from "swiper/modules";
+
+  // astro:page-load event is fired when the page is loaded
+  document.addEventListener("astro:page-load", () => {
+    new Swiper(".services-slider", {
+      modules: [Pagination, Autoplay],
+      loop: true,
+      pagination: {
+        el: ".pagination",
+        clickable: true,
+        bulletActiveClass: "active",
+      },
+    });
+  });
+</script>

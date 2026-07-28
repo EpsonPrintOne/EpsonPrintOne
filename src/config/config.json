@@ -1,0 +1,46 @@
+{
+  "site": {
+    "title": "Bigspring Astro and Tailwindcss",
+    "base_url": "https://example.com",
+    "base_path": "/",
+    "trailing_slash": false,
+    "favicon": "/images/favicon.png",
+    "logo": "/images/logo.png",
+    "logo_darkmode": "/images/logo-darkmode.png",
+    "logo_width": "180",
+    "logo_height": "39",
+    "logo_text": "Bigspring"
+  },
+
+  "settings": {
+    "sticky_header": true,
+    "theme_switcher": true,
+    "default_theme": "system",
+    "pagination": 6,
+    "summary_length": 96,
+    "blog_folder": "blog"
+  },
+
+  "params": {
+    "contact_form_action": "#",
+    "footer_content": "Lorem ipsum dolor sit amet, consectetur elit. Consjat tristique eget amet, tempus eu at cttur.",
+    "copyright": "All rights reserved | Theme by [Themefisher](https://themefisher.com/)"
+  },
+
+  "navigation_button": {
+    "enable": true,
+    "label": "Get Demo",
+    "link": "/contact"
+  },
+
+  "google_tag_manager": {
+    "enable": false,
+    "gtm_id": "GTM-XXXXXX"
+  },
+
+  "metadata": {
+    "meta_author": "Themefisher",
+    "meta_image": "/images/og-image.png",
+    "meta_description": "Bigspring with Nextjs and Tailwindcss"
+  }
+}

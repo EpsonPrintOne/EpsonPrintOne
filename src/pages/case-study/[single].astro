@@ -1,0 +1,153 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import PageHeader from "@/partials/PageHeader.astro";
+import { Image } from "astro:assets";
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+  const caseStudies = await getSinglePage("caseStudy");
+  const paths = caseStudies.map((caseStudy) => {
+    return {
+      params: {
+        single: caseStudy.id,
+      },
+      props: {
+        caseStudy,
+      },
+    };
+  });
+
+  return paths;
+}
+
+const { caseStudy } = Astro.props;
+const caseStudies = await getSinglePage("caseStudy");
+
+const currnetIndex = caseStudies.findIndex((page) => {
+  return page.id === caseStudy.id;
+});
+
+const hasNext = currnetIndex + 1 < caseStudies.length;
+const hasPrev = currnetIndex - 1 >= 0;
+const nextcaseStudy = hasNext && caseStudies[currnetIndex + 1];
+const prevcaseStudy = hasPrev && caseStudies[currnetIndex - 1];
+const { Content } = await render(caseStudy);
+const { call_to_action, description, image, title } = caseStudy.data;
+---
+
+<Base {...caseStudy.data}>
+  <PageHeader title={title} subtitle={description} />
+
+  <section class="section">
+    <div class="container">
+      <div class="lg:col-8 mx-auto mb-10">
+        <div
+          class="pb-10 border-b border-border dark:border-darkmode-border mb-10"
+        >
+          <h4
+            class="text-xl font-bold text-text-light dark:text-darkmode-text-light"
+            set:html={markdownify("Lets Meet")}
+          />
+          <h1
+            class="text-primary dark:text-darkmode-primary"
+            set:html={markdownify(title)}
+          />
+        </div>
+        <div class="content">
+          <Content />
+        </div>
+        <div class="row">
+          <div class="col-6 text-center md:text-left">
+            {
+              prevcaseStudy && (
+                <a
+                  class="inline-block"
+                  href={`/case-study/${prevcaseStudy.id}`}
+                >
+                  <div class="bg-secondary rounded-lg">
+                    {prevcaseStudy.data.image && (
+                      <Image
+                        class="mb-2"
+                        src={image!}
+                        alt={title}
+                        width={170}
+                        height={100}
+                      />
+                    )}
+                  </div>
+                  <div class="text-center">
+                    <p>Previous Case</p>
+                    <p class="h4 text-text-dark dark:text-darkmode-text-dark font-bold">
+                      {title}
+                    </p>
+                  </div>
+                </a>
+              )
+            }
+          </div>
+          <div class="col-6 text-center md:text-right">
+            {
+              nextcaseStudy && (
+                <a
+                  class="inline-block"
+                  href={`/case-study/${nextcaseStudy.id}`}
+                >
+                  <div class="bg-secondary rounded-lg">
+                    {nextcaseStudy.data.image && (
+                      <Image
+                        class="mb-2"
+                        src={nextcaseStudy.data.image}
+                        alt={nextcaseStudy.data.title}
+                        width={170}
+                        height={100}
+                      />
+                    )}
+                  </div>
+                  <div class="text-center">
+                    <p>Next Case</p>
+                    <p class="h4 text-text-dark dark:text-darkmode-text-dark font-bold">
+                      {nextcaseStudy.data.title}
+                    </p>
+                  </div>
+                </a>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    call_to_action?.enable && (
+      <section class="section pt-0">
+        <div class="container">
+          <div class="row justify-center items-center">
+            <div class="lg:col-4">
+              <Image
+                src={call_to_action.image}
+                alt="cta-img"
+                width={446}
+                height={264}
+              />
+            </div>
+            <div class="lg:col-4">
+              <h2 class="mb-4" set:html={markdownify(call_to_action.title)} />
+              <p
+                class="mb-6"
+                set:html={markdownify(call_to_action.description)}
+              />
+              {call_to_action.button.enable && (
+                <a class="btn btn-primary" href={call_to_action.button.link}>
+                  {call_to_action.button.label}
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+</Base>

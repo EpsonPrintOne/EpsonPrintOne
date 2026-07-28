@@ -1,0 +1,182 @@
+{
+  "main": [
+    {
+      "name": "Home",
+      "url": "/"
+    },
+    {
+      "name": "Company",
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "About",
+          "url": "/about"
+        },
+        {
+          "name": "Team",
+          "url": "/team"
+        },
+        {
+          "name": "How It Works",
+          "url": "/how-it-works"
+        },
+        {
+          "name": "career",
+          "url": "/careers"
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "CRM",
+          "description": "For great customer relationships",
+          "url": "/products/product-1",
+          "icon": "FaUsers"
+        },
+        {
+          "name": "Help Desk",
+          "description": "Software to deliver great customer support",
+          "url": "/products/product-2",
+          "icon": "FaDiceD6"
+        },
+        {
+          "name": "Workplace",
+          "description": "Application built to improve productivity",
+          "url": "/products/product-3",
+          "icon": "FaHouseLaptop"
+        },
+        {
+          "name": "Analytics",
+          "description": "Create custom reports from any data set.",
+          "url": "/products/product-4",
+          "icon": "FaChartBar"
+        },
+        {
+          "name": "View All Product",
+          "url": "/products",
+          "icon": "FaArrowRight"
+        }
+      ]
+    },
+    {
+      "name": "Blog",
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "Blog",
+          "url": "/blog"
+        },
+        {
+          "name": "Authors",
+          "url": "/authors"
+        }
+      ]
+    },
+    {
+      "name": "Pages",
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "Pricing",
+          "url": "/pricing"
+        },
+        {
+          "name": "Case Studies",
+          "url": "/case-study"
+        },
+        {
+          "name": "FAQ",
+          "url": "/faq"
+        },
+        {
+          "name": "Privacy Policy",
+          "url": "/privacy-policy"
+        },
+        {
+          "name": "Terms & Condition",
+          "url": "/terms-condition"
+        },
+        {
+          "name": "Elements",
+          "url": "/elements"
+        },
+        {
+          "name": "404",
+          "url": "/404"
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "url": "/contact"
+    }
+  ],
+  "footer": [
+    {
+      "name": "Company",
+      "menu": [
+        {
+          "name": "About",
+          "url": "/about"
+        },
+        {
+          "name": "Team",
+          "url": "/team"
+        },
+        {
+          "name": "How It Works",
+          "url": "/how-it-works"
+        },
+        {
+          "name": "career",
+          "url": "/careers"
+        }
+      ]
+    },
+    {
+      "name": "Product",
+      "menu": [
+        {
+          "name": "CRM",
+          "url": "/products/product-1"
+        },
+        {
+          "name": "Help Desk",
+          "url": "/products/product-2"
+        },
+        {
+          "name": "Workplace",
+          "url": "/products/product-3"
+        },
+        {
+          "name": "Analytics",
+          "url": "/products/product-4"
+        }
+      ]
+    },
+    {
+      "name": "Support",
+      "menu": [
+        {
+          "name": "FAQ",
+          "url": "/faq"
+        },
+        {
+          "name": "Contact",
+          "url": "/contact"
+        },
+        {
+          "name": "Privacy Policy",
+          "url": "/privacy-policy"
+        },
+        {
+          "name": "Terms & Conditions",
+          "url": "/terms-condition"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getListPage, getSinglePage } from "@/lib/contentParser.astro";
+import { markdownify, slugify } from "@/lib/utils/textConverter";
+import PageHeader from "@/partials/PageHeader.astro";
+import { Image } from "astro:assets";
+
+const caseStudiesIndex = await getListPage("caseStudy", "-index");
+const buildDrafts = process.argv.includes("--buildDrafts");
+if (!buildDrafts && caseStudiesIndex.data.draft) return Astro.redirect("/404");
+const caseStudies = await getSinglePage("caseStudy");
+---
+
+<Base {...caseStudiesIndex.data}>
+  <PageHeader
+    title={caseStudiesIndex.data.title}
+    subtitle={caseStudiesIndex.data.subtitle}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="row gy-4 justify-center">
+        {
+          caseStudies.map((caseStudy) => {
+            const { image, title, description } = caseStudy.data;
+            return (
+              <div class="md:col-6 lg:col-4 xl:col-3">
+                <div class="rounded-sm relative h-full shadow dark:shadow-white/30 overflow-hidden">
+                  <div class="bg-secondary">
+                    {image && (
+                      <Image src={image} alt={title} width={306} height={180} />
+                    )}
+                  </div>
+                  <div class="bg-body dark:bg-darkmode-body h-full rounded-b py-10 px-12">
+                    <h3
+                      class="text-text-dark dark:text-darkmode-text-dark mb-3"
+                      set:html={markdownify(title!)}
+                    />
+                    <p
+                      set:html={markdownify(description?.slice(0, 72) + "...")}
+                    />
+                    <a
+                      class="text-primary dark:text-darkmode-primary block mt-5"
+                      href={`/case-study/${slugify(caseStudy.id)}`}
+                    >
+                      Read the full case study
+                    </a>
+                  </div>
+                  <a
+                    href={`/case-study/${slugify(caseStudy.id)}`}
+                    class="absolute inset-0"
+                  />
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+</Base>

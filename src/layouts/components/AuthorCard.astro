@@ -1,0 +1,43 @@
+---
+import { plainify, slugify } from "@/lib/utils/textConverter";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import Social from "./Social.astro";
+
+type Props = CollectionEntry<"authors">;
+const { data, id, body } = Astro.props;
+const { title, image, social } = data;
+---
+
+<div class="text-center">
+  {
+    image && (
+      <Image
+        class="mx-auto rounded-full w-[120px] h-[120px] object-cover"
+        src={image}
+        alt={title}
+        width={120}
+        height={120}
+      />
+    )
+  }
+  <div class="py-4">
+    <h4 class="mb-6 font-bold">
+      <a href={`/authors/${id}`}>{title}</a>
+    </h4>
+    {
+      social && (
+        <Social source={social} className="social-icons author-social" />
+      )
+    }
+    <p class="mt-7 inline-block">
+      {plainify(body?.slice(0, 80) + "... ")}
+      <a
+        href={`/authors/${slugify(id)}`}
+        class="font-bold inline-block capitalize hover:text-primary dark:hover:text-darkmode-primary text-text-dark dark:text-darkmode-text-dark"
+      >
+        Read More
+      </a>
+    </p>
+  </div>
+</div>

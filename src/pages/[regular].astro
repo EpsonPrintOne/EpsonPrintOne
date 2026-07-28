@@ -1,0 +1,32 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+  const pages = await getSinglePage("pages");
+  const paths = pages.map((page) => ({
+    params: {
+      regular: page.id,
+    },
+    props: { page },
+  }));
+  return paths;
+}
+
+const { page } = Astro.props;
+const { title } = page.data;
+const { Content } = await render(page);
+---
+
+<Base {...page.data}>
+  <PageHeader title={title} />
+  <section class="section">
+    <div class="container">
+      <div class="content lg:col-10 mx-auto">
+        <Content />
+      </div>
+    </div>
+  </section>
+</Base>

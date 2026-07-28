@@ -1,0 +1,70 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  data: CollectionEntry<"homepage">["data"]["brands_images"]["lists"];
+};
+const { data } = Astro.props;
+---
+
+<div class="mt-16">
+  <div class="swiper brand-slider">
+    <div class="swiper-wrapper">
+      {
+        data.map((item) => (
+          <div class="swiper-slide text-center flex items-center justify-center">
+            <img
+              class={"mx-auto w-auto h-auto"}
+              src={item.image}
+              alt={item.alt}
+              width={160}
+              height={40}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  import { Swiper } from "swiper";
+  import "swiper/css";
+  import { Autoplay } from "swiper/modules";
+
+  // astro:page-load event is fired when the page is loaded
+  document.addEventListener("astro:page-load", () => {
+    new Swiper(".brand-slider", {
+      modules: [Autoplay],
+      direction: "horizontal",
+      spaceBetween: 30,
+      observer: true,
+      observeParents: true,
+      freeMode: { enabled: true, momentum: false },
+      speed: 4000,
+      loop: true,
+      autoplay: {
+        disableOnInteraction: false,
+        delay: 0,
+      },
+      allowTouchMove: false,
+      breakpoints: {
+        0: {
+          slidesPerView: 2,
+        },
+        576: {
+          slidesPerView: 3,
+        },
+        768: {
+          slidesPerView: 4,
+        },
+        992: {
+          slidesPerView: 5,
+        },
+        1200: {
+          slidesPerView: 6,
+        },
+      },
+    });
+  });
+</script>

@@ -1,0 +1,105 @@
+---
+import Accordion from "@/helpers/Accordion";
+import Base from "@/layouts/Base.astro";
+import { getListPage } from "@/lib/contentParser.astro";
+import { markdownify, plainify } from "@/lib/utils/textConverter";
+import PageHeader from "@/partials/PageHeader.astro";
+import { Image } from "astro:assets";
+
+const pricingIndex = await getListPage("pricing", "-index");
+const buildDrafts = process.argv.includes("--buildDrafts");
+if (!buildDrafts && pricingIndex.data.draft) return Astro.redirect("/404");
+const { call_to_action, description, faq, pricing_list, title } =
+  pricingIndex.data;
+---
+
+<Base {...pricingIndex.data}>
+  <PageHeader title={title} subtitle={description} />
+  <section class="section">
+    <div class="container">
+      <div class="lg:col-10 mx-auto">
+        <div class="row gy-5 lg:g-0 items-center justify-center">
+          {
+            pricing_list?.map((paln) => (
+              <div class="lg:col-4">
+                <div
+                  class={`bg-body dark:bg-darkmode-secondary rounded-sm shadow border border-border dark:border-none py-12 text-center ${
+                    paln.recommended ? "recommended" : ""
+                  }`}
+                >
+                  <h3 set:html={markdownify(paln.name)} />
+                  <div class="my-3">
+                    <span class="h5">$</span>
+                    <span
+                      class="h2 font-bold text-text-dark dark:text-darkmode-text-dark"
+                      set:html={markdownify(paln.price)}
+                    />
+                    <span> /{plainify(paln.price_per)}</span>
+                  </div>
+                  <p class="h5 mb-5" set:html={markdownify(paln.info)} />
+                  <ul class="space-y-3">
+                    {paln.services.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                  {paln.button.enable && (
+                    <a
+                      href={paln.button.link}
+                      class="btn btn-outline-primary mt-12"
+                    >
+                      {paln.button.label}
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="lg:col-5 mx-auto text-center">
+        <h2 set:html={markdownify(faq.title)} />
+        <p class="mt-4" set:html={markdownify(faq.description)} />
+      </div>
+
+      <div class="row justify-center mt-12">
+        <Accordion questions={faq.questions} client:load />
+      </div>
+    </div>
+  </section>
+
+  {
+    call_to_action.enable && (
+      <section class="section pt-0">
+        <div class="container">
+          <div class="row gy-4 lg:gy-0 justify-center items-center">
+            <div class="lg:col-4">
+              <Image
+                src={call_to_action.image}
+                alt="cta-img"
+                width={446}
+                height={264}
+              />
+            </div>
+            <div class="lg:col-4">
+              <h2 class="mb-4" set:html={markdownify(call_to_action.title)} />
+              <p
+                class="mb-6"
+                set:html={markdownify(call_to_action.description)}
+              />
+              {call_to_action.button.enable && (
+                <a class="btn btn-primary" href={call_to_action.button.link}>
+                  {call_to_action.button.label}
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+</Base>

@@ -1,0 +1,54 @@
+---
+import Logo from "@/components/Logo.astro";
+import Social from "@/components/Social.astro";
+import config from "@/config/config.json";
+import menu from "@/config/menu.json";
+import social from "@/config/social.json";
+import { markdownify } from "@/lib/utils/textConverter";
+
+const { footer } = menu;
+const { footer_content, copyright } = config.params;
+---
+
+<footer class="section bg-light dark:bg-darkmode-light pb-0">
+  <div class="container">
+    {/* footer menu */}
+    <div class="row">
+      {
+        footer.map((col) => {
+          return (
+            <div class="mb-12 sm:col-6 lg:col-3">
+              <h4 set:html={markdownify(col.name)} class="mb-4 font-bold" />
+              <ul class="mt-6">
+                {col.menu.map((item) => (
+                  <li class="mb-3 last:mb-0">
+                    <a
+                      class="dark:text-darkmode-text-dark/50 duration-300 transition-colors hover:text-primary hover:dark:text-darkmode-primary"
+                      href={item.url}
+                    >
+                      {item.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })
+      }
+      {/* social icons */}
+      <div class="md-12 sm:col-6 lg:col-3">
+        <Logo />
+        <p class="mt-3 mb-6" set:html={markdownify(footer_content)} />
+        <Social
+          source={social.main}
+          className="social-icons mb-8 author-social"
+        />
+      </div>
+    </div>
+    {/* copyright */}
+    <div
+      class="border-t text-text-dark dark:text-darkmode-text-light border-border dark:border-darkmode-border py-6 text-center content"
+      set:html={markdownify(copyright)}
+    />
+  </div>
+</footer>

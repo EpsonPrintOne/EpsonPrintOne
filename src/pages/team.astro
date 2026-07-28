@@ -1,0 +1,28 @@
+---
+import TeamMember from "@/components/TeamMember.astro";
+import Base from "@/layouts/Base.astro";
+import { getListPage } from "@/lib/contentParser.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+
+const teamIndex = await getListPage("team", "-index");
+const buildDrafts = process.argv.includes("--buildDrafts");
+if (!buildDrafts && teamIndex.data.draft) return Astro.redirect("/404");
+const { title, subtitle, team_members } = teamIndex.data;
+---
+
+<Base {...teamIndex.data}>
+  <PageHeader title={title} subtitle={subtitle} />
+  <section class="section bg-theme-body dark:bg-darkmode-body">
+    <div class="container">
+      <div class="row gy-5 lg:gy-4">
+        {
+          team_members.map((member) => (
+            <div class="lg:col-3 md:col-6">
+              <TeamMember {...member} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

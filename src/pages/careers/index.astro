@@ -1,0 +1,61 @@
+---
+import DynamicIcon from "@/helpers/DynamicIcon";
+import Base from "@/layouts/Base.astro";
+import { getListPage, getSinglePage } from "@/lib/contentParser.astro";
+import { markdownify, slugify } from "@/lib/utils/textConverter";
+import PageHeader from "@/partials/PageHeader.astro";
+
+const careersIndex = await getListPage("career", "-index");
+const buildDrafts = process.argv.includes("--buildDrafts");
+if (!buildDrafts && careersIndex.data.draft) return Astro.redirect("/404");
+const careers = await getSinglePage("career");
+---
+
+<Base {...careersIndex.data}>
+  <PageHeader
+    title={careersIndex.data.title}
+    subtitle={"Give your team the design mindset & design tools"}
+  />
+  <section class="section">
+    <div class="container">
+      <div class="container">
+        <div class="row g-4">
+          {
+            careers.map((career) => {
+              const { title, job_nature } = career.data;
+              return (
+                <div class="lg:col-6">
+                  <div class="bg-body dark:bg-darkmode-body rounded shadow border border-border dark:border-darkmode-border p-11 group relative hover:-translate-y-[3px] transition hover:shadow-lg hover:border-transparent dark:hover:border-transparent">
+                    <a
+                      href={`/careers/${slugify(career.id)}`}
+                      class="font-bold block h4 text-text-dark dark:text-darkmode-text-dark leading-7 mb-3"
+                      set:html={markdownify(title)}
+                    />
+                    <p class="mb-4">
+                      <span set:html={markdownify(job_nature!)} /> | Service
+                    </p>
+                    <a
+                      class="text-primary dark:text-darkmode-primary"
+                      href={"/"}
+                    >
+                      Apply for Position
+                      <DynamicIcon
+                        className="inline-block group-hover:ml-3 transition-all duration-300 ml-2 w-3 h-3"
+                        icon="FaArrowRightLong"
+                      />
+                    </a>
+
+                    <a
+                      href={`/careers/${slugify(career.id)}`}
+                      class="absolute inset-0"
+                    />
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

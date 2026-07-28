@@ -1,0 +1,25 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+import Social from "./Social.astro";
+
+const { image, designation, name, social_profile } = Astro.props;
+---
+
+<div class="text-center">
+  {
+    image && (
+      <img
+        class="mx-auto rounded"
+        src={image}
+        alt={name}
+        width={380}
+        height={420}
+      />
+    )
+  }
+  <div class="py-4">
+    <h4 class="mb-1 font-bold" set:html={markdownify(name)} />
+    <p class="mb-4" set:html={markdownify(designation)} />
+    <Social source={social_profile} className="social-icons" />
+  </div>
+</div>

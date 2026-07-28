@@ -1,0 +1,61 @@
+---
+import DynamicIcon from "@/helpers/DynamicIcon";
+import Base from "@/layouts/Base.astro";
+import { getListPage, getSinglePage } from "@/lib/contentParser.astro";
+import { markdownify, slugify } from "@/lib/utils/textConverter";
+import PageHeader from "@/partials/PageHeader.astro";
+
+const productsIndex = await getListPage("products", "-index");
+const buildDrafts = process.argv.includes("--buildDrafts");
+if (!buildDrafts && productsIndex.data.draft) return Astro.redirect("/404");
+const products = await getSinglePage("products");
+---
+
+<Base {...productsIndex.data}>
+  <PageHeader
+    title={productsIndex.data.title}
+    subtitle={productsIndex.data.subtitle}
+  />
+  <section class="section">
+    <div class="container">
+      <div class="row gy-5 lg:gy-0">
+        {
+          products.map((product) => {
+            const { title, description, icon } = product.data;
+            return (
+              <div class="lg:col-3">
+                <div class="bg-body dark:bg-darkmode-body rounded border border-border dark:border-darkmode-border p-11 transition-all hover:shadow hover:-translate-y-[3px] relative">
+                  <div class="text-primary dark:text-darkmode-primary">
+                    {icon && (
+                      <DynamicIcon
+                        className="inline-block w-12 h-9"
+                        icon={icon}
+                      />
+                    )}
+                  </div>
+                  <h4 class="font-bold mt-6" set:html={markdownify(title)} />
+                  <p class="mt-5" set:html={markdownify(description!)} />
+                  <a
+                    class="text-primary dark:text-darkmode-primary mt-10 block"
+                    href={`/products/${slugify(product.id)}`}
+                  >
+                    View Product
+                    <DynamicIcon
+                      icon="FaArrowRightLong"
+                      className="inline-block ml-4"
+                    />
+                  </a>
+
+                  <a
+                    class="absolute inset-0"
+                    href={`/products/${slugify(product.id)}`}
+                  />
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+</Base>

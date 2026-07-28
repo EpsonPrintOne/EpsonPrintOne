@@ -1,0 +1,92 @@
+---
+import config from "@/config/config.json";
+import DynamicIcon from "@/helpers/DynamicIcon";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import dateFormat from "@/lib/utils/dateFormat";
+import { markdownify, plainify, slugify } from "@/lib/utils/textConverter";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+const {
+  summary_length,
+  blog_folder,
+}: { summary_length: number; blog_folder: string } = config.settings;
+
+type Props = CollectionEntry<"blog">;
+
+const { data, id, body } = Astro.props;
+const { title, image, date, author: name } = data;
+
+const singleAuthor = await getSinglePage("authors");
+
+const author = singleAuthor[0];
+---
+
+<div class="bg-body dark:bg-darkmode-body px-1">
+  {
+    image && (
+      <Image
+        class="mb-6 w-full rounded"
+        src={image}
+        width={400}
+        height={200}
+        alt={title}
+      />
+    )
+  }
+  <div class="flex space-x-3 items-center mb-3">
+    {
+      name ? (
+        <a href={`/authors/${slugify(id)}`}>
+          {author.data.image && (
+            <Image
+              class="inline-block rounded-full"
+              src={author.data.image}
+              width={30}
+              height={30}
+              alt={name!}
+              title={name}
+            />
+          )}
+        </a>
+      ) : (
+        <div class="inline-flex items-center justify-center border border-border dark:border-darkmode-border rounded-full w-8 h-8 text-text-dark dark:text-darkmode-text-dark">
+          <DynamicIcon className="inline-block" icon="FaUser" />
+        </div>
+      )
+    }
+    <p>
+      <span>by</span>
+      {
+        name ? (
+          <a
+            class="transition hover:text-primary hover:dark:text-darkmode-primary"
+            href={`/authors/${slugify(author.id)}`}
+            set:html={markdownify(name)}
+          />
+        ) : (
+          <span>admin</span>
+        )
+      }
+    </p>
+    <div>
+      <DynamicIcon className="inline-block" icon="FaRegCalendarDays" />{" "}
+      {dateFormat(date!)}
+    </div>
+  </div>
+
+  <h4
+    class="mb-3 font-bold text-text-dark dark:text-darkmode-text-dark hover:text-primary dark:hover:text-darkmode-primary transition"
+  >
+    <a href={`/${blog_folder}/${id}`} set:html={markdownify(title)} />
+  </h4>
+
+  {
+    body && (
+      <p class="mb-6">{plainify(body.slice(0, Number(summary_length)))}</p>
+    )
+  }
+
+  <a class="btn btn-primary capitalize" href={`/${blog_folder}/${id}`}>
+    read more
+  </a>
+</div>

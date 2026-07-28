@@ -1,0 +1,96 @@
+---
+import DynamicIcon from "@/helpers/DynamicIcon";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import dateFormat from "@/lib/utils/dateFormat";
+import { markdownify, slugify } from "@/lib/utils/textConverter";
+import { Image } from "astro:assets";
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getSinglePage("blog");
+
+  const paths = posts.map((post) => ({
+    params: {
+      single: post.id,
+    },
+    props: { post },
+  }));
+  return paths;
+}
+
+const { post } = Astro.props;
+const { author: name, image, title, date } = post.data;
+const { Content } = await render(post);
+const autors = await getSinglePage("authors");
+const singleAuthor = autors[0];
+---
+
+<Base {...post.data}>
+  <section class="section pt-7">
+    <div class="container">
+      <div class="row justify-center">
+        <article class="lg:col-9">
+          {
+            image && (
+              <div class="mb-10">
+                <Image
+                  src={image}
+                  height={500}
+                  width={1200}
+                  alt={title}
+                  class="w-full rounded"
+                />
+              </div>
+            )
+          }
+          <div class="flex space-x-3 items-center my-3">
+            {
+              singleAuthor?.data?.image ? (
+                <a href={`/authors/${slugify(singleAuthor.id)}`}>
+                  <Image
+                    class="inline-block rounded-full"
+                    src={singleAuthor.data.image}
+                    width={30}
+                    height={30}
+                    alt={name!}
+                    title={name}
+                  />
+                </a>
+              ) : (
+                <div class="inline-flex items-center justify-center border border-border dark:border-darkmode-border rounded-full w-8 h-8 text-text-dark dark:text-darkmode-text-dark">
+                  <DynamicIcon className="inline-block" icon="FaUser" />
+                </div>
+              )
+            }
+            <p>
+              <span>by</span>
+              {
+                name ? (
+                  <a
+                    href={`/authors/${slugify(singleAuthor.id)}`}
+                    class="text-text-dark dark:text-darkmode-text-dark hover:text-primary transition"
+                    set:html={markdownify(name)}
+                  />
+                ) : (
+                  <p class="inline">admin</p>
+                )
+              }
+            </p>
+            <div>
+              <DynamicIcon className="inline-block" icon="FaRegCalendarDays" />{
+                " "
+              }
+              {dateFormat(date!)}
+            </div>
+          </div>
+          <h2 set:html={markdownify(title)} class="h2 mb-4" />
+
+          <div class="content mb-10">
+            <Content />
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</Base>

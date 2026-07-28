@@ -1,0 +1,106 @@
+---
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+import { getListPage } from "@/lib/contentParser.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import { render } from "astro:content";
+
+const { contact_form_action } = config.params;
+
+const contactIndex = await getListPage("contact", "-index");
+const buildDrafts = process.argv.includes("--buildDrafts");
+if (!buildDrafts && contactIndex.data.draft) return Astro.redirect("/404");
+const { title, description, meta_title, image } = contactIndex.data;
+const { Content } = await render(contactIndex);
+---
+
+<Base
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  image={image}
+>
+  <PageHeader title={title} />
+  <section class="section-sm">
+    <div class="container">
+      <div class="row gy-4 lg:gy-0">
+        <div class="lg:col-6">
+          <div class="content">
+            <Content />
+          </div>
+        </div>
+        <div class="lg:col-6">
+          <form class="row" action={contact_form_action}>
+            <div class="lg:col-6">
+              <label for="first-name">
+                <div
+                  class="mb-2 font-medium text-text-dark dark:text-darkmode-text-dark"
+                >
+                  First Name <span class="text-red-500">*</span>
+                </div>
+                <input
+                  class="blcok border border-border w-full rounded-sm p-3 focus:border-primary focus:outline-none focus:ring-0 focus:shadow-none transition dark:bg-dark/20 dark:border-darkmode-border dark:focus:border-darkmode-primary placeholder:text-darkmode-text-light"
+                  type="text"
+                  id="first-name"
+                  placeholder="First Name"
+                  required
+                />
+              </label>
+            </div>
+            <div class="lg:col-6 mt-6 lg:mt-0">
+              <label for="last-name">
+                <div
+                  class="mb-2 font-medium text-text-dark dark:text-darkmode-text-dark"
+                >
+                  Last Name <span class="text-red-500">*</span>
+                </div>
+                <input
+                  class="blcok border border-border w-full rounded-sm p-3 focus:border-primary focus:outline-none focus:ring-0 focus:shadow-none transition dark:bg-dark/20 dark:border-darkmode-border dark:focus:border-darkmode-primary placeholder:text-darkmode-text-light"
+                  type="text"
+                  id="last-name"
+                  placeholder="Last Name"
+                  required
+                />
+              </label>
+            </div>
+
+            <div class="col-12 mt-6">
+              <label for="email">
+                <div
+                  class="mb-2 font-medium text-text-dark dark:text-darkmode-text-dark"
+                >
+                  Email <span class="text-red-500">*</span>
+                </div>
+                <input
+                  class="blcok border border-border w-full rounded-sm p-3 focus:border-primary focus:outline-none focus:ring-0 focus:shadow-none transition dark:bg-dark/20 dark:border-darkmode-border dark:focus:border-darkmode-primary placeholder:text-darkmode-text-light"
+                  type="text"
+                  id="email"
+                  placeholder="Email"
+                  required
+                />
+              </label>
+            </div>
+
+            <div class="col-12 mt-6">
+              <label for="email">
+                <div
+                  class="mb-2 font-medium text-text-dark dark:text-darkmode-text-dark"
+                >
+                  Message <span class="text-red-500">*</span>
+                </div>
+                <textarea
+                  rows={4}
+                  class="blcok border border-border w-full rounded-sm p-3 focus:border-primary focus:outline-none focus:ring-0 focus:shadow-none transition dark:bg-dark/20 dark:border-darkmode-border dark:focus:border-darkmode-primary placeholder:text-darkmode-text-light"
+                  id="measage"
+                  placeholder="Message"
+                  required></textarea>
+              </label>
+            </div>
+
+            <button class="btn btn-primary mt-8">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
