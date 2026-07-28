@@ -1,4 +1,9 @@
-interface Env {
+interface AssetsFetcher {
+  fetch(request: Request): Promise<Response>;
+}
+
+export interface Env {
+  ASSETS: AssetsFetcher;
   RESEND_API_KEY?: string;
   ENQUIRY_NOTIFICATION_EMAIL?: string;
   ENQUIRY_FROM_EMAIL?: string;
@@ -93,12 +98,7 @@ async function sendNotification(
   return true;
 }
 
-export async function onRequestPost(context: {
-  request: Request;
-  env: Env;
-}): Promise<Response> {
-  const { request, env } = context;
-
+export async function handleEnquiry(request: Request, env: Env): Promise<Response> {
   let payload: EnquiryPayload;
   try {
     payload = await request.json();
