@@ -2,6 +2,9 @@
   "name": "epsonprintonecloudflare",
   "compatibility_date": "2026-03-01",
   "main": "worker/index.ts",
+  "vars": {
+    "ENQUIRY_NOTIFICATION_EMAIL": "enquiries@epsonprintone.com"
+  },
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page",
