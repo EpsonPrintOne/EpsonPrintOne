@@ -18,8 +18,6 @@ const {
   included_services,
   ownership_comparison,
   use_cases,
-  sustainability,
-  case_study_teaser,
   faq_teaser,
   final_cta,
 } = homepage.data;
@@ -247,54 +245,6 @@ const {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-    )
-  }
-
-  {/* Sustainability */}
-  {
-    sustainability.enable && (
-      <section class="section">
-        <div class="container">
-          <div class="row items-center gy-8">
-            <div class="lg:col-6">
-              <Image
-                src={sustainability.image}
-                alt="Epson EcoTank printer"
-                width={600}
-                height={480}
-                class="mx-auto h-72 w-auto object-contain"
-              />
-            </div>
-            <div class="lg:col-6">
-              <h2 class="mb-4" set:html={markdownify(sustainability.title)} />
-              <p class="mb-6" set:html={markdownify(sustainability.description)} />
-              <ul class="space-y-3">
-                {sustainability.points.map((point) => (
-                  <li class="flex items-start space-x-3">
-                    <DynamicIcon
-                      icon="FaLeaf"
-                      className="mt-1 h-4 w-4 flex-none text-primary dark:text-darkmode-primary"
-                    />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  {/* Case studies (pending approved content) */}
-  {
-    case_study_teaser.enable && (
-      <section class="section bg-light dark:bg-darkmode-light">
-        <div class="container text-center">
-          <h2 class="mb-4" set:html={markdownify(case_study_teaser.title)} />
-          <p set:html={markdownify(case_study_teaser.description)} />
         </div>
       </section>
     )

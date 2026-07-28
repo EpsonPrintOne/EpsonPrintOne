@@ -97,21 +97,6 @@ use_cases:
       title: "SMEs and small offices"
       description: "Plans sized for offices, including A3 printing, with servicing and support included."
 
-sustainability:
-  enable: true
-  title: "Sustainability and Epson Heat-Free Technology"
-  description: "Epson Heat-Free Technology is designed to use less energy than conventional heat-based laser printing."
-  points:
-    - "Epson Heat-Free Technology"
-    - "Designed to reduce energy use compared with conventional heat-based laser printing"
-    - "Lower consumables and packaging burden where supported"
-  image: "/images/printers/epson-l6390.jpg"
-
-case_study_teaser:
-  enable: false
-  title: "Customer stories"
-  description: "Case studies are being prepared and will appear here once approved."
-
 faq_teaser:
   enable: true
   title: "Frequently asked questions"

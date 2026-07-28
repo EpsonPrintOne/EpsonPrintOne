@@ -17,14 +17,6 @@
       "url": "/why-printone"
     },
     {
-      "name": "Sustainability",
-      "url": "/sustainability"
-    },
-    {
-      "name": "Case Studies",
-      "url": "/case-study"
-    },
-    {
       "name": "FAQ",
       "url": "/faq"
     },
@@ -52,14 +44,6 @@
         {
           "name": "Why PrintOne",
           "url": "/why-printone"
-        },
-        {
-          "name": "Sustainability",
-          "url": "/sustainability"
-        },
-        {
-          "name": "Case Studies",
-          "url": "/case-study"
         }
       ]
     },

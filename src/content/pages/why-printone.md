@@ -33,3 +33,13 @@ Epson PrintOne is a printer subscription programme: one printer, one plan, one b
 #### Who PrintOne is for
 
 PrintOne is designed to serve home users, families, students, home businesses, SMEs, small offices, and offices that need A3 printing — without the brand feeling fragmented across those groups.
+
+#### Sustainability and Epson Heat-Free Technology
+
+PrintOne printers use Epson Heat-Free Technology, which is designed to require less energy than conventional heat-based laser printing.
+
+Where supported, Epson Heat-Free Technology is designed to reduce the consumables and packaging burden associated with printing.
+
+For business and office customers, PrintOne's centralised approach to printer plans is designed to support fleet-management benefits across multiple devices.
+
+Numerical environmental claims will be published here once an approved source, assumptions, calculation method and date are confirmed.

@@ -85,30 +85,6 @@ export const career = defineCollection({
   }),
 });
 
-export const caseStudy = defineCollection({
-  loader: glob({
-    pattern: "**/*.{md,mdx}",
-    base: "src/content/case-study",
-  }),
-  schema: z.object({
-    ...commonFields,
-    subtitle: z.string().optional(),
-    call_to_action: z
-      .object({
-        enable: z.boolean(),
-        title: z.string(),
-        description: z.string(),
-        image: z.string(),
-        button: z.object({
-          label: z.string(),
-          link: z.string(),
-          enable: z.boolean(),
-        }),
-      })
-      .optional(),
-  }),
-});
-
 export const contact = defineCollection({
   loader: glob({
     pattern: "**/-*.{md,mdx}",
@@ -219,18 +195,6 @@ export const homepage = defineCollection({
           description: z.string(),
         }),
       ),
-    }),
-    sustainability: z.object({
-      enable: z.boolean(),
-      title: z.string(),
-      description: z.string(),
-      points: z.array(z.string()),
-      image: z.string(),
-    }),
-    case_study_teaser: z.object({
-      enable: z.boolean(),
-      title: z.string(),
-      description: z.string(),
     }),
     faq_teaser: z.object({
       enable: z.boolean(),
