@@ -23,3 +23,12 @@ package-lock.json
 
 # ignore .astro directory
 .astro
+
+# wrangler local state / cache
+.wrangler/
+
+# TypeScript incremental build cache
+tsconfig.tsbuildinfo
+
+# stray nested checkout, not part of this repo
+EpsonPrintOne/
