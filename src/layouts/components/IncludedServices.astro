@@ -1,0 +1,51 @@
+---
+import DynamicIcon from "@/helpers/DynamicIcon";
+
+const items = [
+  { icon: "FaPrint", text: "Printer included" },
+  { icon: "FaTruckFast", text: "Free delivery" },
+  { icon: "FaScrewdriverWrench", text: "Free installation and setup" },
+  { icon: "FaDroplet", text: "Genuine Epson ink supplied under the programme" },
+  { icon: "FaFileLines", text: "Free monthly pages according to the selected plan" },
+  { icon: "FaWrench", text: "Onsite servicing" },
+  {
+    icon: "FaArrowsRotate",
+    text: "Onsite repair or one-to-one exchange, subject to final approved terms",
+  },
+  {
+    icon: "FaShieldHalved",
+    text: "Official Epson warranty, uplifted to next business day onsite!",
+  },
+  { icon: "FaLocationDot", text: "Singapore local support" },
+  {
+    icon: "FaEnvelope",
+    text: "Scan-to-email configuration where supported and applicable",
+  },
+];
+---
+
+<section class="section bg-light dark:bg-darkmode-light">
+  <div class="container">
+    <div class="mb-6 text-center">
+      <span
+        class="inline-block rounded-full bg-primary dark:bg-darkmode-primary px-4 py-1 text-sm font-medium text-white"
+      >
+        No more upfront payment for printer and inks!
+      </span>
+    </div>
+    <h2 class="mb-10 text-center">Everything included with every subscription</h2>
+    <div class="row gy-8">
+      {
+        items.map((item) => (
+          <div class="sm:col-6 lg:col-3 flex items-start space-x-4">
+            <DynamicIcon
+              icon={item.icon}
+              className="mt-1 h-6 w-6 flex-none text-primary dark:text-darkmode-primary"
+            />
+            <p>{item.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,186 @@
+---
+import Base from "@/layouts/Base.astro";
+import DynamicIcon from "@/helpers/DynamicIcon";
+import PageHeader from "@/partials/PageHeader.astro";
+import IncludedServices from "@/components/IncludedServices.astro";
+import { plans, formatMonthlyPages } from "@/data/plans";
+import { getProductSpecs } from "@/data/productSpecs";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  return plans.map((plan, index) => ({
+    params: { slug: plan.slug },
+    props: { plan, nextPlan: plans[index + 1] },
+  }));
+}
+
+const { plan, nextPlan } = Astro.props;
+const specs = getProductSpecs(plan.slug)!;
+---
+
+<Base
+  title={plan.name}
+  meta_title={`${plan.name} - Epson PrintOne`}
+  description={`${plan.name}: ${plan.model}, ${formatMonthlyPages(plan.monthlyPages)}. ${specs.blurb}`}
+>
+  <PageHeader title={plan.name} />
+
+  {/* At-a-glance info cards */}
+  <section class="pb-8">
+    <div class="container">
+      <div class="row justify-center gy-4">
+        <div class="sm:col-4">
+          <div class="h-full rounded-sm bg-body dark:bg-darkmode-secondary p-5 text-center shadow-lg">
+            <DynamicIcon
+              icon="FaPrint"
+              className="mx-auto mb-2 h-6 w-6 text-primary dark:text-darkmode-primary"
+            />
+            <p class="mb-1 text-sm text-text-light dark:text-darkmode-text-light">
+              The Printer
+            </p>
+            <p class="font-bold text-text-dark dark:text-darkmode-text-dark">
+              {plan.model}
+            </p>
+          </div>
+        </div>
+        <div class="sm:col-4">
+          <div class="h-full rounded-sm bg-body dark:bg-darkmode-secondary p-5 text-center shadow-lg">
+            <DynamicIcon
+              icon="FaFileLines"
+              className="mx-auto mb-2 h-6 w-6 text-primary dark:text-darkmode-primary"
+            />
+            <p class="mb-1 text-sm text-text-light dark:text-darkmode-text-light">
+              No of Free Pages
+            </p>
+            <p class="font-bold text-text-dark dark:text-darkmode-text-dark">
+              {plan.monthlyPages.toLocaleString()} per month
+            </p>
+          </div>
+        </div>
+        <div class="sm:col-4">
+          <div class="h-full rounded-sm bg-body dark:bg-darkmode-secondary p-5 text-center shadow-lg">
+            <DynamicIcon
+              icon="FaDollarSign"
+              className="mx-auto mb-2 h-6 w-6 text-primary dark:text-darkmode-primary"
+            />
+            <p class="mb-1 text-sm text-text-light dark:text-darkmode-text-light">
+              Monthly Subscription
+            </p>
+            <p class="font-bold text-text-dark dark:text-darkmode-text-dark">
+              ${plan.monthlyFee.toFixed(2)}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Printer + quick brief */}
+  <section class="section-sm">
+    <div class="container">
+      <div class="row items-center gy-8">
+        <div class="lg:col-5 text-center">
+          <Image
+            src={plan.image}
+            alt={plan.model}
+            width={500}
+            height={500}
+            class="mx-auto h-72 w-auto object-contain"
+          />
+        </div>
+        <div class="lg:col-7">
+          <p class="mb-6 text-lg text-text-dark dark:text-darkmode-text-dark">
+            {specs.blurb}
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href={plan.stripePaymentLink} class="btn-primary">
+              Subscribe Now
+            </a>
+            <a
+              href={specs.brochure}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline-primary"
+            >
+              View full spec sheet (PDF)
+            </a>
+            {nextPlan && (
+              <a href={`/pricing/${nextPlan.slug}`} class="btn btn-outline-primary">
+                Need more pages? See {nextPlan.name}
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Key specs */}
+  <section class="section-sm bg-light dark:bg-darkmode-light">
+    <div class="container">
+      <h3 class="mb-8 text-center">Key features</h3>
+      <div class="lg:col-10 mx-auto row gy-6">
+        {
+          specs.headline.map((spec) => (
+            <div class="sm:col-6 lg:col-4">
+              <p class="mb-1 text-sm font-semibold text-primary dark:text-darkmode-primary">
+                {spec.label}
+              </p>
+              <p class="text-text-dark dark:text-darkmode-text-dark">
+                {spec.value}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="lg:col-10 mx-auto mt-10">
+        <details class="rounded-sm border border-border dark:border-darkmode-border p-5">
+          <summary class="cursor-pointer font-medium text-text-dark dark:text-darkmode-text-dark">
+            More specifications
+          </summary>
+          <div class="row gy-4 mt-6">
+            {
+              specs.detailed.map((spec) => (
+                <div class="sm:col-6">
+                  <p class="text-sm text-text-light dark:text-darkmode-text-light">
+                    {spec.label}
+                  </p>
+                  <p class="text-text-dark dark:text-darkmode-text-dark">
+                    {spec.value}
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  {/* Repeat block */}
+  <IncludedServices />
+
+  {/* Upsell + subscribe */}
+  <section class="section bg-dark dark:bg-darkmode-dark">
+    <div class="container text-center">
+      <h2 class="mb-4 text-white">{plan.name}</h2>
+      <p class="mb-8 text-white/80">
+        ${plan.monthlyFee.toFixed(2)} /month · {formatMonthlyPages(plan.monthlyPages)}
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={plan.stripePaymentLink} class="btn-primary">
+          Subscribe Now
+        </a>
+        {nextPlan && (
+          <a
+            href={`/pricing/${nextPlan.slug}`}
+            class="inline-block rounded-full border-2 border-white px-7 py-3 font-medium text-white transition hover:bg-white hover:text-text-dark"
+          >
+            Need more pages? See {nextPlan.name}
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+</Base>

@@ -22,7 +22,7 @@ const { call_to_action, description, faq, title } = pricingIndex.data;
         {
           plans.map((plan) => (
             <div class="sm:col-6 lg:col-4">
-              <PlanCard plan={plan} />
+              <PlanCard plan={plan} showMoreInfo />
             </div>
           ))
         }
