@@ -4,7 +4,7 @@ meta_title: "Slack Case Study - BigSpring"
 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas Werat viverra id et aliquet. vulputate egestas sollicitudin."
 image: "/images/case-study/slack.webp"
 date: "2025-07-13"
-draft: false
+draft: true
 
 call_to_action:
   enable: true

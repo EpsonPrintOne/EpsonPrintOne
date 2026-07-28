@@ -1,46 +1,39 @@
 ---
-title: "How it Works"
-meta_title: "How it Works - BigSpring"
+title: "How It Works"
+meta_title: "How It Works - Epson PrintOne"
 image: ""
-subtitle: ""
-description: "This is meta description"
+subtitle: "How PrintOne works"
+description: "How Epson PrintOne brings the printer, ink, pages and servicing together in one monthly plan."
 draft: false
 
-#show it works banner
 banner:
-  title: "Your Partner for the best Software Innovation"
-  image: "/images/how-it-works.png"
-  content: "Create a best strategic tool, share it with your team and ensure it’s on track with intuitive dashboards. Simple enough with the sophistication and flexibility to meet the needs"
+  title: "How PrintOne Works"
+  image: "/images/programme/how-it-works.png"
+  content: "Epson PrintOne brings together the printer, monthly pages, ink support, installation and servicing in one simple monthly plan."
   button:
     enable: true
-    label: "Get started for Free"
-    link: "contact/"
+    label: "View Plans"
+    link: "/pricing"
 
-#Intro Video
 intro_video:
-  enable: true
-  title: "Built exclusively for you"
-  content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas Werat viverra id et aliquet. vulputate egestas sollicitudin."
-  video_id: "dyZcRRWiuuw"
-  video_thumbnail: "/images/products/1.webp"
+  enable: false
 
-#how_it_works
 how_it_works:
   enable: true
   blocks:
-    - title: "It is the most advanced <br> digital database tool."
-      image: "/images/how-it-works/1.webp"
-      content: "Adipiscing elit Consequat tristique eget amet, tempus eu at consecttur. Leo facilisi nunc viverra tellus. Ac laoreet sit vel consquat. consectetur adipiscing elit tempus eu at consecttur."
+    - title: "Choose your printer plan"
+      icon: "FaClipboardList"
+      content: "Compare the six PrintOne plans and choose the one sized for how much you print, from home use up to A3 office printing."
 
-    - title: "It is a privately owned information for SAAS agency"
-      image: "/images/how-it-works/2.webp"
-      content: "Adipiscing elit Consequat tristique eget amet, tempus eu at consecttur. Leo facilisi nunc viverra tellus. Ac laoreet sit vel consquat. consectetur adipiscing elit tempus eu at consecttur."
+    - title: "Print-IQ delivers and installs the Epson printer"
+      icon: "FaTruckFast"
+      content: "Print-IQ delivers and installs your Epson printer, so it's ready to use."
 
-    - title: "It’s build experienced and skilled people with distributions"
-      image: "/images/how-it-works/3.webp"
-      content: "Adipiscing elit Consequat tristique eget amet, tempus eu at consecttur. Leo facilisi nunc viverra tellus. Ac laoreet sit vel consquat. consectetur adipiscing elit tempus eu at consecttur."
+    - title: "Print within the plan's monthly page allowance"
+      icon: "FaPrint"
+      content: "Print within your plan's monthly page allowance, with genuine Epson ink supplied under the programme."
 
-    - title: "The best tool standing different from others"
-      image: "/images/how-it-works/4.webp"
-      content: "Adipiscing elit Consequat tristique eget amet, tempus eu at consecttur. Leo facilisi nunc viverra tellus. Ac laoreet sit vel consquat. consectetur adipiscing elit tempus eu at consecttur."
+    - title: "Ink support and servicing are managed under the programme"
+      icon: "FaScrewdriverWrench"
+      content: "Ink support and onsite servicing are managed under the programme, so you're not sourcing ink or servicing separately."
 ---

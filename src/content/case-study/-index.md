@@ -1,8 +1,8 @@
 ---
-title: "Case Studies"
-meta_title: "Case Studies - BigSpring"
-description: "Read our Case Studies"
+title: "Customer Stories"
+meta_title: "Customer Stories - Epson PrintOne"
+description: "Epson PrintOne customer stories."
 image: ""
-subtitle: "Read our Case Studies"
+subtitle: "Customer stories"
 draft: false
 ---

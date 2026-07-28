@@ -1,16 +1,16 @@
 ---
-title: "Contact Us"
-meta_title: "Contact Us - BigSpring"
-subtitle: ""
-description: "Get in touch with BigSpring for any inquiries or support."
+title: "Talk to Print-IQ"
+meta_title: "Contact - Epson PrintOne"
+subtitle: "Talk to Print-IQ"
+description: "Get in touch with Print-IQ Singapore about Epson PrintOne plans."
 image: ""
 draft: false
 ---
 
-#### Why you should contact us
+#### Get in touch
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit recusandae voluptates doloremque veniam temporibus porro culpa ipsa, nisi soluta minima saepe laboriosam debitis nesciunt.
+Have a question about PrintOne plans, or want to subscribe? Send us a message and Print-IQ Singapore will get back to you.
 
-- **Phone: +88 125 256 452**
-- **Mail: [info@bigspring.com](mailto:info@bigspring.com)**
-- **Address: 360 Main rd, Rio, Brazil**
+- **Local support: 6100 7747**
+- **Operated by: Print-IQ Singapore Pte Ltd**
+- **Powered by: Epson**

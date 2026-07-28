@@ -1,4 +1,5 @@
 ---
+import DynamicIcon from "@/helpers/DynamicIcon";
 import VideoThumnail from "@/helpers/VideoThumnail";
 import Base from "@/layouts/Base.astro";
 import { getListPage } from "@/lib/contentParser.astro";
@@ -41,22 +42,26 @@ const { banner, how_it_works, intro_video } = howItWorksIndex.data;
       </div>
     </div>
   </section>
-  <section class="section bg-body dark:bg-darkmode-body">
-    <div class="container">
-      <div class="lg:col-6 mx-auto text-center">
-        <h2 set:html={markdownify(intro_video.title)} />
-        <p set:html={markdownify(intro_video.content)} />
-      </div>
+  {
+    intro_video.enable && (
+      <section class="section bg-body dark:bg-darkmode-body">
+        <div class="container">
+          <div class="lg:col-6 mx-auto text-center">
+            <h2 set:html={markdownify(intro_video.title!)} />
+            <p set:html={markdownify(intro_video.content!)} />
+          </div>
 
-      <div class="lg:col-9 mx-auto text-center mt-8">
-        <VideoThumnail
-          src={intro_video.video_thumbnail}
-          videoId={intro_video.video_id}
-          client:load
-        />
-      </div>
-    </div>
-  </section>
+          <div class="lg:col-9 mx-auto text-center mt-8">
+            <VideoThumnail
+              src={intro_video.video_thumbnail!}
+              videoId={intro_video.video_id!}
+              client:load
+            />
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   {
     how_it_works.enable && (
@@ -71,15 +76,18 @@ const { banner, how_it_works, intro_video } = howItWorksIndex.data;
             >
               <div class="container">
                 <div
-                  class={`row gy-5 lg:gy-0 ${
+                  class={`row gy-5 lg:gy-0 items-center ${
                     isEven ? "lg:flex-row-reverse" : ""
                   }`}
                 >
                   <div class="lg:col-6 lg:order-1 order-2">
                     <div class="lg:px-4">
                       <div class={`${!isEven ? "lg:text-right" : "text-left"}`}>
+                        <p class="mb-2 text-sm font-semibold text-primary dark:text-darkmode-primary">
+                          Step {index + 1}
+                        </p>
                         <h2
-                          class="mb-3 lg:mt-16"
+                          class="mb-3"
                           set:html={markdownify(block.title)}
                         />
                         <p set:html={markdownify(block.content)} />
@@ -87,14 +95,13 @@ const { banner, how_it_works, intro_video } = howItWorksIndex.data;
                     </div>
                   </div>
                   <div class="lg:col-6 lg:order-2 order-1">
-                    <div class="px-4">
-                      <Image
-                        src={block.image}
-                        class="rounded"
-                        width={1070}
-                        height={698}
-                        alt="product-image"
-                      />
+                    <div class="px-4 flex justify-center">
+                      <div class="flex h-24 w-24 items-center justify-center rounded-full bg-light dark:bg-darkmode-light">
+                        <DynamicIcon
+                          icon={block.icon}
+                          className="h-10 w-10 text-primary dark:text-darkmode-primary"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

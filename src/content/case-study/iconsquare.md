@@ -4,7 +4,7 @@ meta_title: "Iconosquare Case Study - BigSpring"
 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas Werat viverra id et aliquet. vulputate egestas sollicitudin."
 image: "/images/case-study/iconosquare.webp"
 date: "2025-07-09"
-draft: false
+draft: true
 
 call_to_action:
   enable: true
