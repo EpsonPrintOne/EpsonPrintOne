@@ -10,7 +10,7 @@ hero:
   secondary_button:
     enable: true
     label: "Subscribe Now"
-    link: "/contact"
+    link: "/subscribe"
 
 trust_strip:
   enable: true
@@ -131,5 +131,5 @@ final_cta:
   button:
     enable: true
     label: "Subscribe Now"
-    link: "/contact"
+    link: "/subscribe"
 ---

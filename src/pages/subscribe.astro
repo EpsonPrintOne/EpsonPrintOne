@@ -1,0 +1,60 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import { plans, STRIPE_PUBLISHABLE_KEY } from "@/data/plans";
+---
+
+<Base
+  title="Subscribe"
+  meta_title="Subscribe - Epson PrintOne"
+  description="Choose your PrintOne plan and subscribe securely via Stripe."
+>
+  <PageHeader
+    title="Subscribe to PrintOne"
+    subtitle="Choose your plan and subscribe securely via Stripe."
+  />
+  <section class="section">
+    <div class="container">
+      <div class="row gy-8">
+        {
+          plans.map((plan) => (
+            <div class="sm:col-6 lg:col-4">
+              <div
+                class={`flex h-full flex-col items-center rounded-sm border py-8 px-6 text-center bg-body dark:bg-darkmode-secondary ${
+                  plan.featured
+                    ? "recommended border-primary dark:border-darkmode-primary"
+                    : "border-border dark:border-none"
+                }`}
+              >
+                {plan.featured && (
+                  <span class="mb-4 inline-block rounded-full bg-primary dark:bg-darkmode-primary px-4 py-1 text-sm font-medium text-white">
+                    Highly Recommended
+                  </span>
+                )}
+                <h4 class="mb-1">{plan.name}</h4>
+                <p class="mb-4 text-sm text-text-light dark:text-darkmode-text-light">
+                  {plan.model}
+                </p>
+                <div class="mb-6">
+                  <span class="h5">$</span>
+                  <span class="h2 font-bold text-text-dark dark:text-darkmode-text-dark">
+                    {plan.monthlyFee.toFixed(2)}
+                  </span>
+                  <span> /month</span>
+                </div>
+                <div class="mt-auto">
+                  <stripe-buy-button
+                    buy-button-id={plan.stripeBuyButtonId}
+                    publishable-key={STRIPE_PUBLISHABLE_KEY}
+                  />
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script is:inline async src="https://js.stripe.com/v3/buy-button.js"></script>

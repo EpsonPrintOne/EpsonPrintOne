@@ -30,7 +30,7 @@
   "navigation_button": {
     "enable": true,
     "label": "Subscribe Now",
-    "link": "/contact"
+    "link": "/subscribe"
   },
 
   "google_tag_manager": {

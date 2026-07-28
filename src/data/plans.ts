@@ -7,7 +7,11 @@ export interface Plan {
   audience: string;
   image: string;
   featured: boolean;
+  stripePaymentLink: string;
+  stripeBuyButtonId: string;
 }
+
+export const STRIPE_PUBLISHABLE_KEY = "pk_live_2gYsyYrz7ZE4tR24oV4kkaMK00d5a6sAjp";
 
 export const plans: Plan[] = [
   {
@@ -19,6 +23,8 @@ export const plans: Plan[] = [
     audience: "Home users",
     image: "/images/printers/epson-l1250.jpg",
     featured: false,
+    stripePaymentLink: "https://buy.stripe.com/fZu00i3Zz5AUecX8eR7bW03",
+    stripeBuyButtonId: "buy_btn_1TyAZpBN5PVvSqrqQZrh50M0",
   },
   {
     slug: "lite-plus",
@@ -29,6 +35,8 @@ export const plans: Plan[] = [
     audience: "Families",
     image: "/images/printers/epson-l4360.jpg",
     featured: false,
+    stripePaymentLink: "https://buy.stripe.com/cNi8wO7bL6EY8SD9iV7bW02",
+    stripeBuyButtonId: "buy_btn_1TyAb5BN5PVvSqrqHuG24dNF",
   },
   {
     slug: "pro",
@@ -39,6 +47,8 @@ export const plans: Plan[] = [
     audience: "Students and home businesses",
     image: "/images/printers/epson-l6390.jpg",
     featured: true,
+    stripePaymentLink: "https://buy.stripe.com/14AaEWeEd8N67Oz0Mp7bW01",
+    stripeBuyButtonId: "buy_btn_1TyAbYBN5PVvSqrq9TGeqq6D",
   },
   {
     slug: "pro-plus",
@@ -49,6 +59,8 @@ export const plans: Plan[] = [
     audience: "SMEs",
     image: "/images/printers/epson-l6490.jpg",
     featured: false,
+    stripePaymentLink: "https://buy.stripe.com/5kQ3cubs19Ra5Gr8eR7bW00",
+    stripeBuyButtonId: "buy_btn_1TyAc0BN5PVvSqrqq2mjtXo1",
   },
   {
     slug: "max",
@@ -59,6 +71,8 @@ export const plans: Plan[] = [
     audience: "Small offices requiring A3",
     image: "/images/printers/epson-l15150.jpg",
     featured: false,
+    stripePaymentLink: "https://buy.stripe.com/aFabJ09jT7J29WHdzb7bW04",
+    stripeBuyButtonId: "buy_btn_1TyAcPBN5PVvSqrqWAG1BGOV",
   },
   {
     slug: "max-plus",
@@ -69,6 +83,8 @@ export const plans: Plan[] = [
     audience: "Higher-volume offices",
     image: "/images/printers/epson-l15180.jpg",
     featured: false,
+    stripePaymentLink: "https://buy.stripe.com/5kQbJ0cw57J22uf1Qt7bW05",
+    stripeBuyButtonId: "buy_btn_1TyAcqBN5PVvSqrqAuELQIvJ",
   },
 ];
 

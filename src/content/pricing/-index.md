@@ -27,6 +27,6 @@ call_to_action:
   image: /images/printers/epson-l6390.jpg
   button:
     label: "Subscribe Now"
-    link: "/contact"
+    link: "/subscribe"
     enable: true
 ---
