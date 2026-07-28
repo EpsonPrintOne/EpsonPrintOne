@@ -10,12 +10,7 @@ Epson PrintOne is a printer subscription programme: one printer, one plan, one b
 
 #### Traditional printer ownership versus PrintOne
 
-| Traditional ownership | PrintOne |
-| --- | --- |
-| Upfront printer purchase | Monthly plan |
-| Separate ink purchasing | Programme ink support |
-| Ad hoc servicing | Included servicing framework |
-| Unpredictable operating cost | Predictable monthly fee |
+![Traditional printer ownership versus PrintOne: traditional ownership costs an estimated $839+ per year between the printer, ink, repairs and miscellaneous costs, versus a PrintOne Pro example of $310.80 per year at $25.90 per month, with ink, servicing, delivery and installation, and official Epson warranty included](/images/programme/traditional-vs-printone.png)
 
 #### Everything included with every subscription
 
@@ -26,7 +21,7 @@ Epson PrintOne is a printer subscription programme: one printer, one plan, one b
 - Free monthly pages according to the selected plan
 - Onsite servicing
 - Onsite repair or one-to-one exchange, subject to final approved terms
-- Official Epson warranty wording, subject to final approval
+- Official Epson warranty, uplifted to next business day onsite!
 - Singapore local support
 - Scan-to-email configuration where supported and applicable
 

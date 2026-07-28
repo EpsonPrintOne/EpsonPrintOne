@@ -64,7 +64,7 @@ included_services:
     - icon: "FaArrowsRotate"
       text: "Onsite repair or one-to-one exchange, subject to final approved terms"
     - icon: "FaShieldHalved"
-      text: "Official Epson warranty wording, subject to final approval"
+      text: "Official Epson warranty, uplifted to next business day onsite!"
     - icon: "FaLocationDot"
       text: "Singapore local support"
     - icon: "FaEnvelope"

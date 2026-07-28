@@ -73,17 +73,13 @@ const {
     trust_strip.enable && (
       <section class="section bg-dark dark:bg-darkmode-dark">
         <div class="container">
-          <div class="row gy-6 text-center">
-            {trust_strip.items.map((item) => (
-              <div class="sm:col-4 lg:col-2">
-                <DynamicIcon
-                  icon={item.icon}
-                  className="mx-auto mb-3 h-7 w-7 text-white"
-                />
-                <p class="text-white/90">{item.label}</p>
-              </div>
-            ))}
-          </div>
+          <Image
+            src="/images/programme/trust-strip.png"
+            alt="All included, all taken care of: printer included with free delivery, ink included and delivered, free onsite servicing, free monthly pages, official Epson warranty on all parts and consumables"
+            width={2000}
+            height={764}
+            class="mx-auto h-auto w-full max-w-5xl"
+          />
         </div>
       </section>
     )
