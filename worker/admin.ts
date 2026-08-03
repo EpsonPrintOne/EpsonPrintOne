@@ -14,7 +14,10 @@ interface SubscriberRow {
 function unauthorized(): Response {
   return new Response("Authentication required.", {
     status: 401,
-    headers: { "WWW-Authenticate": 'Basic realm="PrintOne Admin"' },
+    headers: {
+      "WWW-Authenticate": 'Basic realm="PrintOne Admin"',
+      "Cache-Control": "no-store, private",
+    },
   });
 }
 
@@ -106,6 +109,9 @@ export async function handleAdmin(request: Request, env: Env): Promise<Response>
   ).all<SubscriberRow>();
 
   return new Response(renderPage(results), {
-    headers: { "Content-Type": "text/html; charset=utf-8" },
+    headers: {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "no-store, private",
+    },
   });
 }
