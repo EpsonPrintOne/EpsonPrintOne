@@ -21,7 +21,7 @@ export default {
       return handleStripeWebhook(request, env);
     }
 
-    if (url.pathname === "/admin" || url.pathname === "/admin/") {
+    if (url.pathname === "/printone-subscribers" || url.pathname === "/printone-subscribers/") {
       return handleAdmin(request, env);
     }
 
