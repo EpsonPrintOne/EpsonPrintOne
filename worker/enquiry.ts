@@ -1,13 +1,4 @@
-interface AssetsFetcher {
-  fetch(request: Request): Promise<Response>;
-}
-
-export interface Env {
-  ASSETS: AssetsFetcher;
-  RESEND_API_KEY?: string;
-  ENQUIRY_NOTIFICATION_EMAIL?: string;
-  ENQUIRY_FROM_EMAIL?: string;
-}
+import type { Env } from "./env";
 
 interface EnquiryPayload {
   name?: unknown;
