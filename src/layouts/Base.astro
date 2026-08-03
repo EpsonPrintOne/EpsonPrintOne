@@ -29,6 +29,11 @@ export interface Props {
 // distructure frontmatters
 const { title, meta_title, description, image, noindex, canonical } =
   Astro.props;
+
+// canonical always resolves to the primary domain, regardless of which
+// custom domain actually served the request (multiple domains point at
+// this same Worker) - prevents duplicate-content SEO issues.
+const canonicalUrl = canonical ?? `${config.site.base_url}${Astro.url.pathname}`;
 ---
 
 <!doctype html>
@@ -78,7 +83,7 @@ const { title, meta_title, description, image, noindex, canonical } =
     </title>
 
     <!-- canonical url -->
-    {canonical && <link rel="canonical" href={canonical} item-prop="url" />}
+    <link rel="canonical" href={canonicalUrl} item-prop="url" />
 
     <!-- noindex robots -->
     {noindex && <meta name="robots" content="noindex,nofollow" />}
@@ -112,10 +117,7 @@ const { title, meta_title, description, image, noindex, canonical } =
       )}
     />
     <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content={`${config.site.base_url}/${Astro.url.pathname.replace("/", "")}`}
-    />
+    <meta property="og:url" content={canonicalUrl} />
 
     <!-- twitter-title -->
     <meta
