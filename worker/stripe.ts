@@ -65,9 +65,9 @@ async function notifyTeam(env: Env, record: {
   amountTotal: number;
   currency: string;
 }): Promise<boolean> {
-  if (!env.RESEND_API_KEY || !env.ENQUIRY_NOTIFICATION_EMAIL) {
+  if (!env.RESEND_API_KEY || !env.SUBSCRIBER_NOTIFICATION_EMAIL) {
     console.warn(
-      "stripe-webhook: RESEND_API_KEY or ENQUIRY_NOTIFICATION_EMAIL not configured, skipping notification email",
+      "stripe-webhook: RESEND_API_KEY or SUBSCRIBER_NOTIFICATION_EMAIL not configured, skipping notification email",
     );
     return false;
   }
@@ -88,7 +88,7 @@ async function notifyTeam(env: Env, record: {
     },
     body: JSON.stringify({
       from: env.ENQUIRY_FROM_EMAIL || "PrintOne Subscribers <enquiries@epsonprintone.com>",
-      to: env.ENQUIRY_NOTIFICATION_EMAIL,
+      to: env.SUBSCRIBER_NOTIFICATION_EMAIL,
       subject: `New subscriber - ${record.planName}`,
       html,
     }),

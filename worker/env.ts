@@ -22,6 +22,7 @@ export interface Env {
   RESEND_API_KEY?: string;
   ENQUIRY_NOTIFICATION_EMAIL?: string;
   ENQUIRY_FROM_EMAIL?: string;
+  SUBSCRIBER_NOTIFICATION_EMAIL?: string;
   STRIPE_WEBHOOK_SECRET?: string;
   ADMIN_PASSWORD?: string;
 }

@@ -3,7 +3,8 @@
   "compatibility_date": "2026-03-01",
   "main": "worker/index.ts",
   "vars": {
-    "ENQUIRY_NOTIFICATION_EMAIL": "enquiries@epsonprintone.com"
+    "ENQUIRY_NOTIFICATION_EMAIL": "enquiries@epsonprintone.com",
+    "SUBSCRIBER_NOTIFICATION_EMAIL": "deployment@print-iq.com.sg"
   },
   "d1_databases": [
     {
