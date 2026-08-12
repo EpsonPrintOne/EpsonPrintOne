@@ -14,3 +14,7 @@ Have a question about PrintOne plans, or want to subscribe? Send us a message an
 - **Local support: 6100 7747**
 - **Operated by: Print-IQ Singapore Pte Ltd**
 - **Powered by: Epson**
+
+#### Talk to us on WhatsApp
+
+[![Talk to Us on WhatsApp](/images/whatsapp-cta.png)](https://api.whatsapp.com/send?phone=6590078759)

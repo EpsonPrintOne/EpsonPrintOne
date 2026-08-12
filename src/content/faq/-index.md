@@ -27,4 +27,10 @@ faq_list:
 
   - title: "Who operates PrintOne?"
     content: "PrintOne is operated by Print-IQ Singapore Pte Ltd and powered by Epson."
+
+  - title: "What type of pages can I print within my monthly plan?"
+    content: "Any — both color and black & white pages count towards your monthly page quota, so you can print freely in full vibrant colors without worrying about ink. Additional pages beyond your monthly quota are priced at just 4.5 cents per page."
+
+  - title: "Have more questions?"
+    content: "Talk to us on WhatsApp. [![Talk to Us on WhatsApp](/images/whatsapp-cta.png)](https://api.whatsapp.com/send?phone=6590078759)"
 ---
