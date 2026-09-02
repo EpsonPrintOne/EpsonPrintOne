@@ -276,7 +276,7 @@ Use this approved working data:
 
 | Plan | Epson model | Monthly fee | Monthly pages | Primary audience |
 |---|---|---:|---:|---|
-| PrintOne Lite | Epson EcoTank L1250 | $9.90 | 100 | Home users |
+| PrintOne Lite | Epson EcoTank L1350 | $9.90 | 100 | Home users |
 | PrintOne Lite Plus | Epson EcoTank L4360 | $16.90 | 200 | Families |
 | PrintOne Pro | Epson EcoTank L6390 | $25.90 | 500 | Students and home businesses |
 | PrintOne Pro Plus | Epson EcoTank L6490 | $35.90 | 750 | SMEs |
@@ -292,11 +292,11 @@ export const plans = [
   {
     slug: "lite",
     name: "PrintOne Lite",
-    model: "Epson EcoTank L1250",
+    model: "Epson EcoTank L1350",
     monthlyFee: 9.9,
     monthlyPages: 100,
     audience: "Home users",
-    image: "/images/printers/epson-l1250.webp",
+    image: "/images/printers/epson-l1350.webp",
     featured: false,
   },
   {
@@ -427,7 +427,7 @@ public/images/branding/printone-logo.svg
 public/images/branding/printiq-logo.svg
 public/images/branding/powered-by-epson.svg
 
-public/images/printers/epson-l1250.webp
+public/images/printers/epson-l1350.webp
 public/images/printers/epson-l4360.webp
 public/images/printers/epson-l6390.webp
 public/images/printers/epson-l6490.webp

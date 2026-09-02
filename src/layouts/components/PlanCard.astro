@@ -18,9 +18,9 @@ const { plan, showMoreInfo = false } = Astro.props;
   }`}
 >
   {
-    plan.featured && (
+    plan.badge && (
       <span class="mb-4 inline-block rounded-full bg-primary dark:bg-darkmode-primary px-4 py-1 text-sm font-medium text-white">
-        Highly Recommended
+        {plan.badge}
       </span>
     )
   }

@@ -7,6 +7,7 @@ export interface Plan {
   audience: string;
   image: string;
   featured: boolean;
+  badge?: string;
   stripePaymentLink: string;
   stripeBuyButtonId: string;
 }
@@ -17,12 +18,13 @@ export const plans: Plan[] = [
   {
     slug: "lite",
     name: "PrintOne Lite",
-    model: "Epson EcoTank L1250",
+    model: "Epson EcoTank L1350",
     monthlyFee: 9.9,
     monthlyPages: 100,
     audience: "Home users",
-    image: "/images/printers/epson-l1250.jpg",
+    image: "/images/printers/epson-l1350.jpg",
     featured: false,
+    badge: "New Launch",
     stripePaymentLink: "https://buy.stripe.com/fZu00i3Zz5AUecX8eR7bW03",
     stripeBuyButtonId: "buy_btn_1TyAZpBN5PVvSqrqQZrh50M0",
   },
@@ -47,6 +49,7 @@ export const plans: Plan[] = [
     audience: "Students and home businesses",
     image: "/images/printers/epson-l6390.jpg",
     featured: true,
+    badge: "Highly Recommended",
     stripePaymentLink: "https://buy.stripe.com/14AaEWeEd8N67Oz0Mp7bW01",
     stripeBuyButtonId: "buy_btn_1TyAbYBN5PVvSqrq9TGeqq6D",
   },

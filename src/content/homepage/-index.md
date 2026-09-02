@@ -105,7 +105,7 @@ faq_teaser:
     - question: "What's included in every PrintOne plan?"
       answer: "Every PrintOne plan includes the printer, free delivery and installation, genuine Epson ink, your monthly page allowance, and onsite servicing."
     - question: "Which Epson printer do I get?"
-      answer: "Each plan is matched to a specific Epson EcoTank model, from the L1250 on PrintOne Lite up to the L15180 on PrintOne Max Plus. See the plan comparison for details."
+      answer: "Each plan is matched to a specific Epson EcoTank model, from the L1350 on PrintOne Lite up to the L15180 on PrintOne Max Plus. See the plan comparison for details."
     - question: "How is PrintOne different from buying a printer outright?"
       answer: "Instead of an upfront printer purchase and separate ink buying, PrintOne combines the printer, ink support and servicing into one predictable monthly fee."
 
