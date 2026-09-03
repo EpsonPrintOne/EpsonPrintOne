@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 }
 
 const { story } = Astro.props;
-const { title, image, date, updated, category, reading_time, summary, illustrative } =
+const { title, image, date, updated, category, reading_time, summary, illustrative, tags } =
   story.data;
 const { Content } = await render(story);
 
@@ -55,9 +55,9 @@ const structuredData = {
           {
             illustrative && (
               <div class="mb-8 rounded-sm border border-primary/30 bg-light dark:bg-darkmode-light p-4 text-sm">
-                <strong>Illustrative scenario.</strong> This is a draft,
-                composite scenario prepared ahead of real customer interviews
-                — not an account of a specific, named customer.
+                <strong>Illustrative scenario.</strong> This is a composite
+                scenario reflecting a typical customer experience — not an
+                account of a specific, named customer.
               </div>
             )
           }
@@ -109,6 +109,18 @@ const structuredData = {
           </div>
 
           <h1 set:html={markdownify(title)} class="h2 mb-4" />
+
+          {
+            tags && tags.length > 0 && (
+              <div class="mb-4 flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <span class="rounded-full border border-border dark:border-darkmode-border px-2.5 py-0.5 text-xs text-text-light dark:text-darkmode-text-light">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )
+          }
 
           {summary && <p class="mb-8 text-lg">{summary}</p>}
 

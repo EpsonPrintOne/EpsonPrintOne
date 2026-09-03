@@ -11,7 +11,7 @@ const { stories_folder }: { stories_folder: string } = config.settings;
 type Props = CollectionEntry<"stories">;
 
 const { data, id } = Astro.props;
-const { title, image, date, category, summary, reading_time } = data;
+const { title, image, date, category, summary, reading_time, tags } = data;
 ---
 
 <div class="bg-body dark:bg-darkmode-body px-1">
@@ -58,7 +58,19 @@ const { title, image, date, category, summary, reading_time } = data;
     <a href={`/${stories_folder}/${id}`} set:html={markdownify(title)} />
   </h4>
 
-  {summary && <p class="mb-6">{summary}</p>}
+  {summary && <p class="mb-4">{summary}</p>}
+
+  {
+    tags && tags.length > 0 && (
+      <div class="mb-6 flex flex-wrap gap-2">
+        {tags.map((tag) => (
+          <span class="rounded-full border border-border dark:border-darkmode-border px-2.5 py-0.5 text-xs text-text-light dark:text-darkmode-text-light">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )
+  }
 
   <a class="btn btn-primary capitalize" href={`/${stories_folder}/${id}`}>
     Read Their Story
