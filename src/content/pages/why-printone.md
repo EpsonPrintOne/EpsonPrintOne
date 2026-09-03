@@ -1,12 +1,12 @@
 ---
 title: "Why PrintOne"
-meta_title: "Why PrintOne - Epson PrintOne"
-description: "Why choose Epson PrintOne over buying a printer outright."
+meta_title: "Why PrintOne - PrintOne program in partnership with Epson"
+description: "Why choose the PrintOne program in partnership with Epson over buying a printer outright."
 image: ""
 draft: false
 ---
 
-Epson PrintOne is a printer subscription programme: one printer, one plan, one bill. It's operated by Print-IQ Singapore Pte Ltd and powered by Epson.
+PrintOne program <i class="text-primary dark:text-darkmode-primary">in partnership with Epson</i> is a printer subscription programme: one printer, one plan, one bill. It's operated by Print-IQ Singapore Pte Ltd and powered by Epson.
 
 #### Traditional printer ownership versus PrintOne
 

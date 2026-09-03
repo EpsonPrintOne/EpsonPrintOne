@@ -1,8 +1,8 @@
 ---
 title: "Talk to Print-IQ"
-meta_title: "Contact - Epson PrintOne"
+meta_title: "Contact - PrintOne program in partnership with Epson"
 subtitle: "Talk to Print-IQ"
-description: "Get in touch with Print-IQ Singapore about Epson PrintOne plans."
+description: "Get in touch with Print-IQ Singapore about PrintOne program in partnership with Epson plans."
 image: ""
 draft: false
 ---

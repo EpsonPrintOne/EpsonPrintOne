@@ -1,15 +1,15 @@
 ---
 title: "How It Works"
-meta_title: "How It Works - Epson PrintOne"
+meta_title: "How It Works - PrintOne program in partnership with Epson"
 image: ""
 subtitle: "How PrintOne works"
-description: "How Epson PrintOne brings the printer, ink, pages and servicing together in one monthly plan."
+description: "How the PrintOne program in partnership with Epson brings the printer, ink, pages and servicing together in one monthly plan."
 draft: false
 
 banner:
   title: "How PrintOne Works"
-  image: "/images/programme/how-it-works.png"
-  content: "Epson PrintOne brings together the printer, monthly pages, ink support, installation and servicing in one simple monthly plan."
+  image: "/images/programme/how-it-works-v2.jpg"
+  content: "PrintOne program <i class=\"text-primary dark:text-darkmode-primary\">in partnership with Epson</i> brings together the printer, monthly pages, ink support, installation and servicing in one simple monthly plan."
   button:
     enable: true
     label: "View Plans"

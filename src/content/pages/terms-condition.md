@@ -1,6 +1,6 @@
 ---
 title: "Terms and Conditions"
-meta_title: "Terms and Conditions - Epson PrintOne"
+meta_title: "Terms and Conditions - PrintOne program in partnership with Epson"
 description: "PrintOne subscription terms and conditions, operated by Print-IQ Singapore Pte Ltd."
 image: ""
 draft: false

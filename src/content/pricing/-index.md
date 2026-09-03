@@ -1,6 +1,6 @@
 ---
 title: "Plans"
-meta_title: "Plans - Epson PrintOne"
+meta_title: "Plans - PrintOne program in partnership with Epson"
 image: ""
 subtitle: "Six plans, one simple bill"
 description: "Compare the six PrintOne plans and find the one sized for how much you print."

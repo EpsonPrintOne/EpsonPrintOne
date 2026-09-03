@@ -1,8 +1,8 @@
 ---
 title: "Frequently Asked Questions"
-meta_title: "FAQ - Epson PrintOne"
+meta_title: "FAQ - PrintOne program in partnership with Epson"
 image: ""
-subtitle: "Everything you need to know about Epson PrintOne"
+subtitle: "Everything you need to know about the PrintOne program <i class=\"text-primary dark:text-darkmode-primary\">in partnership with Epson</i>"
 description: "Answers about what's included, which printer you get, and how PrintOne works."
 draft: false
 

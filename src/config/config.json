@@ -1,6 +1,6 @@
 {
   "site": {
-    "title": "Epson PrintOne",
+    "title": "PrintOne program in partnership with Epson",
     "base_url": "https://epsonprintone.com",
     "base_path": "/",
     "trailing_slash": false,
@@ -42,6 +42,6 @@
   "metadata": {
     "meta_author": "Print-IQ Singapore Pte Ltd",
     "meta_image": "/images/og-image.png",
-    "meta_description": "Epson PrintOne: One Printer. One Plan. One Bill. Subscribe to an Epson EcoTank printer with ink, servicing and monthly pages included, powered by Print-IQ Singapore."
+    "meta_description": "PrintOne program in partnership with Epson: One Printer. One Plan. One Bill. Subscribe to an Epson EcoTank printer with ink, servicing and monthly pages included, powered by Print-IQ Singapore."
   }
 }

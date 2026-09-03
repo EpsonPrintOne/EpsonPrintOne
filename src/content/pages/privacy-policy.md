@@ -1,6 +1,6 @@
 ---
 title: "Privacy Policy"
-meta_title: "Privacy Policy - Epson PrintOne"
+meta_title: "Privacy Policy - PrintOne program in partnership with Epson"
 description: "How Print-IQ Singapore Pte Ltd collects, uses, discloses and protects personal data in connection with the PrintOne printer subscription programme."
 image: ""
 draft: false

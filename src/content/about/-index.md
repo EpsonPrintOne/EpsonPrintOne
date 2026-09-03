@@ -1,13 +1,13 @@
 ---
 title: "About"
-meta_title: "About PrintOne and Print-IQ - Epson PrintOne"
-description: "About Epson PrintOne, operated by Print-IQ Singapore Pte Ltd and powered by Epson."
+meta_title: "About PrintOne and Print-IQ - PrintOne program in partnership with Epson"
+description: "About PrintOne program in partnership with Epson, operated by Print-IQ Singapore Pte Ltd and powered by Epson."
 image: "/images/branding/printone-logo.png"
 draft: false
 
 about:
   title: "About PrintOne and Print-IQ"
-  description: "Epson PrintOne is a printer subscription programme: one printer, one plan, one bill. It's operated by Print-IQ Singapore Pte Ltd and powered by Epson."
+  description: "PrintOne program <i class=\"text-primary dark:text-darkmode-primary\">in partnership with Epson</i> is a printer subscription programme: one printer, one plan, one bill. It's operated by Print-IQ Singapore Pte Ltd and powered by Epson."
   image: "/images/branding/printone-logo.png"
 
 lists:

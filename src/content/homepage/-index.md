@@ -2,7 +2,7 @@
 hero:
   tagline: "One Printer. One Plan. One Bill."
   title: "Print More. Pay Less. Never Buy Ink Again."
-  subtitle: "Epson PrintOne brings together the printer, monthly pages, ink support, installation and servicing in one simple monthly plan."
+  subtitle: "PrintOne program <i class=\"text-primary dark:text-darkmode-primary\">in partnership with Epson</i> brings together the printer, monthly pages, ink support, installation and servicing in one simple monthly plan."
   primary_button:
     enable: true
     label: "View Plans"
