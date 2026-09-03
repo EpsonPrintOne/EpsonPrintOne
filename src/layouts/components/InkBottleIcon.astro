@@ -1,0 +1,31 @@
+---
+interface Props {
+  color: string;
+  label: string;
+}
+const { color, label } = Astro.props;
+---
+
+<svg
+  width="28"
+  height="36"
+  viewBox="0 0 28 36"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label={label}
+  class="flex-none"
+>
+  <rect x="10" y="1" width="8" height="5" rx="1" fill="#6B7280" />
+  <rect x="8" y="5" width="12" height="4" rx="1.5" fill="#9CA3AF" />
+  <path
+    d="M6 11 C6 9.5 7.5 9 9 9 H19 C20.5 9 22 9.5 22 11 V31 C22 33.2 20.2 35 18 35 H10 C7.8 35 6 33.2 6 31 Z"
+    fill="white"
+    stroke="#D1D5DB"
+    stroke-width="1"
+  />
+  <path
+    d="M7 15 C7 13.9 7.9 13 9 13 H19 C20.1 13 21 13.9 21 15 V30 C21 32 19.2 34 17 34 H11 C8.8 34 7 32 7 30 Z"
+    fill={color}
+  />
+</svg>

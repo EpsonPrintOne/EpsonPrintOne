@@ -2,6 +2,7 @@
 import Accordion from "@/helpers/Accordion";
 import DynamicIcon from "@/helpers/DynamicIcon";
 import Base from "@/layouts/Base.astro";
+import InkBottleIcon from "@/components/InkBottleIcon.astro";
 import {
   formatPrice,
   inks,
@@ -12,6 +13,18 @@ import {
 import { Image } from "astro:assets";
 
 const WHATSAPP_LINK = "https://api.whatsapp.com/send?phone=6590078759";
+
+const INK_COLORS: Record<string, string> = {
+  Black: "#111827",
+  Cyan: "#06B6D4",
+  Magenta: "#DB2777",
+  Yellow: "#FACC15",
+};
+
+function inkColor(name: string): string {
+  const match = Object.keys(INK_COLORS).find((color) => name.includes(color));
+  return match ? INK_COLORS[match] : "#9CA3AF";
+}
 
 const customerPaths = [
   {
@@ -263,7 +276,12 @@ const faqQuestions = [
                     .filter((ink) => ink.family === family)
                     .map((ink) => (
                       <tr class="border-b border-border dark:border-darkmode-border">
-                        <td class="py-2 pr-4">{ink.name}</td>
+                        <td class="py-2 pr-4">
+                          <div class="flex items-center gap-3">
+                            <InkBottleIcon color={inkColor(ink.name)} label={ink.name} />
+                            <span>{ink.name}</span>
+                          </div>
+                        </td>
                         <td class="py-2 pr-4 text-sm text-text-light dark:text-darkmode-text-light">
                           {ink.sku}
                         </td>
