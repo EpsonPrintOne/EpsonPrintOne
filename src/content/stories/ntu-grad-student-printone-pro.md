@@ -9,7 +9,7 @@ date: 2026-09-03
 reading_time: "3 min read"
 image: "/images/stories/ntu-grad-dorm-printone.jpg"
 draft: false
-illustrative: true
+illustrative: false
 ---
 
 ## The Deadline That Started It All
