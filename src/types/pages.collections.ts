@@ -72,6 +72,31 @@ export const blog = defineCollection({
   }),
 });
 
+export const stories = defineCollection({
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/stories",
+  }),
+  schema: z.object({
+    ...commonFields,
+    subtitle: z.string().optional(),
+    category: z
+      .enum([
+        "Personal & Family",
+        "Home Business",
+        "Small Business",
+        "Education & Tuition",
+        "Creative Work",
+        "Community & Non-profit",
+      ])
+      .optional(),
+    summary: z.string().optional(),
+    reading_time: z.string().optional(),
+    updated: z.coerce.date().optional(),
+    illustrative: z.boolean().optional(),
+  }),
+});
+
 export const career = defineCollection({
   loader: glob({
     pattern: "**/*.{md,mdx}",

@@ -24,5 +24,10 @@ export interface Env {
   ENQUIRY_FROM_EMAIL?: string;
   SUBSCRIBER_NOTIFICATION_EMAIL?: string;
   STRIPE_WEBHOOK_SECRET?: string;
+  /** Restricted key, read-only on Checkout Sessions — used only to resolve
+   * which SKU was purchased in a one-time (non-subscription) order, since
+   * several ink SKUs share an identical price and can't be told apart by
+   * amount alone. */
+  STRIPE_SECRET_KEY?: string;
   ADMIN_PASSWORD?: string;
 }

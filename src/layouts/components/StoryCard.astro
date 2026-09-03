@@ -1,0 +1,66 @@
+---
+import config from "@/config/config.json";
+import DynamicIcon from "@/helpers/DynamicIcon";
+import dateFormat from "@/lib/utils/dateFormat";
+import { markdownify } from "@/lib/utils/textConverter";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+const { stories_folder }: { stories_folder: string } = config.settings;
+
+type Props = CollectionEntry<"stories">;
+
+const { data, id } = Astro.props;
+const { title, image, date, category, summary, reading_time } = data;
+---
+
+<div class="bg-body dark:bg-darkmode-body px-1">
+  {
+    image && (
+      <Image
+        class="mb-6 w-full rounded"
+        src={image}
+        width={400}
+        height={200}
+        alt={title}
+      />
+    )
+  }
+  <div class="mb-3 flex flex-wrap items-center gap-3 text-sm text-text-light dark:text-darkmode-text-light">
+    {
+      category && (
+        <span class="rounded-full bg-light dark:bg-darkmode-light px-3 py-1 text-xs font-medium text-primary dark:text-darkmode-primary">
+          {category}
+        </span>
+      )
+    }
+    {
+      date && (
+        <span class="inline-flex items-center gap-1">
+          <DynamicIcon className="inline-block" icon="FaRegCalendarDays" />
+          {dateFormat(date)}
+        </span>
+      )
+    }
+    {
+      reading_time && (
+        <span class="inline-flex items-center gap-1">
+          <DynamicIcon className="inline-block" icon="FaRegClock" />
+          {reading_time}
+        </span>
+      )
+    }
+  </div>
+
+  <h4
+    class="mb-3 font-bold text-text-dark dark:text-darkmode-text-dark hover:text-primary dark:hover:text-darkmode-primary transition"
+  >
+    <a href={`/${stories_folder}/${id}`} set:html={markdownify(title)} />
+  </h4>
+
+  {summary && <p class="mb-6">{summary}</p>}
+
+  <a class="btn btn-primary capitalize" href={`/${stories_folder}/${id}`}>
+    Read Their Story
+  </a>
+</div>

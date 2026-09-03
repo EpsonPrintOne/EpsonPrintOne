@@ -1,0 +1,137 @@
+---
+import DynamicIcon from "@/helpers/DynamicIcon";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import dateFormat from "@/lib/utils/dateFormat";
+import { markdownify } from "@/lib/utils/textConverter";
+import { Image } from "astro:assets";
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+  const stories = await getSinglePage("stories");
+
+  const paths = stories.map((story) => ({
+    params: {
+      slug: story.id,
+    },
+    props: { story },
+  }));
+  return paths;
+}
+
+const { story } = Astro.props;
+const { title, image, date, updated, category, reading_time, summary, illustrative } =
+  story.data;
+const { Content } = await render(story);
+
+const publishedIso = date ? new Date(date).toISOString() : undefined;
+const updatedIso = updated
+  ? new Date(updated).toISOString()
+  : publishedIso;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title,
+  description: summary,
+  datePublished: publishedIso,
+  dateModified: updatedIso,
+  author: {
+    "@type": "Organization",
+    name: "Print-IQ Singapore Pte Ltd",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "EpsonPrintOne",
+  },
+};
+---
+
+<Base {...story.data}>
+  <section class="section pt-7">
+    <div class="container">
+      <div class="row justify-center">
+        <article class="lg:col-9">
+          {
+            illustrative && (
+              <div class="mb-8 rounded-sm border border-primary/30 bg-light dark:bg-darkmode-light p-4 text-sm">
+                <strong>Illustrative scenario.</strong> This is a draft,
+                composite scenario prepared ahead of real customer interviews
+                — not an account of a specific, named customer.
+              </div>
+            )
+          }
+          {
+            image && (
+              <div class="mb-10">
+                <Image
+                  src={image}
+                  height={500}
+                  width={1200}
+                  alt={title}
+                  class="w-full rounded"
+                />
+              </div>
+            )
+          }
+          <div class="mb-3 flex flex-wrap items-center gap-3 text-sm text-text-light dark:text-darkmode-text-light">
+            {
+              category && (
+                <span class="rounded-full bg-light dark:bg-darkmode-light px-3 py-1 text-xs font-medium text-primary dark:text-darkmode-primary">
+                  {category}
+                </span>
+              )
+            }
+            {
+              date && (
+                <span class="inline-flex items-center gap-1">
+                  <DynamicIcon
+                    className="inline-block"
+                    icon="FaRegCalendarDays"
+                  />
+                  {dateFormat(date)}
+                </span>
+              )
+            }
+            {
+              reading_time && (
+                <span class="inline-flex items-center gap-1">
+                  <DynamicIcon className="inline-block" icon="FaRegClock" />
+                  {reading_time}
+                </span>
+              )
+            }
+            {
+              updated && (
+                <span>Last updated {dateFormat(updated)}</span>
+              )
+            }
+          </div>
+
+          <h1 set:html={markdownify(title)} class="h2 mb-4" />
+
+          {summary && <p class="mb-8 text-lg">{summary}</p>}
+
+          <div class="content mb-10">
+            <Content />
+          </div>
+
+          <div class="flex flex-wrap gap-4 rounded-sm border border-border dark:border-darkmode-border p-6">
+            <a href="/pricing/" class="btn btn-primary">
+              Explore PrintOne Plans
+            </a>
+            <a href="/buy-printers/" class="btn btn-outline-primary">
+              I'd Rather Buy a Printer Outright
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(structuredData)}
+  />
+</Base>

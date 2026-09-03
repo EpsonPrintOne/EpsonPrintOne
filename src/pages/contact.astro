@@ -140,6 +140,8 @@ const { Content } = await render(contactIndex);
                   >
                     <option value="">Select one</option>
                     {plans.map((plan) => <option value={plan.slug}>{plan.name}</option>)}
+                    <option value="buy-printer">Buying a printer (not subscribing)</option>
+                    <option value="buy-ink">Ink &amp; supplies enquiry</option>
                     <option value="not-sure">Not sure yet</option>
                   </select>
                 </label>
@@ -242,6 +244,28 @@ const { Content } = await render(contactIndex);
     const submitBtn = document.getElementById(
       "enquiry-submit",
     ) as HTMLButtonElement;
+
+    // Preselect the enquiry topic when arriving via a link with ?topic= (and
+    // optionally &model=), e.g. from the buy-printers or stories pages.
+    const params = new URLSearchParams(window.location.search);
+    const topic = params.get("topic");
+    const model = params.get("model");
+    const planSelect = document.getElementById("plan") as HTMLSelectElement | null;
+    const messageField = document.getElementById("message") as HTMLTextAreaElement | null;
+
+    if (topic && planSelect && [...planSelect.options].some((o) => o.value === topic)) {
+      planSelect.value = topic;
+    }
+
+    if (messageField && !messageField.value) {
+      if (topic === "buy-printer") {
+        messageField.value = model
+          ? `I'd like to request a quote for the ${model}.`
+          : "I'd like to request a quote for purchasing a printer.";
+      } else if (topic === "buy-ink") {
+        messageField.value = "I'd like to ask about genuine Epson ink for my printer.";
+      }
+    }
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();

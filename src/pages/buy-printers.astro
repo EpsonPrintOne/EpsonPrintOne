@@ -1,0 +1,440 @@
+---
+import Accordion from "@/helpers/Accordion";
+import DynamicIcon from "@/helpers/DynamicIcon";
+import Base from "@/layouts/Base.astro";
+import {
+  formatPrice,
+  inks,
+  maintenanceBoxes,
+  printers,
+  promoPrice,
+} from "@/data/buyPrinters";
+import { Image } from "astro:assets";
+
+const WHATSAPP_LINK = "https://api.whatsapp.com/send?phone=6590078759";
+
+const customerPaths = [
+  {
+    icon: "FaHouse",
+    title: "Home and personal printing",
+    items: [
+      "Compact and economical printers",
+      "Colour documents, schoolwork and everyday printing",
+      "Easy wireless printing where supported",
+    ],
+  },
+  {
+    icon: "FaBriefcase",
+    title: "Home business and small office",
+    items: [
+      "Higher-volume EcoTank models",
+      "Scanning, copying and automatic document feeding where required",
+      "Suitable for invoices, proposals and business documents",
+    ],
+  },
+  {
+    icon: "FaDroplet",
+    title: "Ink and supplies",
+    items: [
+      "Genuine Epson ink",
+      "Help identifying the correct ink for each printer",
+      "Delivery availability within Singapore",
+    ],
+  },
+];
+
+const inkFamilies = [...new Set(inks.map((ink) => ink.family))];
+
+const faqQuestions = [
+  {
+    question: "Can I buy a printer without subscribing?",
+    answer:
+      "Yes. PrintOne is available as a subscription, but Print-IQ also sells Epson printers and genuine ink as one-time purchases — click Buy Now on any model or ink bottle above to check out directly.",
+  },
+  {
+    question: "Do you sell genuine Epson ink?",
+    answer:
+      "Yes, genuine Epson ink bottles and maintenance boxes are available for purchase directly above. If you're not sure which one your printer needs, contact our team with your printer model and we'll confirm the correct ink for it.",
+  },
+  {
+    question: "Can I get help before I buy?",
+    answer:
+      "Of course — use the Ask First button on any printer, or Ask About Genuine Ink below the ink tables, or contact us directly by phone or WhatsApp, and our team will help you choose before you check out.",
+  },
+  {
+    question: "Can you recommend a printer for my monthly volume?",
+    answer:
+      "Yes — tell us roughly how many pages you print each month and what you print (documents, photos or business paperwork), and our team can recommend a suitable model, whether you're buying outright or considering a PrintOne subscription.",
+  },
+  {
+    question: "How does buying compare with subscribing?",
+    answer:
+      "Buying outright means paying for the printer and ink upfront, with servicing and future ink purchases on you. A PrintOne subscription bundles the printer, genuine ink, delivery, installation and servicing into one predictable monthly fee. Compare the two on our [pricing page](/pricing).",
+  },
+  {
+    question: "Do you deliver and install printers?",
+    answer:
+      "Delivery is available within Singapore for both subscription and outright purchases. Our team will confirm delivery and installation details when you request your quote.",
+  },
+];
+---
+
+<Base
+  title="Buy Epson printers and ink at great Singapore prices"
+  meta_title="Buy Epson Printers & Ink in Singapore | EpsonPrintOne"
+  description="Shop Epson printers and genuine Epson ink at competitive Singapore prices. Prefer predictable monthly printing costs? Explore EpsonPrintOne subscription plans."
+>
+  {/* Hero */}
+  <section class="pt-20">
+    <div class="container">
+      <div class="row items-center gy-10">
+        <div class="lg:col-6">
+          <h1 class="font-primary font-bold">
+            Buy Epson printers and ink at great Singapore prices
+          </h1>
+          <p class="mt-4">
+            We understand that you may not be ready to move to a subscription
+            model. That's why we also offer Epson printers and genuine Epson
+            ink as straightforward, one-time purchases.
+          </p>
+          <p class="mt-4 mb-8">
+            <strong>Our price promise:</strong> we aim to offer you the best
+            available Epson prices in Singapore. If you find a lower comparable
+            local price, talk to our team and let us see how we can help.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#printers" class="btn-primary">
+              Shop Printers &amp; Ink
+            </a>
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline-primary"
+            >
+              Talk to Us on WhatsApp
+            </a>
+          </div>
+        </div>
+        <div class="lg:col-6">
+          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+            <Image
+              src="/images/whatsapp-cta.png"
+              alt="Talk to Us on WhatsApp"
+              width={600}
+              height={400}
+              class="mx-auto h-auto w-full max-w-md object-contain"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Customer paths */}
+  <section class="section">
+    <div class="container">
+      <div class="lg:col-6 mx-auto mb-16 text-center">
+        <h2 class="mb-4">Find the right Epson printer for your needs</h2>
+        <p>
+          Whether you print occasionally at home, manage a home business, or
+          operate a growing office, our team can recommend a suitable Epson
+          printer and the correct genuine ink supplies.
+        </p>
+      </div>
+      <div class="row gy-8">
+        {
+          customerPaths.map((path) => (
+            <div class="sm:col-6 lg:col-4">
+              <div class="h-full rounded-sm border border-border dark:border-none py-8 px-6 text-center bg-body dark:bg-darkmode-secondary">
+                <div class="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary dark:bg-darkmode-primary text-white">
+                  <DynamicIcon className="h-6 w-6" icon={path.icon} />
+                </div>
+                <h4 class="mb-4">{path.title}</h4>
+                <ul class="text-left">
+                  {path.items.map((item) => (
+                    <li class="mb-2 flex items-start gap-2">
+                      <DynamicIcon
+                        className="mt-1 flex-none text-primary dark:text-darkmode-primary"
+                        icon="FaCheck"
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* Printer catalogue */}
+  <section id="printers" class="section bg-light dark:bg-darkmode-light">
+    <div class="container">
+      <div class="lg:col-6 mx-auto mb-16 text-center">
+        <h2 class="mb-4">Epson EcoTank printers</h2>
+        <p>
+          Every printer below comes with an exclusive PrintOne special
+          warranty uplift. Prices include GST.
+        </p>
+      </div>
+      <div class="row gy-8">
+        {
+          printers.map((printer) => (
+            <div class="sm:col-6 lg:col-4">
+              <div class="h-full rounded-sm border border-border dark:border-none py-8 px-6 text-center bg-body dark:bg-darkmode-secondary">
+                <Image
+                  src={printer.image}
+                  alt={printer.model}
+                  width={280}
+                  height={280}
+                  class="mx-auto mb-4 h-40 w-auto object-contain"
+                />
+                <h4 class="mb-1">{printer.model}</h4>
+                <p class="mb-3 text-sm text-text-light dark:text-darkmode-text-light">
+                  SKU: {printer.sku}
+                </p>
+                <div class="mb-1">
+                  <span class="text-text-light dark:text-darkmode-text-light line-through">
+                    {formatPrice(printer.srp)}
+                  </span>{" "}
+                  <span class="h4 font-bold text-text-dark dark:text-darkmode-text-dark">
+                    {formatPrice(printer.buyPrice)}
+                  </span>
+                </div>
+                <p class="mb-3 text-sm font-medium text-primary dark:text-darkmode-primary">
+                  {printer.warrantyUplift} exclusive PrintOne warranty uplift
+                </p>
+                {printer.bonusPromo && (
+                  <p class="mb-3 inline-block rounded-full bg-light dark:bg-darkmode-light px-3 py-1 text-xs font-medium">
+                    + {printer.bonusPromo}
+                  </p>
+                )}
+                <p class="mb-6 text-sm">{printer.description}</p>
+                <div class="flex flex-wrap justify-center gap-3">
+                  <a href={printer.paymentLink} class="btn-primary">
+                    Buy Now
+                  </a>
+                  <a
+                    href={`/contact/?topic=buy-printer&model=${encodeURIComponent(printer.model)}`}
+                    class="btn btn-outline-primary"
+                  >
+                    Ask First
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* Ink and supplies */}
+  <section class="section">
+    <div class="container">
+      <div class="lg:col-6 mx-auto mb-12 text-center">
+        <h2 class="mb-4">Genuine Epson ink and maintenance boxes</h2>
+        <p>
+          Not sure which ink your printer needs? Send us your printer model
+          and we'll confirm the correct genuine ink for it.
+        </p>
+      </div>
+
+      {
+        inkFamilies.map((family) => (
+          <div class="mb-10">
+            <h4 class="mb-4">{family} Series Ink Bottles</h4>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead>
+                  <tr class="border-b border-border dark:border-darkmode-border">
+                    <th class="py-2 pr-4">Ink</th>
+                    <th class="py-2 pr-4">SKU</th>
+                    <th class="py-2 pr-4">Price</th>
+                    <th class="py-2 pr-4">Compatible models</th>
+                    <th class="py-2" />
+                  </tr>
+                </thead>
+                <tbody>
+                  {inks
+                    .filter((ink) => ink.family === family)
+                    .map((ink) => (
+                      <tr class="border-b border-border dark:border-darkmode-border">
+                        <td class="py-2 pr-4">{ink.name}</td>
+                        <td class="py-2 pr-4 text-sm text-text-light dark:text-darkmode-text-light">
+                          {ink.sku}
+                        </td>
+                        <td class="py-2 pr-4">
+                          <span class="text-text-light dark:text-darkmode-text-light line-through">
+                            {formatPrice(ink.srp)}
+                          </span>{" "}
+                          {formatPrice(promoPrice(ink.srp))}
+                        </td>
+                        <td class="py-2 pr-4 text-sm">{ink.compatibleModels}</td>
+                        <td class="py-2 text-right">
+                          <a href={ink.paymentLink} class="btn btn-primary btn-sm whitespace-nowrap">
+                            Buy Now
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))
+      }
+
+      <div class="mb-10">
+        <h4 class="mb-4">Maintenance Boxes</h4>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="border-b border-border dark:border-darkmode-border">
+                <th class="py-2 pr-4">SKU</th>
+                <th class="py-2 pr-4">Price</th>
+                <th class="py-2 pr-4">Compatible models</th>
+                <th class="py-2" />
+              </tr>
+            </thead>
+            <tbody>
+              {
+                maintenanceBoxes.map((box) => (
+                  <tr class="border-b border-border dark:border-darkmode-border">
+                    <td class="py-2 pr-4 text-sm text-text-light dark:text-darkmode-text-light">
+                      {box.sku}
+                    </td>
+                    <td class="py-2 pr-4">
+                      <span class="text-text-light dark:text-darkmode-text-light line-through">
+                        {formatPrice(box.srp)}
+                      </span>{" "}
+                      {formatPrice(promoPrice(box.srp))}
+                    </td>
+                    <td class="py-2 pr-4 text-sm">{box.compatibleModels}</td>
+                    <td class="py-2 text-right">
+                      <a href={box.paymentLink} class="btn btn-primary btn-sm whitespace-nowrap">
+                        Buy Now
+                      </a>
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <p class="mb-3 text-sm">Not sure which ink you need?</p>
+        <a href="/contact/?topic=buy-ink" class="btn btn-outline-primary">
+          Ask About Genuine Ink
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Trust section */}
+  <section class="section bg-light dark:bg-darkmode-light">
+    <div class="container">
+      <div class="row items-center gy-8">
+        <div class="lg:col-8">
+          <h3 class="mb-4">Why buy through Print-IQ</h3>
+          <ul>
+            <li class="mb-2 flex items-start gap-2">
+              <DynamicIcon
+                className="mt-1 flex-none text-primary dark:text-darkmode-primary"
+                icon="FaCheck"
+              />
+              <span>
+                Print-IQ Singapore Pte Ltd — an Epson authorised dealer
+              </span>
+            </li>
+            <li class="mb-2 flex items-start gap-2">
+              <DynamicIcon
+                className="mt-1 flex-none text-primary dark:text-darkmode-primary"
+                icon="FaCheck"
+              />
+              <span>Free consultation and product recommendation</span>
+            </li>
+            <li class="mb-2 flex items-start gap-2">
+              <DynamicIcon
+                className="mt-1 flex-none text-primary dark:text-darkmode-primary"
+                icon="FaCheck"
+              />
+              <span>Delivery available within Singapore</span>
+            </li>
+            <li class="mb-2 flex items-start gap-2">
+              <DynamicIcon
+                className="mt-1 flex-none text-primary dark:text-darkmode-primary"
+                icon="FaCheck"
+              />
+              <span>Local support: 6100 7747</span>
+            </li>
+          </ul>
+        </div>
+        <div class="lg:col-4">
+          <Image
+            src="/images/branding/epson-authorized-dealer-badge.png"
+            alt="Epson Authorized Dealer"
+            width={233}
+            height={137}
+            class="mx-auto h-24 w-auto object-contain"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Subscription conversion */}
+  <section class="section">
+    <div class="container">
+      <div class="rounded-sm border border-primary/30 dark:border-darkmode-primary/30 bg-light dark:bg-darkmode-light p-8 lg:p-12">
+        <div class="row items-center gy-6">
+          <div class="lg:col-8">
+            <h3 class="mb-4">Before you buy, compare the subscription option</h3>
+            <p class="mb-3">
+              Buying outright may feel familiar, but it also means paying for
+              the printer and ink upfront. EpsonPrintOne combines the
+              printer, ink supply, delivery and installation into one
+              predictable monthly plan — with no upfront printer payment.
+            </p>
+            <p>
+              If you print regularly, a subscription could give you better
+              cash flow, simpler budgeting and fewer worries about running
+              out of ink.
+            </p>
+          </div>
+          <div class="lg:col-4">
+            <div class="flex flex-col gap-4">
+              <a href="/pricing/" class="btn-primary text-center">
+                Compare Subscription Plans
+              </a>
+              <a href="#printers" class="btn btn-outline-primary text-center">
+                I Still Prefer to Buy
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+  <section class="section">
+    <div class="container">
+      <div class="lg:col-5 mx-auto text-center">
+        <h2>Frequently Asked Questions</h2>
+        <p class="mt-4">
+          Buying outright, ink compatibility and how it compares with
+          PrintOne.
+        </p>
+      </div>
+      <div class="row justify-center mt-12">
+        <Accordion questions={faqQuestions} client:load />
+      </div>
+    </div>
+  </section>
+</Base>

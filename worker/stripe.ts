@@ -58,6 +58,41 @@ function matchPlan(amountTotal: number, currency: string) {
   return plans.find((plan) => Math.round(plan.monthlyFee * 100) === amountTotal);
 }
 
+interface PurchasedLineItem {
+  description: string;
+  quantity: number;
+  sku?: string;
+}
+
+async function fetchLineItems(
+  sessionId: string,
+  secretKey: string,
+): Promise<PurchasedLineItem[] | null> {
+  const response = await fetch(
+    `https://api.stripe.com/v1/checkout/sessions/${sessionId}/line_items?expand[]=data.price.product`,
+    { headers: { Authorization: `Bearer ${secretKey}` } },
+  );
+
+  if (!response.ok) {
+    console.error("stripe-webhook: failed to fetch line items", await response.text());
+    return null;
+  }
+
+  const data: any = await response.json();
+  return (data.data || []).map((item: any) => ({
+    description: item.description || "Unknown item",
+    quantity: item.quantity || 1,
+    sku: item.price?.product?.metadata?.sku,
+  }));
+}
+
+function summarizeLineItems(items: PurchasedLineItem[] | null): string {
+  if (!items || items.length === 0) return "Unknown item";
+  return items
+    .map((item) => `${item.description}${item.sku ? ` (${item.sku})` : ""} x${item.quantity}`)
+    .join(", ");
+}
+
 async function notifyTeam(env: Env, record: {
   email: string;
   name: string;
@@ -102,6 +137,90 @@ async function notifyTeam(env: Env, record: {
   return true;
 }
 
+async function notifyOrderTeam(env: Env, record: {
+  email: string;
+  name: string;
+  itemsSummary: string;
+  amountTotal: number;
+  currency: string;
+}): Promise<boolean> {
+  if (!env.RESEND_API_KEY || !env.SUBSCRIBER_NOTIFICATION_EMAIL) {
+    console.warn(
+      "stripe-webhook: RESEND_API_KEY or SUBSCRIBER_NOTIFICATION_EMAIL not configured, skipping notification email",
+    );
+    return false;
+  }
+
+  const amount = (record.amountTotal / 100).toFixed(2);
+  const html = `<h2>New printer/ink order - prepare for fulfilment</h2><ul>
+    <li><strong>Name:</strong> ${record.name || "(not provided)"}</li>
+    <li><strong>Email:</strong> ${record.email || "(not provided)"}</li>
+    <li><strong>Items:</strong> ${record.itemsSummary}</li>
+    <li><strong>Amount paid:</strong> ${record.currency.toUpperCase()} ${amount}</li>
+  </ul>`;
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: env.ENQUIRY_FROM_EMAIL || "PrintOne Subscribers <enquiries@epsonprintone.com>",
+      to: env.SUBSCRIBER_NOTIFICATION_EMAIL,
+      subject: `New printer/ink order - ${record.itemsSummary}`,
+      html,
+    }),
+  });
+
+  if (!response.ok) {
+    console.error("stripe-webhook: failed to send order notification email", await response.text());
+    return false;
+  }
+
+  return true;
+}
+
+async function handleOneTimePurchase(session: any, env: Env): Promise<Response> {
+  const email = session.customer_details?.email || session.customer_email || "";
+  const name = session.customer_details?.name || "";
+  const amountTotal = Number(session.amount_total) || 0;
+  const currency = String(session.currency || "sgd");
+
+  const lineItems = env.STRIPE_SECRET_KEY
+    ? await fetchLineItems(session.id, env.STRIPE_SECRET_KEY)
+    : null;
+  if (!env.STRIPE_SECRET_KEY) {
+    console.error("stripe-webhook: STRIPE_SECRET_KEY not configured, cannot resolve purchased items");
+  }
+  const itemsSummary = summarizeLineItems(lineItems);
+
+  try {
+    await env.DB.prepare(
+      `INSERT OR IGNORE INTO subscribers
+        (stripe_session_id, stripe_customer_id, stripe_subscription_id, email, name, plan_slug, plan_name, amount_total, currency)
+       VALUES (?, ?, NULL, ?, ?, ?, ?, ?, ?)`,
+    )
+      .bind(
+        session.id,
+        session.customer || null,
+        email,
+        name,
+        "one-time-purchase",
+        itemsSummary,
+        amountTotal,
+        currency,
+      )
+      .run();
+  } catch (err) {
+    console.error("stripe-webhook: failed to write order record", err);
+  }
+
+  const notified = await notifyOrderTeam(env, { email, name, itemsSummary, amountTotal, currency });
+
+  return Response.json({ received: true, notified });
+}
+
 export async function handleStripeWebhook(request: Request, env: Env): Promise<Response> {
   if (!env.STRIPE_WEBHOOK_SECRET) {
     console.error("stripe-webhook: STRIPE_WEBHOOK_SECRET not configured");
@@ -131,7 +250,15 @@ export async function handleStripeWebhook(request: Request, env: Env): Promise<R
   }
 
   const session = event.data?.object;
-  if (!session || session.mode !== "subscription") {
+  if (!session) {
+    return Response.json({ received: true, skipped: true });
+  }
+
+  if (session.mode === "payment") {
+    return handleOneTimePurchase(session, env);
+  }
+
+  if (session.mode !== "subscription") {
     return Response.json({ received: true, skipped: true });
   }
 

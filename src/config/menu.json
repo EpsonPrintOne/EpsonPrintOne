@@ -9,20 +9,40 @@
       "url": "/pricing"
     },
     {
+      "name": "Buy Printers & Ink",
+      "url": "/buy-printers"
+    },
+    {
       "name": "How It Works",
       "url": "/how-it-works"
     },
     {
       "name": "Why PrintOne",
-      "url": "/why-printone"
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "Why PrintOne",
+          "url": "/why-printone"
+        },
+        {
+          "name": "Customer Stories",
+          "url": "/stories"
+        }
+      ]
     },
     {
       "name": "FAQ",
-      "url": "/faq"
-    },
-    {
-      "name": "Contact",
-      "url": "/contact"
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "FAQ",
+          "url": "/faq"
+        },
+        {
+          "name": "Contact",
+          "url": "/contact"
+        }
+      ]
     }
   ],
   "footer": [
@@ -36,6 +56,10 @@
         {
           "name": "Plans",
           "url": "/pricing"
+        },
+        {
+          "name": "Buy Printers & Ink",
+          "url": "/buy-printers"
         },
         {
           "name": "How It Works",
@@ -53,6 +77,10 @@
         {
           "name": "FAQ",
           "url": "/faq"
+        },
+        {
+          "name": "Customer Stories",
+          "url": "/stories"
         },
         {
           "name": "Contact",
