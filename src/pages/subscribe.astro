@@ -2,6 +2,7 @@
 import Base from "@/layouts/Base.astro";
 import PageHeader from "@/partials/PageHeader.astro";
 import { plans } from "@/data/plans";
+import { Image } from "astro:assets";
 ---
 
 <Base
@@ -31,6 +32,13 @@ import { plans } from "@/data/plans";
                     Highly Recommended
                   </span>
                 )}
+                <Image
+                  src={plan.image}
+                  alt={plan.model}
+                  width={280}
+                  height={280}
+                  class="mx-auto mb-4 h-40 w-auto object-contain"
+                />
                 <h4 class="mb-1">{plan.name}</h4>
                 <p class="mb-4 text-sm text-text-light dark:text-darkmode-text-light">
                   {plan.model}
