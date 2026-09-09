@@ -22,6 +22,9 @@ faq_list:
   - title: "Is servicing included?"
     content: "Yes. Every plan includes onsite servicing, with onsite repair or a one-to-one exchange available subject to final approved terms."
 
+  - title: "How long is the contractual period? And can I cancel it midway?"
+    content: "All plans are 24 months and non-cancellable throughout the 24 months. Any cancellation midway will imply that the remaining months be billed upfront immediately."
+
   - title: "Who is PrintOne for?"
     content: "PrintOne is designed for home users, families, students, home businesses, SMEs, and small offices, including offices that need A3 printing."
 

@@ -20,6 +20,9 @@ faq:
     - question: "How is PrintOne different from buying a printer outright?"
       answer: "Instead of an upfront printer purchase and separate ink buying, PrintOne combines the printer, ink support and servicing into one predictable monthly fee."
 
+    - question: "How long is the contractual period? And can I cancel it midway?"
+      answer: "All plans are 24 months and non-cancellable throughout the 24 months. Any cancellation midway will imply that the remaining months be billed upfront immediately."
+
 call_to_action:
   enable: true
   title: "One Printer. One Plan. One Bill."
