@@ -268,12 +268,22 @@ export async function handleStripeWebhook(request: Request, env: Env): Promise<R
   const currency = String(session.currency || "sgd");
   const plan = matchPlan(amountTotal, currency);
   const planName = plan?.name || "Unknown plan";
+  const acknowledgmentToken =
+    typeof session.client_reference_id === "string" && session.client_reference_id
+      ? session.client_reference_id
+      : null;
+
+  if (!acknowledgmentToken) {
+    console.warn(
+      "stripe-webhook: subscription completed without a client_reference_id - 24-month acknowledgment cannot be verified for this session",
+    );
+  }
 
   try {
     await env.DB.prepare(
       `INSERT OR IGNORE INTO subscribers
-        (stripe_session_id, stripe_customer_id, stripe_subscription_id, email, name, plan_slug, plan_name, amount_total, currency)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        (stripe_session_id, stripe_customer_id, stripe_subscription_id, email, name, plan_slug, plan_name, amount_total, currency, acknowledgment_token)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     )
       .bind(
         session.id,
@@ -285,6 +295,7 @@ export async function handleStripeWebhook(request: Request, env: Env): Promise<R
         planName,
         amountTotal,
         currency,
+        acknowledgmentToken,
       )
       .run();
   } catch (err) {

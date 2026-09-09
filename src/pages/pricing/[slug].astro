@@ -93,13 +93,7 @@ const specs = getProductSpecs(plan.slug)!;
             {specs.blurb}
           </p>
           <div class="flex flex-wrap gap-4">
-            <a
-              href={plan.stripePaymentLink}
-              class="btn-primary subscribe-link pointer-events-none opacity-50"
-              aria-disabled="true"
-              tabindex="-1"
-              data-subscribe-link
-            >
+            <a href={`/subscribe/${plan.slug}`} class="btn-primary">
               Subscribe Now
             </a>
             <a
@@ -116,20 +110,9 @@ const specs = getProductSpecs(plan.slug)!;
               </a>
             )}
           </div>
-          <label class="mt-5 flex max-w-2xl items-start gap-3 text-sm text-text-dark dark:text-darkmode-text-dark">
-            <input
-              type="checkbox"
-              class="subscribe-ack mt-1"
-              aria-describedby="subscribe-ack-text"
-            />
-            <span id="subscribe-ack-text">
-              I acknowledge that this is a non-cancellable subscription for 24
-              months, you will be billed monthly for 24 months until the
-              contract ends, should I wish to terminate before 24 months, I
-              will be liable for the remaining subscription months, service
-              and warranty will continue for 24 months regardless.
-            </span>
-          </label>
+          <p class="mt-3 text-sm text-text-light dark:text-darkmode-text-light">
+            24-month non-cancellable subscription — you'll confirm this before payment.
+          </p>
         </div>
       </div>
     </div>
@@ -189,13 +172,7 @@ const specs = getProductSpecs(plan.slug)!;
         ${plan.monthlyFee.toFixed(2)} /month · {formatMonthlyPages(plan.monthlyPages)}
       </p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a
-          href={plan.stripePaymentLink}
-          class="btn-primary subscribe-link pointer-events-none opacity-50"
-          aria-disabled="true"
-          tabindex="-1"
-          data-subscribe-link
-        >
+        <a href={`/subscribe/${plan.slug}`} class="btn-primary">
           Subscribe Now
         </a>
         {nextPlan && (
@@ -207,46 +184,9 @@ const specs = getProductSpecs(plan.slug)!;
           </a>
         )}
       </div>
-      <label class="mx-auto mt-6 flex max-w-2xl items-start gap-3 text-left text-sm text-white/80">
-        <input type="checkbox" class="subscribe-ack mt-1" />
-        <span>
-          I acknowledge that this is a non-cancellable subscription for 24
-          months, you will be billed monthly for 24 months until the contract
-          ends, should I wish to terminate before 24 months, I will be liable
-          for the remaining subscription months, service and warranty will
-          continue for 24 months regardless.
-        </span>
-      </label>
+      <p class="mx-auto mt-4 max-w-2xl text-sm text-white/70">
+        24-month non-cancellable subscription — you'll confirm this before payment.
+      </p>
     </div>
   </section>
-
-  <script>
-    document.addEventListener("astro:page-load", () => {
-      const checkboxes = document.querySelectorAll<HTMLInputElement>(".subscribe-ack");
-      const links = document.querySelectorAll<HTMLAnchorElement>("[data-subscribe-link]");
-
-      const sync = (checked: boolean) => {
-        checkboxes.forEach((cb) => {
-          cb.checked = checked;
-        });
-        links.forEach((link) => {
-          if (checked) {
-            link.classList.remove("pointer-events-none", "opacity-50");
-            link.removeAttribute("aria-disabled");
-            link.removeAttribute("tabindex");
-          } else {
-            link.classList.add("pointer-events-none", "opacity-50");
-            link.setAttribute("aria-disabled", "true");
-            link.setAttribute("tabindex", "-1");
-          }
-        });
-      };
-
-      checkboxes.forEach((cb) => {
-        cb.addEventListener("change", () => sync(cb.checked));
-      });
-
-      sync(false);
-    });
-  </script>
 </Base>

@@ -1,0 +1,150 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import { plans, formatMonthlyPages } from "@/data/plans";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  return plans.map((plan) => ({
+    params: { slug: plan.slug },
+    props: { plan },
+  }));
+}
+
+const { plan } = Astro.props;
+---
+
+<Base
+  title={`Confirm ${plan.name}`}
+  meta_title={`Confirm ${plan.name} - PrintOne program in partnership with Epson`}
+  description={`Confirm your ${plan.name} subscription before proceeding to secure payment.`}
+  noindex
+>
+  <PageHeader
+    title={`Confirm your ${plan.name} subscription`}
+    subtitle="One last step before secure payment via Stripe."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="lg:col-6">
+          <div class="rounded-sm border border-border dark:border-darkmode-border bg-body dark:bg-darkmode-secondary p-8 text-center">
+            <Image
+              src={plan.image}
+              alt={plan.model}
+              width={220}
+              height={220}
+              class="mx-auto mb-4 h-32 w-auto object-contain"
+            />
+            <h4 class="mb-1">{plan.name}</h4>
+            <p class="mb-4 text-sm text-text-light dark:text-darkmode-text-light">
+              {plan.model}
+            </p>
+            <div class="mb-1">
+              <span class="h5">$</span>
+              <span class="h2 font-bold text-text-dark dark:text-darkmode-text-dark">
+                {plan.monthlyFee.toFixed(2)}
+              </span>
+              <span> /month</span>
+            </div>
+            <p class="mb-6 text-sm font-medium text-primary dark:text-darkmode-primary">
+              24-month non-cancellable subscription
+            </p>
+            <p class="mb-6 text-text-dark dark:text-darkmode-text-dark">
+              {formatMonthlyPages(plan.monthlyPages)}
+            </p>
+
+            <label class="mb-6 flex items-start gap-3 rounded-sm border border-border dark:border-darkmode-border p-4 text-left text-sm">
+              <input type="checkbox" id="subscribe-ack" class="mt-1" />
+              <span>
+                I acknowledge that this is a non-cancellable subscription for
+                24 months, you will be billed monthly for 24 months until the
+                contract ends, should I wish to terminate before 24 months, I
+                will be liable for the remaining subscription months, service
+                and warranty will continue for 24 months regardless.
+              </span>
+            </label>
+
+            <div
+              id="subscribe-error"
+              class="mb-4 hidden rounded-sm border border-red-300 bg-red-50 p-3 text-sm text-red-700"
+              role="alert"
+            >
+            </div>
+
+            <button
+              id="subscribe-continue"
+              type="button"
+              class="btn-primary w-full cursor-not-allowed opacity-50"
+              disabled
+              data-plan-slug={plan.slug}
+              data-payment-link={plan.stripePaymentLink}
+            >
+              Continue to Secure Payment
+            </button>
+            <p class="mt-4 text-xs text-text-light dark:text-darkmode-text-light">
+              You'll be redirected to Stripe to complete payment securely.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("astro:page-load", () => {
+      const checkbox = document.getElementById("subscribe-ack") as HTMLInputElement | null;
+      const continueBtn = document.getElementById(
+        "subscribe-continue",
+      ) as HTMLButtonElement | null;
+      const errorBox = document.getElementById("subscribe-error");
+      if (!checkbox || !continueBtn || !errorBox) return;
+
+      checkbox.addEventListener("change", () => {
+        continueBtn.disabled = !checkbox.checked;
+        continueBtn.classList.toggle("opacity-50", !checkbox.checked);
+        continueBtn.classList.toggle("cursor-not-allowed", !checkbox.checked);
+      });
+
+      continueBtn.addEventListener("click", async () => {
+        if (!checkbox.checked) return;
+
+        errorBox.classList.add("hidden");
+        const originalLabel = continueBtn.textContent;
+        continueBtn.disabled = true;
+        continueBtn.textContent = "Recording acknowledgment...";
+
+        const planSlug = continueBtn.dataset.planSlug;
+        const paymentLink = continueBtn.dataset.paymentLink;
+
+        try {
+          const response = await fetch("/api/acknowledge", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ plan_slug: planSlug }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to record acknowledgment");
+          }
+
+          const data = (await response.json()) as { token?: string };
+          if (!data.token || !paymentLink) {
+            throw new Error("Missing token or payment link");
+          }
+
+          const destination = new URL(paymentLink);
+          destination.searchParams.set("client_reference_id", data.token);
+          window.location.href = destination.toString();
+        } catch {
+          errorBox.textContent =
+            "Something went wrong confirming your acknowledgment. Please try again, or contact us if this persists.";
+          errorBox.classList.remove("hidden");
+          continueBtn.disabled = false;
+          continueBtn.textContent = originalLabel;
+        }
+      });
+    });
+  </script>
+</Base>

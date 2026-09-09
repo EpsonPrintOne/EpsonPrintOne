@@ -1,7 +1,7 @@
 ---
 import Base from "@/layouts/Base.astro";
 import PageHeader from "@/partials/PageHeader.astro";
-import { plans, STRIPE_PUBLISHABLE_KEY } from "@/data/plans";
+import { plans } from "@/data/plans";
 ---
 
 <Base
@@ -35,18 +35,20 @@ import { plans, STRIPE_PUBLISHABLE_KEY } from "@/data/plans";
                 <p class="mb-4 text-sm text-text-light dark:text-darkmode-text-light">
                   {plan.model}
                 </p>
-                <div class="mb-6">
+                <div class="mb-1">
                   <span class="h5">$</span>
                   <span class="h2 font-bold text-text-dark dark:text-darkmode-text-dark">
                     {plan.monthlyFee.toFixed(2)}
                   </span>
                   <span> /month</span>
                 </div>
+                <p class="mb-6 text-xs text-text-light dark:text-darkmode-text-light">
+                  24-month non-cancellable subscription plan
+                </p>
                 <div class="mt-auto">
-                  <stripe-buy-button
-                    buy-button-id={plan.stripeBuyButtonId}
-                    publishable-key={STRIPE_PUBLISHABLE_KEY}
-                  />
+                  <a href={`/subscribe/${plan.slug}`} class="btn-primary">
+                    Subscribe Now
+                  </a>
                 </div>
               </div>
             </div>
@@ -56,5 +58,3 @@ import { plans, STRIPE_PUBLISHABLE_KEY } from "@/data/plans";
     </div>
   </section>
 </Base>
-
-<script is:inline async src="https://js.stripe.com/v3/buy-button.js"></script>

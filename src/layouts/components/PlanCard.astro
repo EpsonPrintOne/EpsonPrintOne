@@ -49,7 +49,7 @@ const { plan, showMoreInfo = false } = Astro.props;
   <p class="mb-6 text-sm">{plan.audience}</p>
   <div class="flex flex-wrap justify-center gap-3">
     <a
-      href={plan.stripePaymentLink}
+      href={`/subscribe/${plan.slug}`}
       class={plan.featured ? "btn-primary" : "btn btn-outline-primary"}
     >
       Subscribe Now

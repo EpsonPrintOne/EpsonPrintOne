@@ -9,6 +9,7 @@ interface SubscriberRow {
   currency: string;
   stripe_subscription_id: string | null;
   created_at: string;
+  acknowledged_at: string | null;
 }
 
 function unauthorized(): Response {
@@ -59,6 +60,7 @@ function renderPage(rows: SubscriberRow[]): string {
         <td>${escapeHtml(row.plan_name || "-")}</td>
         <td>${row.currency.toUpperCase()} ${(row.amount_total / 100).toFixed(2)}</td>
         <td>${escapeHtml(row.stripe_subscription_id || "-")}</td>
+        <td>${row.acknowledged_at ? `&#10003; ${escapeHtml(row.acknowledged_at)}` : `<span style="color:#b91c1c">Not recorded</span>`}</td>
       </tr>`,
     )
     .join("");
@@ -90,7 +92,7 @@ function renderPage(rows: SubscriberRow[]): string {
       ? `<div class="empty">No subscribers yet.</div>`
       : `<table>
           <thead>
-            <tr><th>Date</th><th>Name</th><th>Email</th><th>Plan</th><th>Amount</th><th>Stripe Subscription</th></tr>
+            <tr><th>Date</th><th>Name</th><th>Email</th><th>Plan</th><th>Amount</th><th>Stripe Subscription</th><th>24-mo Terms Acknowledged</th></tr>
           </thead>
           <tbody>${tableRows}</tbody>
         </table>`
@@ -105,7 +107,12 @@ export async function handleAdmin(request: Request, env: Env): Promise<Response>
   }
 
   const { results } = await env.DB.prepare(
-    "SELECT id, email, name, plan_name, amount_total, currency, stripe_subscription_id, created_at FROM subscribers ORDER BY created_at DESC LIMIT 200",
+    `SELECT s.id, s.email, s.name, s.plan_name, s.amount_total, s.currency,
+            s.stripe_subscription_id, s.created_at, a.acknowledged_at
+       FROM subscribers s
+       LEFT JOIN plan_acknowledgments a ON a.token = s.acknowledgment_token
+      ORDER BY s.created_at DESC
+      LIMIT 200`,
   ).all<SubscriberRow>();
 
   return new Response(renderPage(results), {

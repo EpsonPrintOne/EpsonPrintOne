@@ -145,7 +145,7 @@ const {
               {formatMonthlyPages(featuredPlan.monthlyPages)}
             </span>
           </div>
-          <a href={featuredPlan.stripePaymentLink} class="btn-primary">
+          <a href={`/subscribe/${featuredPlan.slug}`} class="btn-primary">
             Subscribe Now
           </a>
         </div>
