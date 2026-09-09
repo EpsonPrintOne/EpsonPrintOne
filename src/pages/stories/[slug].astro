@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 }
 
 const { story } = Astro.props;
-const { title, image, date, updated, category, reading_time, summary, illustrative, tags } =
+const { title, image, video, date, updated, category, reading_time, summary, illustrative, tags } =
   story.data;
 const { Content } = await render(story);
 
@@ -62,16 +62,29 @@ const structuredData = {
             )
           }
           {
-            image && (
+            video ? (
               <div class="mb-10">
-                <Image
-                  src={image}
-                  height={500}
-                  width={1200}
-                  alt={title}
+                <video
+                  controls
+                  preload="metadata"
                   class="w-full rounded"
-                />
+                  poster={image}
+                >
+                  <source src={video} type="video/mp4" />
+                </video>
               </div>
+            ) : (
+              image && (
+                <div class="mb-10">
+                  <Image
+                    src={image}
+                    height={500}
+                    width={1200}
+                    alt={title}
+                    class="w-full rounded"
+                  />
+                </div>
+              )
             )
           }
           <div class="mb-3 flex flex-wrap items-center gap-3 text-sm text-text-light dark:text-darkmode-text-light">

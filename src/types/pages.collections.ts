@@ -95,6 +95,7 @@ export const stories = defineCollection({
     updated: z.coerce.date().optional(),
     illustrative: z.boolean().optional(),
     tags: z.array(z.string()).optional(),
+    video: z.string().optional(),
   }),
 });
 
