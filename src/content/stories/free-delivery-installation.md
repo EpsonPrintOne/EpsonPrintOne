@@ -1,7 +1,7 @@
 ---
 title: "A New Printer Shouldn't Become Your Next DIY Project"
 meta_title: "Free Printer Delivery & Installation | PrintOne program in partnership with Epson"
-description: "Skip the collection trip and DIY setup. The PrintOne program in partnership with Epson includes free standard delivery and installation, with plans starting at S$9.90 a month."
+description: "Skip the collection trip and DIY setup. The PrintOne program in partnership with Epson includes free standard delivery and installation, with plans starting at S$10.90 a month."
 summary: "Free standard delivery and installation are included in every PrintOne plan — so setting up your Epson printer is one less thing on your to-do list."
 tags: ["Free Delivery & Onsite", "Subscription"]
 video: "/videos/delivery-and-installation.mp4"
@@ -42,7 +42,7 @@ It's a straightforward approach: decide what you need, agree the arrangements an
 
 Delivery day is only the beginning of owning or using a printer. That is why it makes sense to consider the ongoing arrangement too.
 
-PrintOne combines an Epson printer, a monthly page allowance, programme ink support and servicing within a subscription. Plans start at **S$9.90 per month**, with different options for different printing needs.
+PrintOne combines an Epson printer, a monthly page allowance, programme ink support and servicing within a subscription. Plans start at **S$10.90 per month**, with different options for different printing needs.
 
 Rather than making delivery and installation an afterthought, they form part of that service experience.
 

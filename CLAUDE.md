@@ -276,10 +276,10 @@ Use this approved working data:
 
 | Plan | Epson model | Monthly fee | Monthly pages | Primary audience |
 |---|---|---:|---:|---|
-| PrintOne Lite | Epson EcoTank L1350 | $9.90 | 100 | Home users |
-| PrintOne Lite Plus | Epson EcoTank L4360 | $16.90 | 200 | Families |
+| PrintOne Lite | Epson EcoTank L1350 | $10.90 | 100 | Home users |
+| PrintOne Lite Plus | Epson EcoTank L4360 | $19.90 | 200 | Families |
 | PrintOne Pro | Epson EcoTank L6390 | $25.90 | 500 | Students and home businesses |
-| PrintOne Pro Plus | Epson EcoTank L6490 | $35.90 | 750 | SMEs |
+| PrintOne Pro Plus | Epson EcoTank L6490 | $45.90 | 750 | SMEs |
 | PrintOne Max | Epson EcoTank L15150 | $69.90 | 1,000 | Small offices requiring A3 |
 | PrintOne Max Plus | Epson EcoTank L15180 | $99.90 | 1,000 | Higher-volume offices |
 
