@@ -30,13 +30,13 @@ const { pathname } = Astro.url;
     <!-- logo -->
     <div class="order-0 flex items-center gap-3">
       <Logo />
-      <span class="hidden h-8 w-px bg-border dark:bg-darkmode-border sm:block" />
+      <span class="hidden h-8 w-px bg-border dark:bg-darkmode-border sm:block lg:max-2xl:hidden" />
       <Image
         src="/images/branding/epson-logo.jpg"
         alt="Powered by Epson"
         width={180}
         height={63}
-        class="hidden h-5 w-auto object-contain sm:inline-block"
+        class="hidden h-5 w-auto object-contain sm:inline-block lg:max-2xl:hidden"
       />
     </div>
     {/* navbar toggler */}

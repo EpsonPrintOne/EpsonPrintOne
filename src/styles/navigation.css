@@ -19,7 +19,7 @@
 }
 
 .nav-item {
-  @apply px-1.5 xl:px-2 2xl:px-3;
+  @apply px-1 2xl:px-3;
 }
 .nav-item:hover .nav-dropdown-list {
   @apply lg:h-auto lg:overflow-auto lg:visible lg:opacity-100;
