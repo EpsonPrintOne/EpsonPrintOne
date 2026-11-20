@@ -1,0 +1,95 @@
+---
+import Base from "@/layouts/Base.astro";
+import { Image } from "astro:assets";
+---
+
+<Base
+  title="Thank You for Your Order"
+  meta_title="Thank You for Your Order | Print-IQ Epson Advantage Program"
+  description="Your Print-IQ Epson Advantage order has been received."
+  noindex
+>
+  <section class="section">
+    <div class="container">
+      <div class="mx-auto max-w-2xl text-center">
+        <Image
+          src="/images/pea/epson-advantage-badge.jpg"
+          alt="Print-IQ Epson Advantage Program"
+          width={200}
+          height={200}
+          class="mx-auto mb-4 h-28 w-28 rounded-full bg-white shadow-lg"
+        />
+        <p class="mb-2 text-sm font-bold uppercase tracking-widest text-primary">
+          Print-IQ Epson Advantage
+        </p>
+        <h1 class="mb-3">Thank You for Your Order</h1>
+        <h2 class="h4 mb-6 text-text-dark">Your Epson Advantage is on its way.</h2>
+
+        <div
+          id="order-details"
+          class="mb-6 hidden rounded-md border border-border bg-white p-6 text-left shadow-sm"
+        >
+          <dl class="space-y-3 text-sm" id="order-list"></dl>
+        </div>
+
+        <p class="mb-8">
+          Thank you for purchasing through the Print-IQ Epson Advantage Program. Our team will
+          process your order and contact you if any additional delivery information is required.
+        </p>
+        <a href="/pea" class="btn btn-primary">Return to Epson Advantage</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("astro:page-load", async () => {
+      const sessionId = new URLSearchParams(window.location.search).get("session_id");
+      const box = document.getElementById("order-details");
+      const list = document.getElementById("order-list");
+      if (!sessionId || !box || !list) return;
+
+      try {
+        const response = await fetch(
+          `/api/pea-order?session_id=${encodeURIComponent(sessionId)}`,
+        );
+        if (!response.ok) return;
+        const order = (await response.json()) as {
+          reference: string;
+          items: { description: string; quantity: number }[];
+          amountTotal: number;
+          currency: string;
+          paymentStatus: string;
+          deliveryAddress: string;
+        };
+
+        const rows: [string, string][] = [
+          ["Order reference", order.reference],
+          ["Epson model", order.items.map((i) => i.description).join(", ")],
+          ["Quantity", order.items.map((i) => String(i.quantity)).join(", ")],
+          [
+            "Advantage price paid",
+            `${order.currency.toUpperCase()} ${(order.amountTotal / 100).toFixed(2)}`,
+          ],
+          ["Delivery address", order.deliveryAddress || "-"],
+          ["Payment status", order.paymentStatus],
+        ];
+
+        for (const [label, value] of rows) {
+          const wrapper = document.createElement("div");
+          wrapper.className = "flex justify-between gap-4 border-b border-border pb-2 last:border-0";
+          const dt = document.createElement("dt");
+          dt.className = "text-text-light";
+          dt.textContent = label;
+          const dd = document.createElement("dd");
+          dd.className = "text-right font-semibold text-text-dark";
+          dd.textContent = value;
+          wrapper.append(dt, dd);
+          list.append(wrapper);
+        }
+        box.classList.remove("hidden");
+      } catch {
+        // Order details are a nice-to-have; the thank-you message stands on its own.
+      }
+    });
+  </script>
+</Base>

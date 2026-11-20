@@ -1,0 +1,47 @@
+---
+import { maxDiscount, minDiscount, productCount } from "@/data/epsonAdvantageProducts";
+import { Image } from "astro:assets";
+---
+
+<section class="bg-gradient-to-b from-light to-white pt-10 pb-8 lg:pt-14 lg:pb-10">
+  <div class="container">
+    <div class="grid items-center gap-8 lg:grid-cols-12">
+      <div class="lg:col-span-8">
+        <p class="mb-3 text-sm font-bold uppercase tracking-widest text-primary">
+          Print-IQ Customer Exclusive
+        </p>
+        <h1 class="mb-3 font-primary font-bold">Print-IQ Epson Advantage Program</h1>
+        <h2 class="h4 mb-3 text-text-dark">Exclusive Epson Prices for Print-IQ Customers</h2>
+        <p class="mb-3">
+          As a Print-IQ customer, you now enjoy preferential pricing on a specially selected range
+          of Epson products.
+        </p>
+        <p class="mb-2 text-2xl font-extrabold text-red-600">
+          Save up to {maxDiscount}% off standard retail prices.
+        </p>
+        <p class="mb-6">
+          No points. No vouchers. No complicated rewards programme.
+          <strong class="text-text-dark">
+            Just better Epson prices because you're a Print-IQ customer.
+          </strong>
+        </p>
+        <a href="#shop" class="btn btn-primary text-base">Shop Epson Advantage</a>
+        <p class="mt-3 text-sm font-semibold text-text-dark">
+          {productCount} specially selected Epson products • Savings from {minDiscount}% to {
+            maxDiscount
+          }%
+        </p>
+      </div>
+
+      <div class="order-first flex justify-center lg:order-last lg:col-span-4">
+        <Image
+          src="/images/pea/epson-advantage-badge.jpg"
+          alt="Print-IQ Epson Advantage Program - exclusive Epson prices for Print-IQ customers"
+          width={400}
+          height={400}
+          class="h-40 w-40 rounded-full bg-white shadow-xl sm:h-52 sm:w-52 lg:h-64 lg:w-64"
+        />
+      </div>
+    </div>
+  </div>
+</section>

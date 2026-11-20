@@ -1,0 +1,49 @@
+---
+import { formatSGD, maxDiscount, topSavings } from "@/data/epsonAdvantageProducts";
+import { Image } from "astro:assets";
+import PEASavingsBadge from "./PEASavingsBadge.astro";
+
+const featured = topSavings(3);
+---
+
+<section class="bg-light py-12 lg:py-16">
+  <div class="container">
+    <div class="mx-auto mb-10 max-w-3xl text-center">
+      <h2 class="mb-2">Why Pay Retail?</h2>
+      <p class="text-xl font-semibold text-text-dark">
+        Print-IQ customers can save up to {maxDiscount}% on selected Epson products.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        featured.map((product) => (
+          <div class="relative rounded-md border border-border bg-white p-6 text-center shadow-sm">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+              <PEASavingsBadge percentage={product.discountPercentage} size="lg" />
+            </div>
+            <Image
+              src={product.image}
+              alt={product.model}
+              width={360}
+              height={270}
+              class="mx-auto mb-3 mt-4 h-32 w-full object-contain"
+            />
+            <p class="mb-3 font-semibold text-text-dark">{product.model}</p>
+            <p class="text-sm text-text-light">
+              Retail <s>{formatSGD(product.retailPrice)}</s>
+            </p>
+            <p class="text-text-light">↓</p>
+            <p class="mb-3 text-3xl font-extrabold text-primary">
+              Advantage {formatSGD(product.advantagePrice)}
+            </p>
+            <p class="mb-4 text-lg font-extrabold text-red-600">
+              You save {formatSGD(product.dollarSaving)}
+            </p>
+            <a href={product.checkoutUrl} class="btn btn-primary w-full text-center">Buy Now</a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

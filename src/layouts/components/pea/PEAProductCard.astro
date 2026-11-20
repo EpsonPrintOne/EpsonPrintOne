@@ -1,0 +1,109 @@
+---
+import { formatSGD, type AdvantageProduct } from "@/data/epsonAdvantageProducts";
+import { Image } from "astro:assets";
+import PEAPriceComparison from "./PEAPriceComparison.astro";
+import PEASavingsBadge from "./PEASavingsBadge.astro";
+
+interface Props {
+  product: AdvantageProduct;
+}
+
+const { product } = Astro.props;
+
+const stockLabels: Record<string, { label: string; class: string }> = {
+  "in-stock": { label: "In Stock", class: "text-green-700" },
+  limited: { label: "Limited Stock", class: "text-amber-700" },
+  "sold-out": { label: "Sold Out", class: "text-red-700" },
+};
+const stock = product.stockStatus ? stockLabels[product.stockStatus] : undefined;
+const soldOut = product.stockStatus === "sold-out";
+---
+
+<article
+  id={product.slug}
+  class="relative flex h-fit flex-col rounded-md border border-border bg-white p-5 shadow-sm transition hover:shadow-lg"
+>
+  <div class="absolute left-4 top-4 z-10">
+    <PEASavingsBadge percentage={product.discountPercentage} size="lg" />
+  </div>
+
+  <Image
+    src={product.image}
+    alt={product.name}
+    width={480}
+    height={360}
+    class="mx-auto mb-3 mt-6 h-48 w-full object-contain"
+  />
+
+  <p class="mb-1 text-xs font-semibold uppercase tracking-wide text-text-light">
+    {product.category}
+  </p>
+  <h3 class="h5 mb-1 text-text-dark">{product.model}</h3>
+  <p class="mb-4 text-sm">{product.shortDescription}</p>
+
+  {stock && <p class:list={["mb-2 text-sm font-semibold", stock.class]}>{stock.label}</p>}
+
+  <p class="text-xs font-bold uppercase tracking-wide text-primary">
+    Your Print-IQ Advantage Price
+  </p>
+  <p class="text-4xl font-extrabold leading-tight text-text-dark">
+    {formatSGD(product.advantagePrice)}
+  </p>
+  <p class="mb-4 text-sm text-text-light">
+    Standard retail price <s class="ml-1">{formatSGD(product.retailPrice)}</s>
+  </p>
+
+  {
+    soldOut ? (
+      <span class="btn w-full cursor-not-allowed bg-gray-200 text-center text-gray-500">
+        Sold Out
+      </span>
+    ) : (
+      <a href={product.checkoutUrl} class="btn btn-primary w-full text-center">
+        Buy Now
+      </a>
+    )
+  }
+
+  <details class="group mt-4 border-t border-border pt-3">
+    <summary
+      class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-primary [&::-webkit-details-marker]:hidden"
+    >
+      View product details
+      <span class="text-lg leading-none transition group-open:rotate-45">+</span>
+    </summary>
+
+    <div class="mt-3 space-y-4 text-sm">
+      <PEAPriceComparison product={product} />
+
+      <div>
+        <p class="mb-1 font-semibold text-text-dark">Why choose this model?</p>
+        <ul class="list-disc space-y-1 pl-5">
+          {product.features.map((feature) => <li>{feature}</li>)}
+        </ul>
+      </div>
+
+      <div>
+        <p class="mb-1 font-semibold text-text-dark">Best for</p>
+        <div class="flex flex-wrap gap-2">
+          {
+            product.bestFor.map((use) => (
+              <span class="rounded-full bg-light px-3 py-1 text-xs font-medium text-primary">
+                {use}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+
+      <div>
+        <p class="mb-1 font-semibold text-text-dark">What's included</p>
+        <ul class="list-disc space-y-1 pl-5">
+          {product.included.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
+      <p class="text-xs text-text-light">Part no. {product.sku}</p>
+    </div>
+  </details>
+</article>

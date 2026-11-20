@@ -1,5 +1,12 @@
 import type { Env } from "./env";
 import { plans } from "../src/data/plans";
+import {
+  PEA_PRODUCT_MARKER,
+  customFieldValue,
+  escapeHtml,
+  formatDeliveryAddress,
+  orderReference,
+} from "./pea";
 
 const TIMESTAMP_TOLERANCE_SECONDS = 5 * 60;
 
@@ -68,10 +75,17 @@ async function fetchLineItems(
   sessionId: string,
   secretKey: string,
 ): Promise<PurchasedLineItem[] | null> {
-  const response = await fetch(
-    `https://api.stripe.com/v1/checkout/sessions/${sessionId}/line_items?expand[]=data.price.product`,
-    { headers: { Authorization: `Bearer ${secretKey}` } },
-  );
+  const base = `https://api.stripe.com/v1/checkout/sessions/${sessionId}/line_items`;
+  const headers = { Authorization: `Bearer ${secretKey}` };
+
+  // Expanding the product (for its SKU metadata) can be refused by a
+  // narrowly-scoped restricted key; fall back to the plain line items, whose
+  // description already carries the product name.
+  let response = await fetch(`${base}?expand[]=data.price.product`, { headers });
+  if (!response.ok) {
+    console.warn("stripe-webhook: expanded line item lookup failed, retrying without expansion");
+    response = await fetch(base, { headers });
+  }
 
   if (!response.ok) {
     console.error("stripe-webhook: failed to fetch line items", await response.text());
@@ -143,6 +157,11 @@ async function notifyOrderTeam(env: Env, record: {
   itemsSummary: string;
   amountTotal: number;
   currency: string;
+  reference: string;
+  isPea: boolean;
+  phone: string;
+  company: string;
+  deliveryAddress: string;
 }): Promise<boolean> {
   if (!env.RESEND_API_KEY || !env.SUBSCRIBER_NOTIFICATION_EMAIL) {
     console.warn(
@@ -152,10 +171,22 @@ async function notifyOrderTeam(env: Env, record: {
   }
 
   const amount = (record.amountTotal / 100).toFixed(2);
-  const html = `<h2>New printer/ink order - prepare for fulfilment</h2><ul>
-    <li><strong>Name:</strong> ${record.name || "(not provided)"}</li>
-    <li><strong>Email:</strong> ${record.email || "(not provided)"}</li>
-    <li><strong>Items:</strong> ${record.itemsSummary}</li>
+  const orderKind = record.isPea ? "Epson Advantage order" : "printer/ink order";
+  const optionalRows = [
+    record.phone && `<li><strong>Mobile:</strong> ${escapeHtml(record.phone)}</li>`,
+    record.company &&
+      `<li><strong>Company / Print-IQ customer:</strong> ${escapeHtml(record.company)}</li>`,
+    record.deliveryAddress &&
+      `<li><strong>Delivery address:</strong> ${escapeHtml(record.deliveryAddress)}</li>`,
+  ]
+    .filter(Boolean)
+    .join("\n    ");
+  const html = `<h2>New ${orderKind} - prepare for fulfilment</h2><ul>
+    <li><strong>Order reference:</strong> ${escapeHtml(record.reference)}</li>
+    <li><strong>Name:</strong> ${escapeHtml(record.name || "(not provided)")}</li>
+    <li><strong>Email:</strong> ${escapeHtml(record.email || "(not provided)")}</li>
+    ${optionalRows}
+    <li><strong>Items:</strong> ${escapeHtml(record.itemsSummary)}</li>
     <li><strong>Amount paid:</strong> ${record.currency.toUpperCase()} ${amount}</li>
   </ul>`;
 
@@ -168,7 +199,7 @@ async function notifyOrderTeam(env: Env, record: {
     body: JSON.stringify({
       from: env.ENQUIRY_FROM_EMAIL || "PrintOne Subscribers <enquiries@epsonprintone.com>",
       to: env.SUBSCRIBER_NOTIFICATION_EMAIL,
-      subject: `New printer/ink order - ${record.itemsSummary}`,
+      subject: `New ${orderKind} - ${record.itemsSummary}`,
       html,
     }),
   });
@@ -216,7 +247,18 @@ async function handleOneTimePurchase(session: any, env: Env): Promise<Response> 
     console.error("stripe-webhook: failed to write order record", err);
   }
 
-  const notified = await notifyOrderTeam(env, { email, name, itemsSummary, amountTotal, currency });
+  const notified = await notifyOrderTeam(env, {
+    email,
+    name,
+    itemsSummary,
+    amountTotal,
+    currency,
+    reference: orderReference(session.id),
+    isPea: itemsSummary.includes(PEA_PRODUCT_MARKER),
+    phone: session.customer_details?.phone || "",
+    company: customFieldValue(session, "printiq_customer"),
+    deliveryAddress: formatDeliveryAddress(session),
+  });
 
   return Response.json({ received: true, notified });
 }

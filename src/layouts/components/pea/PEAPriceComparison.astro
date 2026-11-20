@@ -1,0 +1,35 @@
+---
+import { formatSGD, type AdvantageProduct } from "@/data/epsonAdvantageProducts";
+
+interface Props {
+  product: AdvantageProduct;
+}
+
+const { product } = Astro.props;
+---
+
+<table class="w-full text-sm">
+  <thead>
+    <tr class="border-b border-border text-left text-text-light">
+      <th class="py-1.5 font-medium"></th>
+      <th class="py-1.5 text-right font-medium">Standard retail</th>
+      <th class="py-1.5 text-right font-medium">Epson Advantage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="border-b border-border">
+      <td class="py-1.5">Price</td>
+      <td class="py-1.5 text-right"><s>{formatSGD(product.retailPrice)}</s></td>
+      <td class="py-1.5 text-right font-bold text-text-dark">
+        {formatSGD(product.advantagePrice)}
+      </td>
+    </tr>
+    <tr>
+      <td class="py-1.5">You save</td>
+      <td class="py-1.5"></td>
+      <td class="py-1.5 text-right font-bold text-red-600">
+        {formatSGD(product.dollarSaving)} / {product.discountPercentage}%
+      </td>
+    </tr>
+  </tbody>
+</table>

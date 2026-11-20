@@ -1,0 +1,46 @@
+---
+import { productCount } from "@/data/epsonAdvantageProducts";
+
+const reasons = [
+  {
+    title: "Better Customer Pricing",
+    text: "Enjoy specially negotiated Epson pricing available to eligible Print-IQ customers.",
+  },
+  {
+    title: "Genuine Epson Products",
+    text: "Purchase genuine Epson products supplied through recognised Singapore channels.",
+  },
+  {
+    title: "Local Support",
+    text: "Your purchase is backed by the Print-IQ team in Singapore.",
+  },
+  {
+    title: "Simple Online Purchase",
+    text: "See your price, select your product and purchase directly online. No quotation process required.",
+  },
+];
+---
+
+<section class="bg-white py-12 lg:py-16">
+  <div class="container">
+    <div class="mx-auto mb-10 max-w-3xl text-center">
+      <h2 class="mb-3">Why Epson Advantage?</h2>
+      <p>
+        Being a Print-IQ customer should come with advantages. We've selected {productCount} Epson
+        products across different printing and viewing needs and made them available to our
+        customers at special preferential prices — no coupon codes required.
+      </p>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        reasons.map((reason) => (
+          <div class="rounded-md border border-border p-6 text-center">
+            <h4 class="mb-2 text-primary">{reason.title}</h4>
+            <p class="text-sm">{reason.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

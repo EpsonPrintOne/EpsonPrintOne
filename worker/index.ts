@@ -2,6 +2,7 @@ import { handleEnquiry } from "./enquiry";
 import { handleStripeWebhook } from "./stripe";
 import { handleAdmin } from "./admin";
 import { handleAcknowledge } from "./acknowledge";
+import { handlePeaOrder } from "./pea";
 import type { Env } from "./env";
 
 export default {
@@ -27,6 +28,13 @@ export default {
         return new Response("Method Not Allowed", { status: 405 });
       }
       return handleAcknowledge(request, env);
+    }
+
+    if (url.pathname === "/api/pea-order") {
+      if (request.method !== "GET") {
+        return new Response("Method Not Allowed", { status: 405 });
+      }
+      return handlePeaOrder(request, env);
     }
 
     if (url.pathname === "/printone-subscribers" || url.pathname === "/printone-subscribers/") {

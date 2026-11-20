@@ -1,0 +1,48 @@
+---
+import Accordion from "@/helpers/Accordion";
+import { maxDiscount, minDiscount, productCount } from "@/data/epsonAdvantageProducts";
+
+const printOneBrand =
+  'PrintOne program <i class="text-primary">in partnership with Epson</i>';
+
+const questions = [
+  {
+    question: "Who can purchase at Epson Advantage prices?",
+    answer: "The Epson Advantage Program is designed for eligible Print-IQ customers.",
+  },
+  {
+    question: "Do I need a promotional code?",
+    answer:
+      "No. The customer price displayed on this microsite already reflects the applicable Epson Advantage pricing.",
+  },
+  {
+    question: "How much can I save?",
+    answer: `The ${productCount} selected Epson products currently offer savings ranging from approximately **${minDiscount}% to ${maxDiscount}% compared with their applicable standard retail prices**. The exact saving is displayed against each product.`,
+  },
+  {
+    question: "Are these genuine Epson products?",
+    answer:
+      "Yes. Products offered through the program are genuine Epson products supplied through recognised Singapore distribution channels.",
+  },
+  {
+    question: "Can I purchase directly online?",
+    answer:
+      "Yes. Select your preferred product and click **Buy Now** to proceed directly to checkout.",
+  },
+  {
+    question: `Is this the same as the ${printOneBrand}?`,
+    answer: `No. The ${printOneBrand} is Print-IQ's printer subscription programme. The **Print-IQ Epson Advantage Program** allows eligible customers to purchase selected Epson products outright at preferential customer prices. [Explore the ${printOneBrand}](/pricing/) · [Continue shopping Epson Advantage](#shop)`,
+  },
+];
+---
+
+<section class="bg-light py-12 lg:py-16">
+  <div class="container">
+    <div class="mx-auto text-center lg:col-5">
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="row justify-center mt-10">
+      <Accordion questions={questions} client:load />
+    </div>
+  </div>
+</section>

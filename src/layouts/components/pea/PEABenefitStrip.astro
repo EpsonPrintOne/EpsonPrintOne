@@ -1,0 +1,28 @@
+---
+import { maxDiscount, productCount } from "@/data/epsonAdvantageProducts";
+
+const items = [
+  { title: `Up to ${maxDiscount}% Off Retail`, sub: "Savings from the standard retail price" },
+  { title: `${productCount} Selected Epson Products`, sub: "Printers, projectors and more" },
+  { title: "Genuine Epson Singapore Products", sub: "Supplied through recognised channels" },
+  { title: "Local Print-IQ Support", sub: "Backed by the Print-IQ team" },
+];
+---
+
+<section class="bg-primary text-white">
+  <div class="container py-4">
+    <p class="mb-3 text-center text-xs font-bold uppercase tracking-widest text-white/80">
+      Print-IQ Customer Exclusive
+    </p>
+    <div class="grid grid-cols-2 gap-4 text-center lg:grid-cols-4">
+      {
+        items.map((item) => (
+          <div>
+            <p class="font-bold leading-tight text-white">{item.title}</p>
+            <p class="hidden text-xs text-white/75 sm:block">{item.sub}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
