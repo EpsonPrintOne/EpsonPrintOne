@@ -55,6 +55,7 @@ const inputs: AdvantageProductInput[] = [
     included: [
       "Genuine Epson product",
       "Epson Singapore manufacturer's warranty",
+      "Free delivery in Singapore",
       "Print-IQ customer support",
     ],
     checkoutUrl: "https://buy.stripe.com/00wdR82Vv3sMd8Tcv77bW0C",
@@ -81,6 +82,7 @@ const inputs: AdvantageProductInput[] = [
     included: [
       "Genuine Epson product",
       "Epson Singapore manufacturer's warranty",
+      "Free delivery in Singapore",
       "Print-IQ customer support",
     ],
     checkoutUrl: "https://buy.stripe.com/7sYdR89jT5AU4Cndzb7bW0D",
@@ -107,6 +109,7 @@ const inputs: AdvantageProductInput[] = [
     included: [
       "Genuine Epson product",
       "Epson Singapore manufacturer's warranty",
+      "Free delivery in Singapore",
       "Print-IQ customer support",
     ],
     checkoutUrl: "https://buy.stripe.com/28EeVc0Nn4wQecX52F7bW0E",
@@ -133,6 +136,7 @@ const inputs: AdvantageProductInput[] = [
     included: [
       "Genuine Epson product",
       "Epson Singapore manufacturer's warranty",
+      "Free delivery in Singapore",
       "Print-IQ customer support",
     ],
     checkoutUrl: "https://buy.stripe.com/eVq3cu7bL8N67Oz1Qt7bW0F",
@@ -159,6 +163,7 @@ const inputs: AdvantageProductInput[] = [
     included: [
       "Genuine Epson product",
       "Epson Singapore manufacturer's warranty",
+      "Free delivery in Singapore",
       "Print-IQ customer support",
     ],
     checkoutUrl: "https://buy.stripe.com/dRmcN48fPe7q7Ozdzb7bW0G",
@@ -185,6 +190,7 @@ const inputs: AdvantageProductInput[] = [
     included: [
       "Genuine Epson product",
       "Epson Singapore manufacturer's warranty",
+      "Free delivery in Singapore",
       "Print-IQ customer support",
     ],
     checkoutUrl: "https://buy.stripe.com/8x27sKeEd0gAecX8eR7bW0H",
@@ -210,6 +216,7 @@ const inputs: AdvantageProductInput[] = [
     included: [
       "Genuine Epson product",
       "Epson Singapore manufacturer's warranty",
+      "Free delivery in Singapore",
       "Print-IQ customer support",
     ],
     checkoutUrl: "https://buy.stripe.com/4gM4gy67H9Ra5Gr66J7bW0I",
@@ -236,6 +243,7 @@ const inputs: AdvantageProductInput[] = [
     included: [
       "Genuine Epson product",
       "Epson Singapore manufacturer's warranty",
+      "Free delivery in Singapore",
       "Print-IQ customer support",
     ],
     checkoutUrl: "https://buy.stripe.com/7sY9AS2Vv8N66Kv9iV7bW0J",
@@ -261,6 +269,7 @@ const inputs: AdvantageProductInput[] = [
     included: [
       "Genuine Epson product",
       "Epson Singapore manufacturer's warranty",
+      "Free delivery in Singapore",
       "Print-IQ customer support",
     ],
     checkoutUrl: "https://buy.stripe.com/4gMcN4eEd7J22uf7aN7bW0K",

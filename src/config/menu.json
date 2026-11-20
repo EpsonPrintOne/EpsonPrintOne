@@ -13,6 +13,10 @@
       "url": "/buy-printers"
     },
     {
+      "name": "PIQ Epson Advantage",
+      "url": "/pea"
+    },
+    {
       "name": "How It Works",
       "url": "/how-it-works"
     },
@@ -60,6 +64,10 @@
         {
           "name": "Buy Printers & Ink",
           "url": "/buy-printers"
+        },
+        {
+          "name": "PIQ Epson Advantage",
+          "url": "/pea"
         },
         {
           "name": "How It Works",
