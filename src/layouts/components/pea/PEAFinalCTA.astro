@@ -1,5 +1,6 @@
 ---
 import { maxDiscount, productCount } from "@/data/epsonAdvantageProducts";
+import PEAPromoBanner from "./PEAPromoBanner.astro";
 ---
 
 <section class="bg-primary py-14 text-center text-white">
@@ -11,6 +12,7 @@ import { maxDiscount, productCount } from "@/data/epsonAdvantageProducts";
     <p class="mb-6 text-2xl font-extrabold text-white">
       Save up to {maxDiscount}% off standard retail prices.
     </p>
+    <PEAPromoBanner variant="dark" class="mx-auto mb-6 max-w-2xl" />
     <a
       href="#shop"
       class="inline-block rounded-full bg-white px-8 py-3 text-base font-bold uppercase tracking-wide text-primary transition hover:bg-light"
@@ -18,7 +20,7 @@ import { maxDiscount, productCount } from "@/data/epsonAdvantageProducts";
       Shop Epson Advantage
     </a>
     <p class="mt-4 text-sm text-white/80">
-      Exclusive pricing for eligible Print-IQ customers • While stocks last • Terms apply
+      Exclusive pricing for eligible Print-IQ customers • Terms apply
     </p>
   </div>
 </section>

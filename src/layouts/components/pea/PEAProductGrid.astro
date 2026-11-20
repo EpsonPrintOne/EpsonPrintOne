@@ -6,6 +6,7 @@ import {
   productCount,
 } from "@/data/epsonAdvantageProducts";
 import PEAProductCard from "./PEAProductCard.astro";
+import PEAPromoBanner from "./PEAPromoBanner.astro";
 ---
 
 <section id="shop" class="scroll-mt-20 bg-white py-10 lg:py-14">
@@ -16,6 +17,7 @@ import PEAProductCard from "./PEAProductCard.astro";
         {productCount} selected Epson products, {minDiscount}% – {maxDiscount}% below standard
         retail. No coupon code needed — the price shown is your Print-IQ Epson Advantage Price.
       </p>
+      <PEAPromoBanner class="mx-auto mt-4 max-w-2xl" />
     </div>
 
     <div class="grid items-start gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -304,3 +304,9 @@ export function formatSGD(amount: number): string {
     maximumFractionDigits: 2,
   })}`;
 }
+
+/** Promotion wording - edit here and every call to action on /pea updates. */
+export const promoEndDate = "25 Dec 2026";
+export const promoHeadline = "Act now.";
+export const promoDetail = `Promotion ends ${promoEndDate} or while stocks last, whichever comes first.`;
+export const promoShort = `Offer ends ${promoEndDate} or while stocks last`;

@@ -6,7 +6,8 @@ import PEAHero from "@/components/pea/PEAHero.astro";
 import PEAProductGrid from "@/components/pea/PEAProductGrid.astro";
 import PEASavingsShowcase from "@/components/pea/PEASavingsShowcase.astro";
 import PEAWhyAdvantage from "@/components/pea/PEAWhyAdvantage.astro";
-import { maxDiscount, minDiscount, productCount } from "@/data/epsonAdvantageProducts";
+import { maxDiscount, minDiscount, productCount, promoEndDate } from "@/data/epsonAdvantageProducts";
+import PEAPromoBanner from "@/components/pea/PEAPromoBanner.astro";
 import Base from "@/layouts/Base.astro";
 ---
 
@@ -16,6 +17,7 @@ import Base from "@/layouts/Base.astro";
   description={`Print-IQ customers save ${minDiscount}% to ${maxDiscount}% on ${productCount} selected Epson products. See your Epson Advantage price and buy online.`}
   image="/images/pea/epson-advantage-badge.jpg"
 >
+  <PEAPromoBanner variant="strip" class="rounded-none" />
   <PEAHero />
   <PEABenefitStrip />
   <PEAProductGrid />
@@ -32,14 +34,15 @@ import Base from "@/layouts/Base.astro";
       <p class="mb-5 font-semibold text-text-dark">
         Find yours and enjoy your Print-IQ customer price today.
       </p>
+      <PEAPromoBanner class="mx-auto mb-5 max-w-xl" />
       <a href="#shop" class="btn btn-primary">Shop All {productCount} Products</a>
       <div class="mx-auto mt-8 max-w-2xl rounded-md border border-border bg-light p-4 text-sm">
         <p class="mb-1 font-bold text-text-dark">
           Epson Advantage Prices Are Subject to Availability
         </p>
         <p>
-          Products and preferential prices may change based on stock availability and programme
-          availability.
+          The promotion runs until {promoEndDate} or while stocks last, whichever comes first. Products
+          and preferential prices may change based on stock availability and programme availability.
         </p>
       </div>
     </div>
