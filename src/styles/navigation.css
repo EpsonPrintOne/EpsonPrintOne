@@ -19,7 +19,7 @@
 }
 
 .nav-item {
-  @apply px-2 xl:px-3;
+  @apply px-1.5 xl:px-2 2xl:px-3;
 }
 .nav-item:hover .nav-dropdown-list {
   @apply lg:h-auto lg:overflow-auto lg:visible lg:opacity-100;
@@ -32,7 +32,7 @@
 }
 
 .nav-link {
-  @apply block p-2 lg:p-3 font-medium font-secondary text-text-dark xl:text-base lg:text-sm  dark:text-darkmode-text-dark lg:px-2 lg:py-3 dark:hover:text-darkmode-primary hover:text-primary transition-all cursor-pointer duration-200;
+  @apply block p-2 lg:p-3 font-medium font-secondary text-text-dark 2xl:text-base lg:text-sm whitespace-nowrap  dark:text-darkmode-text-dark lg:px-2 lg:py-3 dark:hover:text-darkmode-primary hover:text-primary transition-all cursor-pointer duration-200;
 }
 .nav-link.active {
   @apply text-primary dark:text-darkmode-primary;
